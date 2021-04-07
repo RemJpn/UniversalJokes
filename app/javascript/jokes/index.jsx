@@ -16,7 +16,7 @@ const JokesApp = () => {
 
   if (!jokesList) return <p>Loading...</p>;
 
-  return (<Feed jokesList={jokesList} />) ;
+  return (<Feed jokesList={jokesList} setJokesList={setJokesList} />) ;
 };
 
 
