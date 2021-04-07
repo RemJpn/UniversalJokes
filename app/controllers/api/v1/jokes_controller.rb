@@ -16,6 +16,7 @@ class Api::V1::JokesController < ApplicationController
       language: joke.language.name,
       category: joke.category.name,
       content: joke.content,
+      likes: joke.liked_jokes.count,
       created_at: joke.created_at
     }
   end
