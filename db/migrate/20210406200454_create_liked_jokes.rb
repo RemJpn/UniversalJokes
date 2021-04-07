@@ -1,6 +1,6 @@
-class CreateJokeLikes < ActiveRecord::Migration[6.0]
+class CreateLikedJokes < ActiveRecord::Migration[6.0]
   def change
-    create_table :joke_likes do |t|
+    create_table :liked_jokes do |t|
       t.references :joke, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true
 
