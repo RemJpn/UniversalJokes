@@ -32,7 +32,7 @@ class Api::V1::JokesController < ApplicationController
       category: joke.category.name,
       content: joke.content,
       likes: joke.liked_jokes.count,
-      is_liked: current_user.liked_jokes.any?{ |like| like.joke == joke },
+      liked_id: current_user&.liked_jokes&.find { |like| like.joke == joke }&.id,
       created_at: joke.created_at
     }
   end

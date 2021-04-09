@@ -2,7 +2,7 @@ import React from 'react';
 
 import JokeReaction from './joke_reaction';
 
-export default function Joke({joke}) {
+export default function Joke({joke, setJokesList}) {
   return (
     <div className="joke">
       <div className="joke-author">
@@ -18,7 +18,7 @@ export default function Joke({joke}) {
           Share on Facebook
         </a>
       </div>
-      <JokeReaction joke={joke} />
+      <JokeReaction joke={joke} setJokesList={setJokesList} />
       <div className="">
         <a href="#">Voir les traductions</a>
       </div>

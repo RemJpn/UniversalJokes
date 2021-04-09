@@ -8,7 +8,7 @@ export default function Feed({jokesList, setJokesList}) {
   const renderJokesList = () => {
     return jokesList.map ( joke => {
       return (
-        <Joke joke={joke} key={joke.id} />
+        <Joke joke={joke} key={joke.id} setJokesList={setJokesList} />
       );
     });
   }
