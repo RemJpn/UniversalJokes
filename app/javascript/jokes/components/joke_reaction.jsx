@@ -3,6 +3,7 @@ import React from 'react';
 export default function JokeReaction({joke}) {
   const handleLike = () => {
     console.log(`liking...${joke.id}`);
+    console.log(joke);
   }
 
   const handleSave = () => {
