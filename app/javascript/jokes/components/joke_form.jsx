@@ -17,10 +17,12 @@ export default function JokeForm({setJokesList}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const joke = {
-      content: contentValue
-    };
-    submitJoke(joke, addNewJokeToState);
+    if (contentValue) {
+      const joke = {
+        content: contentValue
+      };
+      submitJoke(joke, addNewJokeToState);
+    }
   }
 
   const submitJoke = (joke, callback) => {

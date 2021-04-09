@@ -4,4 +4,6 @@ class Joke < ApplicationRecord
   belongs_to :category
 
   has_many :liked_jokes
+
+  validates :content, presence: true
 end
