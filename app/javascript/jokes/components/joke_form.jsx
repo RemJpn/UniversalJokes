@@ -50,7 +50,7 @@ export default function JokeForm({setJokesList}) {
   if (!isConnected) return null;
 
   return (
-    <form onSubmit={handleSubmit} className="channel-editor">
+    <form onSubmit={handleSubmit} className="channel-editor" className="joke_form" >
       <input
         type="text"
         name="content"

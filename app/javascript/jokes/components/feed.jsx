@@ -14,7 +14,7 @@ export default function Feed({jokesList, setJokesList}) {
   }
 
   return (
-    <div>
+    <div className='feed'>
       <JokeForm setJokesList={setJokesList} />
       {renderJokesList()}
     </div>

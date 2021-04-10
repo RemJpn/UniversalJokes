@@ -13,14 +13,14 @@ export default function Joke({joke, setJokesList}) {
         <p>{joke.content}</p>
       </div>
 
-      <div className="">
+      <div className="joke-likes">
         {joke.likes} personnes ont ri à cette blague
         <a href="https://www.facebook.com/sharer/sharer.php?u=example.org" target="_blank">
           Share on Facebook
         </a>
       </div>
       <JokeReaction joke={joke} setJokesList={setJokesList} />
-      <div className="">
+      <div className="joke-translations-link">
         <a href="#">Voir les traductions</a>
       </div>
 

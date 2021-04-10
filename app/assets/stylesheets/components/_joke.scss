@@ -1,0 +1,38 @@
+.joke {
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin: 10px 0;
+}
+
+.joke-author {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.joke-content, .joke-likes, .joke-translations-link {
+  font-size: 0.9375rem;
+}
+
+.joke-likes {
+  display: flex;
+  justify-content: space-between;
+  color: darkgray;
+}
+
+.joke-reaction {
+  display: flex;
+  justify-content: space-evenly;
+  cursor: pointer;
+  margin: 10px 0;
+
+  & > div {
+    display: flex;
+  }
+
+  i {
+    font-size: 1.6rem;
+    margin-right: 5px;
+  }
+}

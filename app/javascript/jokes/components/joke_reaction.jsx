@@ -59,19 +59,25 @@ export default function JokeReaction({joke, setJokesList}) {
   const renderLike = () => {
     if (joke.liked_id){
       // solid
-      return <i className="fas fa-grin-squint-tears" onClick={toggleLike} ></i>
+      return <i className="fas fa-grin-squint-tears" ></i>
     } else {
       // regular
-      return <i className="far fa-grin-squint-tears" onClick={toggleLike} ></i>
+      return <i className="far fa-grin-squint-tears" ></i>
     }
   }
 
   if (!isConnected) return null;
 
   return (
-    <div>
-      {renderLike()}
-      <i className="far fa-save" onClick={handleSave} ></i>
+    <div className="joke-reaction">
+      <div onClick={toggleLike} >
+        {renderLike()}
+        <p>J'ai ri</p>
+      </div>
+      <div>
+        <i className="far fa-save" onClick={handleSave} ></i>
+        <p>Enregistrer</p>
+      </div>
     </div>
   );
 }
