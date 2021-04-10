@@ -27,12 +27,28 @@
   cursor: pointer;
   margin: 10px 0;
 
-  & > div {
-    display: flex;
+  p {
+    margin-left: 5px;
   }
 
-  i {
-    font-size: 1.6rem;
-    margin-right: 5px;
+  & > div {
+    opacity: 1;
+    filter: grayscale(0);
+    display: flex;
+    transition: all 0.2s ease-out;
+
+    & > span {
+      transform: rotate(0deg);
+      transition: all 0.2s ease-out;
+    }
+  }
+
+  .isInactive {
+    opacity: 0.5;
+    filter: grayscale(1);
+  }
+
+  .slanted {
+    transform: rotate(45deg);
   }
 }

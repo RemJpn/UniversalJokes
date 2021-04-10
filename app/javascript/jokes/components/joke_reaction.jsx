@@ -1,4 +1,5 @@
 import React, {useState, useContext} from 'react';
+import {emojify} from 'react-emojione';
 
 import {IsConnectedContext} from '../contexts/IsConnectedContext';
 
@@ -56,26 +57,16 @@ export default function JokeReaction({joke, setJokesList}) {
     console.log('saving...');
   }
 
-  const renderLike = () => {
-    if (joke.liked_id){
-      // solid
-      return <i className="fas fa-grin-squint-tears" ></i>
-    } else {
-      // regular
-      return <i className="far fa-grin-squint-tears" ></i>
-    }
-  }
-
   if (!isConnected) return null;
 
   return (
     <div className="joke-reaction">
-      <div onClick={toggleLike} >
-        {renderLike()}
+      <div onClick={toggleLike} className={joke.liked_id ? '' : 'isInactive'} >
+        <span className={joke.liked_id ? '' : 'slanted'}>{emojify('🤣')}</span>
         <p>J'ai ri</p>
       </div>
-      <div>
-        <i className="far fa-save" onClick={handleSave} ></i>
+      <div className="isInactive">
+        {emojify('💾')}
         <p>Enregistrer</p>
       </div>
     </div>
