@@ -3,6 +3,7 @@ import React from 'react';
 import JokeReaction from './joke_reaction';
 
 export default function Joke({joke, setJokesList}) {
+
   return (
     <div className="joke">
       <div className="joke-author">

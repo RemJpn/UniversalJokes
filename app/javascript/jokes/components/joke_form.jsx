@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+
+import {IsConnectedContext} from '../contexts/IsConnectedContext';
 
 export default function JokeForm({setJokesList}) {
+  const isConnected = useContext(IsConnectedContext);
+
   const [contentValue, setContentValue] = useState('');
   //const [language, setLanguage] = useState('');
   //const [category, setCategory] = useState('');
@@ -42,6 +46,8 @@ export default function JokeForm({setJokesList}) {
     .then(response => response.json())
     .then(callback);
   }
+
+  if (!isConnected) return null;
 
   return (
     <form onSubmit={handleSubmit} className="channel-editor">

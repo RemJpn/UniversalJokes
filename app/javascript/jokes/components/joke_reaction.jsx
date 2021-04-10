@@ -1,6 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+
+import {IsConnectedContext} from '../contexts/IsConnectedContext';
 
 export default function JokeReaction({joke, setJokesList}) {
+  const isConnected = useContext(IsConnectedContext);
+
   const updateJokeList = (updatedJoke) => {
     setJokesList(prev => {
       const jokeIndex = prev.findIndex(prevjoke => prevjoke.id == updatedJoke.id);
@@ -61,6 +65,8 @@ export default function JokeReaction({joke, setJokesList}) {
       return <i className="far fa-grin-squint-tears" onClick={toggleLike} ></i>
     }
   }
+
+  if (!isConnected) return null;
 
   return (
     <div>

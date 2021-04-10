@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import Feed from './components/feed';
+import {IsConnectedContext} from './contexts/IsConnectedContext';
+
+
+const rootElement = document.getElementById('root');
 
 const JokesApp = () => {
   const [jokesList, setJokesList] = useState();
@@ -16,11 +20,15 @@ const JokesApp = () => {
 
   if (!jokesList) return <p>Loading...</p>;
 
-  return (<Feed jokesList={jokesList} setJokesList={setJokesList} />) ;
+  return (
+    <IsConnectedContext.Provider value={root.dataset.signedin == 'true'} >
+      <Feed jokesList={jokesList} setJokesList={setJokesList} />
+    </IsConnectedContext.Provider >
+  ) ;
 };
 
 
 ReactDOM.render(
   <JokesApp />,
-  document.getElementById('root')
+  rootElement
 );
