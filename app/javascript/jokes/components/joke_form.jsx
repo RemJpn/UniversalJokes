@@ -10,13 +10,15 @@ export default function JokeForm({setJokesList}) {
   //const [category, setCategory] = useState('');
 
   const handleChange = (e) => {
-    setContentValue(e.target.value)
+    setContentValue(e.target.value);
+    textAreaAdjust(e.target);
   };
 
   const addNewJokeToState = (joke) => {
     console.log(joke);
     setJokesList(prev => [...prev, joke ]);
     setContentValue('');
+    textAreaAdjust(document.getElementById('content'));
   }
 
   const handleSubmit = (e) => {
@@ -47,20 +49,33 @@ export default function JokeForm({setJokesList}) {
     .then(callback);
   }
 
+  const textAreaAdjust = (element) => {
+    element.style.height = "1px";
+    element.style.height = (2 + element.scrollHeight)+"px";
+  }
+
   if (!isConnected) return null;
 
   return (
     <form onSubmit={handleSubmit} className="channel-editor" className="joke_form" >
-      <input
-        type="text"
+      <textarea
         name="content"
-        className="form-control"
-        autoComplete="off"
+        id="content"
+        cols="30"
+        rows="1"
         value={contentValue}
-        onChange={handleChange}
-      />
-
+        className="form-control"
+        onChange={handleChange}/>
       <button type="submit">Send</button>
     </form>
   );
 }
+
+      // <input
+      //   type="text"
+      //   name="content"
+      //   className="form-control"
+      //   autoComplete="off"
+      //   value={contentValue}
+      //   onChange={handleChange}
+      // />

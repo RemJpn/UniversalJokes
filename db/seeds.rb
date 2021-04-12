@@ -46,11 +46,8 @@ category3 = Category.create!(name: 'Absurde')
 puts "Seeding Jokes..."
 
 joke1 = Joke.create!(
-  content: "C’est un pain au chocolat qui rencontre un croissant et qui lui dit :
-
-– Eh, pourquoi t’es en forme de lune toi ?
-
-– Oh, j’t’en pose des questions, moi ? Est-ce que j’te demande pourquoi t’as une merde au cul ?",
+  content: "Que dit une banane malade à ses camarades qui ont aussi chopé le virus ?
+– On va tous mûrir !",
   user: user1,
   language: language1,
   category: category1
@@ -58,11 +55,8 @@ joke1 = Joke.create!(
 
 joke2 = Joke.create!(
   content: "Une femme discute avec une amie :
-
 – « J’ai un mari en or. »
-
 L’autre lui répond :
-
 « Moi, le mien, il est en taule. »",
   user: user1,
   language: language1,
@@ -75,6 +69,100 @@ joke3 = Joke.create!(
   language: language2,
   category: category1
 )
+
+joke4 = Joke.create!(
+  content: "Une femme observe son mari en train de planter un clou. Quelques minutes après, elle lui dit :
+– Tu me fais penser à la foudre.
+– Parce que je suis rapide hein ?
+– Non, parce que tu ne frappes jamais au même endroit !",
+  user: user3,
+  language: language1,
+  category: category1
+)
+
+joke5 = Joke.create!(
+  content: "Un homme se rend chez le garagiste et lui demande :
+– Pouvez-vous réparer ma roue ?
+– Bien sûr, mais comment avez-vous fait pour la crever ?
+– J’ai roulé sur une bouteille.
+– Vous ne l’aviez pas vue ??
+– Non, le mec l’avait dans la poche.",
+  user: user3,
+  language: language1,
+  category: category1
+)
+
+joke6 = Joke.create!(
+  content: "Deux potes discutent :
+– Quand j’étais jeune, je détestais aller aux mariages parce les vieux me mettaient une tape dans le dos en me disant « C’est toi le prochain ! »
+– Ils ont arrêté ?
+– Oui, quand j’ai commencé à leur faire la même chose pour les enterrements.",
+  user: user3,
+  language: language1,
+  category: category1
+)
+
+joke7 = Joke.create!(
+  content: "Deux vaches discutent :
+– Je sais pas pourquoi mais je me sens mal aujourd’hui.
+L’autre lui répond :
+– J’ai un conseil, arrête l’herbe.",
+  user: user3,
+  language: language1,
+  category: category1
+)
+
+joke8 = Joke.create!(
+  content: "Un caneton marche au bord d’un étang.
+Il voit une affiche où il est inscrit : « Baignade interdite. »
+Pourtant, il plonge. Pourquoi ?
+Réponse : t’as déjà vu un caneton qui sait lire ?",
+  user: user3,
+  language: language1,
+  category: category1
+)
+
+joke9 = Joke.create!(
+  content: "Qu’est-ce qui a deux bosses et qui vit au Pôle nord ?
+Réponse : un chameau qui s’est perdu.",
+  user: user3,
+  language: language1,
+  category: category1
+)
+joke10 = Joke.create!(
+  content: "Le jour de Noël, la tante de Toto lui dit :
+– Tu n’es pas trop triste que je parte demain ?
+– Si, un peu, j’aurais préféré que tu partes aujourd’hui.",
+  user: user3,
+  language: language1,
+  category: category1
+)
+
+joke11 = Joke.create!(
+  content: "Le soir de Noël, deux saucisses se retrouvent dans une casserole.
+L’une dit alors :
+– Il fait chaud non ?
+L’autre se met à crier :
+– Oh mon dieu, au secours ! Une saucisse qui parle !",
+  user: user3,
+  language: language1,
+  category: category1
+)
+
+joke12 = Joke.create!(
+  content: 'A man stands in front of a food truck and reads the menu
+  "Cheeseburgers: $5
+  Fries: $3
+  Handjobs: $10."
+  He walks up to the window and asks the beautiful woman working behind the counter, "Are you the one that gives the handjobs?"
+  "Yes, I am," she replies seductively.
+  "Well, wash your hands, I want a cheeseburger."',
+  user: user2,
+  language: language2,
+  category: category1
+)
+
+
 
 
 #----------------------------------------------------
