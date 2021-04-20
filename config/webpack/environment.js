@@ -1,4 +1,5 @@
 const { environment } = require('@rails/webpacker')
+const typescript =  require('./loaders/typescript')
 
 const webpack = require('webpack');
 // Preventing Babel from transpiling NodeModules packages
@@ -11,4 +12,5 @@ environment.plugins.prepend('Provide',
     Popper: ['popper.js', 'default']
   })
 );
+environment.loaders.prepend('typescript', typescript)
 module.exports = environment

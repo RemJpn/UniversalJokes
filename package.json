@@ -7,6 +7,8 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.3.0",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bootstrap": "^4.6.0",
     "jquery": "^3.6.0",
@@ -15,10 +17,15 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-emojione": "^5.0.1",
-    "turbolinks": "^5.2.0"
+    "ts-loader": "8",
+    "turbolinks": "^5.2.0",
+    "typescript": "^4.2.4"
   },
   "version": "0.1.0",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.24.0",
     "webpack-dev-server": "^3.11.2"
   }
 }

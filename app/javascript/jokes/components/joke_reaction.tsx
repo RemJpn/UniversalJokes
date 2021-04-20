@@ -17,7 +17,8 @@ export default function JokeReaction({joke, setJokesList}) {
 
   const createLike = () => {
     const url = `/api/v1/jokes/${joke.id}/liked_jokes`;
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').attributes.content.value;
+   const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
+   const csrfToken = csrfMetaTag.content;
     const promise = fetch(url, {
       method: 'POST',
       headers: {
@@ -33,7 +34,8 @@ export default function JokeReaction({joke, setJokesList}) {
 
   const deleteLike = () => {
    const url = `/api/v1/liked_jokes/${joke.liked_id}`;
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').attributes.content.value;
+   const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
+   const csrfToken = csrfMetaTag.content;
     const promise = fetch(url, {
       method: 'DELETE',
       headers: {

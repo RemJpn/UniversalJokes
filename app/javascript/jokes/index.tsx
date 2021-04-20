@@ -21,7 +21,7 @@ const JokesApp = () => {
   if (!jokesList) return <p>Loading...</p>;
 
   return (
-    <IsConnectedContext.Provider value={root.dataset.signedin == 'true'} >
+    <IsConnectedContext.Provider value={rootElement.dataset.signedin == 'true'} >
       <Feed jokesList={jokesList} setJokesList={setJokesList} />
     </IsConnectedContext.Provider >
   ) ;

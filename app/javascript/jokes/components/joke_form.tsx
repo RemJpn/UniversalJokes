@@ -33,7 +33,8 @@ export default function JokeForm({setJokesList}) {
 
   const submitJoke = (joke, callback) => {
     const url = '/api/v1/jokes';
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').attributes.content.value;
+    const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
+    const csrfToken = csrfMetaTag.content;
     const body = { joke }; // ES6 destructuring
     const promise = fetch(url, {
       method: 'POST',
@@ -57,12 +58,12 @@ export default function JokeForm({setJokesList}) {
   if (!isConnected) return null;
 
   return (
-    <form onSubmit={handleSubmit} className="channel-editor" className="joke_form" >
+    <form onSubmit={handleSubmit} className="channel-editor joke_form" >
       <textarea
         name="content"
         id="content"
-        cols="30"
-        rows="1"
+        cols= {30}
+        rows= {1}
         value={contentValue}
         className="form-control"
         onChange={handleChange}/>
