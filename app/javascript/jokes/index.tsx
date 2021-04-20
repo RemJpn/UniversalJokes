@@ -7,8 +7,8 @@ import {IsConnectedContext} from './contexts/IsConnectedContext';
 
 const rootElement = document.getElementById('root');
 
-const JokesApp = () => {
-  const [jokesList, setJokesList] = useState();
+const JokesApp: React.FC = () => {
+  const [jokesList, setJokesList] = useState([]);
   useEffect(() => {
     const url = '/api/v1/jokes';
     fetch(url, { credentials: "same-origin" })

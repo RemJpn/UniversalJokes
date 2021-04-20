@@ -2,8 +2,14 @@ import React, {useState, useContext} from 'react';
 import {emojify} from 'react-emojione';
 
 import {IsConnectedContext} from '../contexts/IsConnectedContext';
+import {JokeObject} from './joke';
 
-export default function JokeReaction({joke, setJokesList}) {
+interface Props {
+  joke: JokeObject;
+  setJokesList: React.Dispatch<React.SetStateAction<JokeObject[]>>;
+}
+
+export default function JokeReaction({joke, setJokesList}: Props): JSX.Element {
   const isConnected = useContext(IsConnectedContext);
 
   const updateJokeList = (updatedJoke) => {
@@ -19,7 +25,7 @@ export default function JokeReaction({joke, setJokesList}) {
     const url = `/api/v1/jokes/${joke.id}/liked_jokes`;
    const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
    const csrfToken = csrfMetaTag.content;
-    const promise = fetch(url, {
+    fetch(url, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -36,7 +42,7 @@ export default function JokeReaction({joke, setJokesList}) {
    const url = `/api/v1/liked_jokes/${joke.liked_id}`;
    const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
    const csrfToken = csrfMetaTag.content;
-    const promise = fetch(url, {
+    fetch(url, {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',

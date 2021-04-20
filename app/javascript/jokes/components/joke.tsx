@@ -2,7 +2,23 @@ import React from 'react';
 
 import JokeReaction from './joke_reaction';
 
-export default function Joke({joke, setJokesList}) {
+export interface JokeObject {
+  id: number;
+  author: string;
+  language: string;
+  category: string;
+  content: string;
+  likes: number;
+  liked_id: number | null;
+  created_at: string;
+}
+
+interface Props {
+  joke: JokeObject;
+  setJokesList: React.Dispatch<React.SetStateAction<JokeObject[]>>;
+}
+
+export function Joke({joke, setJokesList}: Props) {
 
   return (
     <div className="joke">

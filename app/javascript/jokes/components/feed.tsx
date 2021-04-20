@@ -1,10 +1,15 @@
 import React from 'react';
 
-import Joke from './joke';
+import {Joke, JokeObject} from './joke';
 import JokeForm from './joke_form';
 
 
-export default function Feed({jokesList, setJokesList}) {
+interface Props {
+  jokesList: JokeObject[];
+  setJokesList: React.Dispatch<React.SetStateAction<JokeObject[]>>;
+}
+
+export default function Feed({jokesList, setJokesList}: Props): JSX.Element {
   const renderJokesList = () => {
     return jokesList.map ( joke => {
       return (
@@ -19,4 +24,4 @@ export default function Feed({jokesList, setJokesList}) {
       {renderJokesList()}
     </div>
   );
-};
+}

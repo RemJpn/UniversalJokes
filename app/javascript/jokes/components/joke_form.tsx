@@ -1,8 +1,13 @@
 import React, { useState, useContext } from 'react';
 
 import {IsConnectedContext} from '../contexts/IsConnectedContext';
+import {JokeObject} from './joke';
 
-export default function JokeForm({setJokesList}) {
+interface Props {
+  setJokesList: React.Dispatch<React.SetStateAction<JokeObject[]>>;
+}
+
+export default function JokeForm({setJokesList}: Props): JSX.Element {
   const isConnected = useContext(IsConnectedContext);
 
   const [contentValue, setContentValue] = useState('');
@@ -36,7 +41,7 @@ export default function JokeForm({setJokesList}) {
     const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
     const csrfToken = csrfMetaTag.content;
     const body = { joke }; // ES6 destructuring
-    const promise = fetch(url, {
+    fetch(url, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
