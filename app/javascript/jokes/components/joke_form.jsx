@@ -70,12 +70,3 @@ export default function JokeForm({setJokesList}) {
     </form>
   );
 }
-
-      // <input
-      //   type="text"
-      //   name="content"
-      //   className="form-control"
-      //   autoComplete="off"
-      //   value={contentValue}
-      //   onChange={handleChange}
-      // />
