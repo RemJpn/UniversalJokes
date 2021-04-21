@@ -17,6 +17,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-emojione": "^5.0.1",
+    "tailwindcss": "^2.1.1",
     "ts-loader": "8",
     "turbolinks": "^5.2.0",
     "typescript": "^4.2.4"
