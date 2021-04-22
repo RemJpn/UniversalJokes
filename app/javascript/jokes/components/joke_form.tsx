@@ -63,7 +63,7 @@ export default function JokeForm({setJokesList}: Props): JSX.Element {
   if (!isConnected) return null;
 
   return (
-    <form onSubmit={handleSubmit} className="channel-editor joke_form" >
+    <form onSubmit={handleSubmit} className="channel-editor joke_form shadow-sm" >
       <textarea
         name="content"
         id="content"
@@ -72,7 +72,7 @@ export default function JokeForm({setJokesList}: Props): JSX.Element {
         value={contentValue}
         className="form-control"
         onChange={handleChange}/>
-      <button type="submit">Send</button>
+      <button type="submit" className="bg-blue-600 text-white">Send</button>
     </form>
   );
 }

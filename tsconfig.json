@@ -9,7 +9,12 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "target": "es5",
-    "jsx": "react"
+    "jsx": "react",
+    // following for png.d.ts
+    "baseUrl": "./",
+    "paths": {
+        "*": [ "app/javascript/custom_types/*"]
+    }
   },
   "exclude": [
     "**/*.spec.ts",

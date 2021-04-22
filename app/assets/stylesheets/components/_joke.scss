@@ -42,6 +42,10 @@
       transform: rotate(0deg);
       transition: all 0.2s ease-out;
     }
+
+    &:hover {
+      filter:grayscale(0);
+    }
   }
 
   .isInactive {

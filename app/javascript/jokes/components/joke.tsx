@@ -1,6 +1,7 @@
 import React from 'react';
 
 import JokeReaction from './joke_reaction';
+import defaultAvatar from 'images/avatar.png';
 
 export interface JokeObject {
   id: number;
@@ -18,12 +19,13 @@ interface Props {
   setJokesList: React.Dispatch<React.SetStateAction<JokeObject[]>>;
 }
 
-export function Joke({joke, setJokesList}: Props) {
+export function Joke({joke, setJokesList}: Props): JSX.Element {
 
   return (
-    <div className="joke">
-      <div className="joke-author">
-        {joke.author}
+    <div className="joke shadow-sm">
+      <div className="joke-author flex items-center">
+        <img src={defaultAvatar} alt="default" className="w-10"/>
+        <p className="ml-2">{joke.author}</p>
       </div>
       <div className="joke-content">
         <p>{joke.content}</p>
