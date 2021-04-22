@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_many :jokes
   has_many :liked_jokes
+  has_many :saved_jokes
 end
