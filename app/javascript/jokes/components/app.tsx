@@ -16,11 +16,19 @@ const App: React.FC = () => {
 
   }, []);
 
+  const [currentUser, setCurrentUser] = useState(false);
+  useEffect(() => {
+    const url = '/api/v1/logged_in';
+    fetch(url, { credentials: "same-origin" })
+      .then(r => r.json())
+      .then(data => setCurrentUser(data.email != null));
+
+  }, []);
 
   if (!jokesList) return <p>Loading...</p>;
 
   return (
-    <IsConnectedContext.Provider value={rootElement.dataset.signedin == 'true'} >
+    <IsConnectedContext.Provider value={currentUser} >
       <Feed jokesList={jokesList} setJokesList={setJokesList} />
     </IsConnectedContext.Provider >
   ) ;

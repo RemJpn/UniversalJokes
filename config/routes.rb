@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       end
       resources :liked_jokes, only: [ :destroy ]
       resources :saved_jokes, only: [ :destroy ]
+      get :logged_in, to: "users#logged_in"
     end
   end
 
