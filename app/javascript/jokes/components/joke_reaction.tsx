@@ -61,8 +61,48 @@ export default function JokeReaction({joke, setJokesList}: Props): JSX.Element {
     joke.liked_id ? deleteLike() : createLike();
   }
 
-  const handleSave = () => {
+
+  const createSaved = () => {
     console.log('saving...');
+    const url = `/api/v1/jokes/${joke.id}/saved_jokes`;
+    const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
+    const csrfToken = csrfMetaTag.content;
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': csrfToken
+      },
+      credentials: 'same-origin'
+    })
+    .then(response => response.json())
+    .then(updateJokeList);
+  }
+
+  const deleteSaved = () => {
+    console.log('unsaving...');
+    const url = `/api/v1/saved_jokes/${joke.saved_id}`;
+    const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
+    const csrfToken = csrfMetaTag.content;
+    fetch(url, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': csrfToken
+      },
+      credentials: 'same-origin'
+    })
+    .then(response => response.json())
+    .then(updateJokeList);
+  }
+
+
+
+  const toggleSave = () => {
+    console.log('save id =', joke.saved_id);
+    joke.saved_id ? deleteSaved() : createSaved();
   }
 
   if (!isConnected) return null;
@@ -73,9 +113,9 @@ export default function JokeReaction({joke, setJokesList}: Props): JSX.Element {
         <span className={joke.liked_id ? '' : 'slanted'}>{emojify('🤣')}</span>
         <p>J'ai ri</p>
       </div>
-      <div className="isInactive">
+      <div onClick={toggleSave} className={joke.saved_id ? '' : 'isInactive'} >
         {emojify('💾')}
-        <p>Enregistrer</p>
+        <p>{joke.saved_id ? 'Enregistrée' : 'Enregistrer'}</p>
       </div>
     </div>
   );

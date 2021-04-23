@@ -5,6 +5,7 @@ class Api::V1::SavedJokesController < ApplicationController
       joke: joke,
       user: current_user
     )
+
     render json: prepare_for_api(joke)
   end
 

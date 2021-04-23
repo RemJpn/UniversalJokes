@@ -6,8 +6,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :jokes, only: [ :index, :create ] do
         resources :liked_jokes, only: [ :create ]
+        resources :saved_jokes, only: [ :create ]
       end
       resources :liked_jokes, only: [ :destroy ]
+      resources :saved_jokes, only: [ :destroy ]
     end
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_06_200454) do
+ActiveRecord::Schema.define(version: 2021_04_22_132602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,15 @@ ActiveRecord::Schema.define(version: 2021_04_06_200454) do
     t.index ["user_id"], name: "index_liked_jokes_on_user_id"
   end
 
+  create_table "saved_jokes", force: :cascade do |t|
+    t.bigint "joke_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["joke_id"], name: "index_saved_jokes_on_joke_id"
+    t.index ["user_id"], name: "index_saved_jokes_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -65,4 +74,6 @@ ActiveRecord::Schema.define(version: 2021_04_06_200454) do
   add_foreign_key "jokes", "users"
   add_foreign_key "liked_jokes", "jokes"
   add_foreign_key "liked_jokes", "users"
+  add_foreign_key "saved_jokes", "jokes"
+  add_foreign_key "saved_jokes", "users"
 end

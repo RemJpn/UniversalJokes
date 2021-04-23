@@ -11,6 +11,7 @@ export interface JokeObject {
   content: string;
   likes: number;
   liked_id: number | null;
+  saved_id: number | null;
   created_at: string;
 }
 
