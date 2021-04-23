@@ -1,0 +1,29 @@
+import React, { useState, useEffect } from 'react';
+
+import Feed from './feed';
+import {IsConnectedContext} from '../contexts/IsConnectedContext';
+
+
+const rootElement = document.getElementById('root');
+
+const App: React.FC = () => {
+  const [jokesList, setJokesList] = useState([]);
+  useEffect(() => {
+    const url = '/api/v1/jokes';
+    fetch(url, { credentials: "same-origin" })
+      .then(r => r.json())
+      .then(data => setJokesList(data));
+
+  }, []);
+
+
+  if (!jokesList) return <p>Loading...</p>;
+
+  return (
+    <IsConnectedContext.Provider value={rootElement.dataset.signedin == 'true'} >
+      <Feed jokesList={jokesList} setJokesList={setJokesList} />
+    </IsConnectedContext.Provider >
+  ) ;
+};
+
+export default App;
