@@ -19,9 +19,9 @@ export default function Feed({jokesList, setJokesList}: Props): JSX.Element {
   }
 
   return (
-    <div className='feed mt-20'>
+    <main className='feed mt-20'>
       <JokeForm setJokesList={setJokesList} />
       {renderJokesList()}
-    </div>
+    </main>
   );
 }
