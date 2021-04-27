@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import JokeReaction from './joke_reaction';
+import JokeShow from './joke_show';
 import defaultAvatar from 'images/avatar.png';
 
 export interface JokeObject {
@@ -21,6 +22,15 @@ interface Props {
 }
 
 export function Joke({joke, setJokesList}: Props): JSX.Element {
+  const [jokeOpen, setJokeOpen] = useState(false);
+  const openJoke = () => setJokeOpen(true);
+
+
+  const renderJokeShow = () => {
+    if (!jokeOpen) return null;
+
+    return <JokeShow joke={joke} setJokeOpen={setJokeOpen} />;
+  }
 
   return (
     <div className="joke shadow-sm">
@@ -28,7 +38,7 @@ export function Joke({joke, setJokesList}: Props): JSX.Element {
         <img src={defaultAvatar} alt="default" className="w-10"/>
         <p className="ml-2">{joke.author}</p>
       </div>
-      <div className="joke-content">
+      <div className="joke-content" onClick={openJoke}>
         <p>{joke.content}</p>
       </div>
 
@@ -39,9 +49,11 @@ export function Joke({joke, setJokesList}: Props): JSX.Element {
         </a>
       </div>
       <JokeReaction joke={joke} setJokesList={setJokesList} />
-      <div className="joke-translations-link">
-        <a href="#">Voir les traductions</a>
+      <div className="joke-translations-link" onClick={openJoke}>
+        Voir les traductions
       </div>
+
+      {renderJokeShow()}
 
     </div>
   );
