@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 import Feed from './feed';
+import NavBar from './navbar';
 import {IsConnectedContext} from '../contexts/IsConnectedContext';
 
-
-const rootElement = document.getElementById('root');
 
 const App: React.FC = () => {
   const [jokesList, setJokesList] = useState([]);
@@ -29,6 +28,7 @@ const App: React.FC = () => {
 
   return (
     <IsConnectedContext.Provider value={currentUser} >
+      <NavBar />
       <Feed jokesList={jokesList} setJokesList={setJokesList} />
     </IsConnectedContext.Provider >
   ) ;
