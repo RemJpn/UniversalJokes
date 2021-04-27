@@ -2,7 +2,7 @@ class Api::V1::JokesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
-    jokes = Joke.all
+    jokes = Joke.all.sort_by {|joke| joke.created_at }.reverse
     api_jokes = jokes.map { |joke| prepare_for_api(joke) }
     render json: api_jokes
   end

@@ -21,7 +21,7 @@ export default function JokeForm({setJokesList}: Props): JSX.Element {
 
   const addNewJokeToState = (joke) => {
     console.log(joke);
-    setJokesList(prev => [...prev, joke ]);
+    setJokesList(prev => [joke, ...prev]);
     setContentValue('');
     textAreaAdjust(document.getElementById('content'));
   }
