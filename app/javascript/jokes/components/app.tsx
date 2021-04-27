@@ -28,7 +28,7 @@ const App: React.FC = () => {
 
   return (
     <IsConnectedContext.Provider value={currentUser} >
-      <NavBar />
+      <NavBar jokesList={jokesList} setJokesList={setJokesList}/>
       <Feed jokesList={jokesList} setJokesList={setJokesList} />
     </IsConnectedContext.Provider >
   ) ;

@@ -1,10 +1,24 @@
 import React, {useContext} from 'react';
 
+import {Joke, JokeObject} from './joke';
 import {IsConnectedContext} from '../contexts/IsConnectedContext';
 
+interface Props {
+  jokesList: JokeObject[];
+  setJokesList: React.Dispatch<React.SetStateAction<JokeObject[]>>;
+}
 
-export default function NavItems() : JSX.Element {
+export default function NavItems({jokesList, setJokesList}: Props) : JSX.Element {
   const isConnected = useContext(IsConnectedContext);
+
+  const handleClickSaved = () => {
+    const url = '/api/v1/saved_jokes';
+    fetch(url, { credentials: "same-origin" })
+      .then(r => r.json())
+      .then(data => setJokesList(data));
+
+  }
+
 
   if (!isConnected){
     return (
@@ -23,10 +37,8 @@ export default function NavItems() : JSX.Element {
           <i className="fas fa-home text-xl text-yellow-100 hover:text-yellow-900 transition duration-200"></i>
         </a>
       </li>
-      <li className="mr-4">
-        <a className="" href="#">
-          <i className="fas fa-heart text-xl text-yellow-100 hover:text-yellow-900 transition duration-200"></i>
-        </a>
+      <li className="mr-4" onClick={handleClickSaved}>
+        <i className="fas fa-heart text-xl text-yellow-100 hover:text-yellow-900 transition duration-200"></i>
       </li>
       <li className="">
         <a href="#">

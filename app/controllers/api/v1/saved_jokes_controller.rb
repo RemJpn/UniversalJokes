@@ -1,4 +1,10 @@
 class Api::V1::SavedJokesController < ApplicationController
+  def index
+    saved_jokes = current_user.saved_jokes
+    api_jokes = saved_jokes.map { |saved_joke| prepare_for_api(saved_joke.joke) }
+    render json: api_jokes
+  end
+
   def create
     joke = Joke.find(params[:joke_id])
     SavedJoke.create(
