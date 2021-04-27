@@ -23,10 +23,10 @@ export default function NavItems({setCurrentPage}: Props) : JSX.Element {
   return (
     <ul className="flex list-none items-center">
       <li className="mr-4 cursor-pointer" onClick={() => setCurrentPage('jokesIndex')}>
-         <i className="fas fa-home text-xl text-yellow-100 hover:text-yellow-900 transition duration-200"></i>
+         <i className="fas fa-home text-xl text-yellow-100 hover:text-yellow-900 transition duration-200 text-shadow"></i>
       </li>
       <li className="mr-4 cursor-pointer" onClick={() => setCurrentPage('savedJokesIndex')}>
-        <i className="fas fa-heart text-xl text-yellow-100 hover:text-yellow-900 transition duration-200"></i>
+        <i className="fas fa-heart text-xl text-yellow-100 hover:text-yellow-900 transition duration-200 text-shadow"></i>
       </li>
       <li className="">
         <a href="#">
