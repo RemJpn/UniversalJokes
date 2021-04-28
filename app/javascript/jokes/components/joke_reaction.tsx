@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useContext} from 'react';
 import {emojify} from 'react-emojione';
 
 import {IsConnectedContext} from '../contexts/IsConnectedContext';
@@ -7,12 +7,13 @@ import {JokeObject} from './joke';
 interface Props {
   joke: JokeObject;
   setJokesList: React.Dispatch<React.SetStateAction<JokeObject[]>>;
+  isSmall: boolean;
 }
 
-export default function JokeReaction({joke, setJokesList}: Props): JSX.Element {
+export default function JokeReaction({joke, setJokesList, isSmall}: Props): JSX.Element {
   const isConnected = useContext(IsConnectedContext);
 
-  const updateJokeList = (updatedJoke) => {
+  const updateJokeList = (updatedJoke: JokeObject) => {
     setJokesList(prev => {
       const jokeIndex = prev.findIndex(prevjoke => prevjoke.id == updatedJoke.id);
       const newList = [...prev];
@@ -98,14 +99,32 @@ export default function JokeReaction({joke, setJokesList}: Props): JSX.Element {
     .then(updateJokeList);
   }
 
-
-
   const toggleSave = () => {
     console.log('save id =', joke.saved_id);
     joke.saved_id ? deleteSaved() : createSaved();
   }
 
+
   if (!isConnected) return null;
+
+  if (isSmall) {
+    return (
+      <div className="joke-reaction">
+        <div onClick={toggleLike} className={joke.liked_id ? '' : 'isInactive'} >
+          <span className={joke.liked_id ? '' : 'slanted'}>{emojify('🤣')}</span>
+        </div>
+        <div onClick={toggleSave} className={joke.saved_id ? '' : 'isInactive'} >
+          {emojify('💾')}
+        </div>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=example.org"
+           target="_blank"
+           className="h-8 w-8 text-center text-gray-600 hover:text-yellow-700 transition duration-200">
+          <i className="fas fa-share-alt text-2xl"></i>
+        </a>
+      </div>
+
+    );
+  }
 
   return (
     <div className="joke-reaction">

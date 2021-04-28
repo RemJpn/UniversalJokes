@@ -22,14 +22,14 @@ interface Props {
 }
 
 export function Joke({joke, setJokesList}: Props): JSX.Element {
-  const [jokeOpen, setJokeOpen] = useState(false);
+  const [jokeOpen, setJokeOpen] = useState(true);
   const openJoke = () => setJokeOpen(true);
 
 
   const renderJokeShow = () => {
     if (!jokeOpen) return null;
 
-    return <JokeShow joke={joke} setJokeOpen={setJokeOpen} />;
+    return <JokeShow joke={joke} setJokeOpen={setJokeOpen} setJokesList={setJokesList}/>;
   }
 
   return (
@@ -38,7 +38,7 @@ export function Joke({joke, setJokesList}: Props): JSX.Element {
         <img src={defaultAvatar} alt="default" className="w-10"/>
         <p className="ml-2">{joke.author}</p>
       </div>
-      <div className="joke-content" onClick={openJoke}>
+      <div className="joke-content cursor-pointer" onClick={openJoke}>
         <p>{joke.content}</p>
       </div>
 
@@ -48,8 +48,8 @@ export function Joke({joke, setJokesList}: Props): JSX.Element {
           Share on Facebook
         </a>
       </div>
-      <JokeReaction joke={joke} setJokesList={setJokesList} />
-      <div className="joke-translations-link" onClick={openJoke}>
+      <JokeReaction joke={joke} setJokesList={setJokesList} isSmall={false}/>
+      <div className="joke-translations-link cursor-pointer" onClick={openJoke}>
         Voir les traductions
       </div>
 
