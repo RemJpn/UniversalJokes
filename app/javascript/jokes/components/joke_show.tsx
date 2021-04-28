@@ -14,6 +14,14 @@ interface Props {
 export default function JokeShow({joke, setJokeOpen, setJokesList}: Props): JSX.Element {
   const closeJoke =() => setJokeOpen(false);
 
+  const renderTranslations = () => {
+    return (
+      joke.translations.map(translation => {
+        return translation.content
+      })
+    )
+  }
+
   return (
     <div className="w-screen h-screen fixed inset-0 flex bg-red-900 z-50">
       <div className="w-1/2 flex flex-col items-center p-4">
@@ -41,6 +49,9 @@ export default function JokeShow({joke, setJokeOpen, setJokesList}: Props): JSX.
       <div className="w-1/2 bg-white p-4">
         <h2 className="text-lg font-bold">Translations</h2>
         <button className="bg-indigo-300 rounded-md shadow-sm px-4 py-2 text-sm text-white">Proposer une traduction</button>
+
+        {renderTranslations()}
+
 
       </div>
     </div>

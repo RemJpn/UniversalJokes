@@ -14,6 +14,16 @@ export interface JokeObject {
   liked_id: number | null;
   saved_id: number | null;
   created_at: string;
+  translations: TranslationObject[];
+}
+
+interface TranslationObject {
+  id: number;
+  content: string;
+  author: string;
+  language: string;
+  created_at: string;
+  joke_id: number;
 }
 
 interface Props {

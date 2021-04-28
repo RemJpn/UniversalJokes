@@ -26,5 +26,4 @@ class Api::V1::JokesController < ApplicationController
   def message_params
     params.require(:joke).permit(:content)
   end
-
 end
