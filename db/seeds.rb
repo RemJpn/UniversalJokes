@@ -127,6 +127,17 @@ Translation.create!(
   language: language2,
   joke: joke5
 )
+Translation.create!(
+  content: "男が整備士のところに行き、彼に尋ねます：
+-ホイールを直してもらえますか？
+-もちろんですが、どうやって彼女を殺したのですか？
+-私はボトルを転がしました。
+-彼女に会いませんでしたか？
+-いいえ、男はポケットに入れていました。",
+  user: user3,
+  language: language4,
+  joke: joke5
+)
 
 joke6 = Joke.create!(
   content: "Deux potes discutent :

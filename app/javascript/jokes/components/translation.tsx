@@ -29,7 +29,7 @@ export function Translation({translation}: Props): JSX.Element {
           {translation.language}
         </p>
       </div>
-      <div className="text-sm cursor-pointer mt-2">
+      <div className="text-sm mt-2">
         <p>{translation.content}</p>
       </div>
     </div>

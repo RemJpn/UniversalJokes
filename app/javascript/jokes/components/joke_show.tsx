@@ -3,6 +3,7 @@ import React from 'react';
 import {JokeObject} from './joke';
 import JokeReaction from './joke_reaction';
 import {Translation} from './translation';
+import TranslationForm from './translation_form';
 
 import defaultAvatar from 'images/avatar.png';
 
@@ -18,7 +19,7 @@ export default function JokeShow({joke, setJokeOpen, setJokesList}: Props): JSX.
   const renderTranslations = () => {
     return (
       joke.translations.map(translation => {
-        return <Translation translation={translation} />
+        return <Translation translation={translation} key={translation.id} />
       })
     )
   }
@@ -38,7 +39,7 @@ export default function JokeShow({joke, setJokeOpen, setJokesList}: Props): JSX.
             <img src={defaultAvatar} alt="default" className="w-10"/>
             <p className="ml-2 font-bold">{joke.author}</p>
           </div>
-          <div className="text-sm cursor-pointer mt-3">
+          <div className="text-sm mt-3">
             <p>{joke.content}</p>
           </div>
           <div className="text-gray-400 mt-4">
@@ -46,15 +47,15 @@ export default function JokeShow({joke, setJokeOpen, setJokesList}: Props): JSX.
           </div>
         </div>
 
-        <div className="bg-gray-100 w-1/2 rounded-full mt-2">
+        <div className="bg-white w-1/2 rounded-full mt-2">
           <JokeReaction joke={joke} setJokesList={setJokesList} isSmall={true}/>
         </div>
 
       </div>
 
-      <div className="w-1/2 bg-white p-4 flex flex-col">
+      <div className="w-1/2 bg-gray-100 p-4 flex flex-col">
         <h2 className="text-lg font-bold">Translations</h2>
-        <button className="bg-indigo-300 rounded-md shadow-sm px-4 py-2 text-sm text-white self-center mt-6">Proposer une traduction</button>
+        <TranslationForm joke={joke} />
 
         {renderTranslations()}
 
