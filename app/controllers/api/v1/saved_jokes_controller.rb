@@ -1,7 +1,7 @@
 class Api::V1::SavedJokesController < ApplicationController
   def index
     saved_jokes = current_user.saved_jokes.sort_by {|saved_joke| saved_joke.created_at }.reverse
-    api_jokes = saved_jokes.map { |saved_joke| prepare_for_api(saved_joke.joke) }
+    api_jokes = saved_jokes.map { |saved_joke| prepare_api_v1_joke(saved_joke.joke) }
     render json: api_jokes
   end
 
@@ -12,7 +12,7 @@ class Api::V1::SavedJokesController < ApplicationController
       user: current_user
     )
 
-    render json: prepare_for_api(joke)
+    render json: prepare_api_v1_joke(joke)
   end
 
   def destroy
@@ -20,26 +20,12 @@ class Api::V1::SavedJokesController < ApplicationController
     joke = like.joke
     like.destroy
 
-    render json: prepare_for_api(joke)
+    render json: prepare_api_v1_joke(joke)
   end
 
   private
 
   def liked_joke_params
     params.require(:joke).permit(:id)
-  end
-
-  def prepare_for_api(joke)
-    {
-      id: joke.id,
-      author: joke.user.email,
-      language: joke.language.name,
-      category: joke.category.name,
-      content: joke.content,
-      likes: joke.liked_jokes.count,
-      liked_id: current_user&.liked_jokes&.find { |like| like.joke == joke }&.id,
-      saved_id: current_user&.saved_jokes&.find { |saved| saved.joke == joke }&.id,
-      created_at: joke.created_at
-    }
   end
 end
