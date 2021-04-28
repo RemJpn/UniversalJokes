@@ -2,6 +2,8 @@
 puts "Start"
 puts "Clean DB"
 LikedJoke.destroy_all
+SavedJoke.destroy_all
+Translation.destroy_all
 Joke.destroy_all
 Category.destroy_all
 Language.destroy_all
@@ -52,6 +54,13 @@ joke1 = Joke.create!(
   language: language1,
   category: category1
 )
+Translation.create!(
+  content: "What does a sick raisin say to its friends that also caught the virus ?
+  - We're all gonna dry!",
+  user: user2,
+  language: language2,
+  joke: joke1
+)
 
 joke2 = Joke.create!(
   content: "Une femme discute avec une amie :
@@ -69,6 +78,12 @@ joke3 = Joke.create!(
   language: language2,
   category: category1
 )
+Translation.create!(
+  content: "J'ai mangé une horloge hier, ca m'a bouffé la journée",
+  user: user1,
+  language: language1,
+  joke: joke3
+)
 
 joke4 = Joke.create!(
   content: "Une femme observe son mari en train de planter un clou. Quelques minutes après, elle lui dit :
@@ -79,6 +94,16 @@ joke4 = Joke.create!(
   language: language1,
   category: category1
 )
+Translation.create!(
+  content: "A woman observes her husband hitting a nail. Some moments later, she tells him :
+– You remind me of lightning.
+– Cause I'm fast, right ?
+– No, because you never strike the same place twice !",
+  user: user2,
+  language: language2,
+  joke: joke4
+)
+
 
 joke5 = Joke.create!(
   content: "Un homme se rend chez le garagiste et lui demande :
@@ -90,6 +115,17 @@ joke5 = Joke.create!(
   user: user3,
   language: language1,
   category: category1
+)
+Translation.create!(
+  content: "A man goes to the garage ans asks the mechanics :
+– Can you repare my tyre ?
+– Of course, but how did it get punctured ?
+– I drove on a glass bottle.
+– You didn't see it ??
+– No, it was in the guy's pocket.",
+  user: user2,
+  language: language2,
+  joke: joke5
 )
 
 joke6 = Joke.create!(
@@ -111,6 +147,7 @@ L’autre lui répond :
   language: language1,
   category: category1
 )
+
 
 joke8 = Joke.create!(
   content: "Un caneton marche au bord d’un étang.
