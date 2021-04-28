@@ -6,21 +6,12 @@ import {JokeObject} from './joke';
 
 interface Props {
   joke: JokeObject;
-  setJokesList: React.Dispatch<React.SetStateAction<JokeObject[]>>;
   isSmall: boolean;
+  updateJokeList: (updatedJoke: JokeObject) => void;
 }
 
-export default function JokeReaction({joke, setJokesList, isSmall}: Props): JSX.Element {
+export default function JokeReaction({joke, updateJokeList, isSmall}: Props): JSX.Element {
   const isConnected = useContext(IsConnectedContext);
-
-  const updateJokeList = (updatedJoke: JokeObject) => {
-    setJokesList(prev => {
-      const jokeIndex = prev.findIndex(prevjoke => prevjoke.id == updatedJoke.id);
-      const newList = [...prev];
-      newList[jokeIndex] = updatedJoke;
-      return newList;
-    });
-  }
 
   const createLike = () => {
     const url = `/api/v1/jokes/${joke.id}/liked_jokes`;

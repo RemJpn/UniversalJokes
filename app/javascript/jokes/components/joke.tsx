@@ -35,11 +35,19 @@ export function Joke({joke, setJokesList}: Props): JSX.Element {
   const [jokeOpen, setJokeOpen] = useState(true);
   const openJoke = () => setJokeOpen(true);
 
+  const updateJokeList = (updatedJoke: JokeObject) => {
+    setJokesList(prev => {
+      const jokeIndex = prev.findIndex(prevjoke => prevjoke.id == updatedJoke.id);
+      const newList = [...prev];
+      newList[jokeIndex] = updatedJoke;
+      return newList;
+    });
+  }
 
   const renderJokeShow = () => {
     if (!jokeOpen) return null;
 
-    return <JokeShow joke={joke} setJokeOpen={setJokeOpen} setJokesList={setJokesList}/>;
+    return <JokeShow joke={joke} setJokeOpen={setJokeOpen} updateJokeList={updateJokeList}/>;
   }
 
   return (
@@ -58,7 +66,7 @@ export function Joke({joke, setJokesList}: Props): JSX.Element {
           Share on Facebook
         </a>
       </div>
-      <JokeReaction joke={joke} setJokesList={setJokesList} isSmall={false}/>
+      <JokeReaction joke={joke} updateJokeList={updateJokeList} isSmall={false}/>
       <div className="joke-translations-link cursor-pointer" onClick={openJoke}>
         Voir les traductions
       </div>

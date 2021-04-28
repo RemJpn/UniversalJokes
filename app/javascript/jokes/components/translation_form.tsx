@@ -5,17 +5,25 @@ import {JokeObject} from './joke';
 
 interface Props {
   joke: JokeObject;
+  updateJokeList: (updatedJoke: JokeObject) => void;
 }
 
-export default function JokeForm({joke}: Props): JSX.Element {
+export default function TranslationForm({joke, updateJokeList}: Props): JSX.Element {
   const isConnected = useContext(IsConnectedContext);
 
   const [contentValue, setContentValue] = useState('');
-  //const [language, setLanguage] = useState('');
+  const [language, setLanguage] = useState('');
 
   const handleChange = (e) => {
-    setContentValue(e.target.value);
-    textAreaAdjust(e.target);
+    switch(e.target.id) {
+      case "language":
+        setLanguage(e.target.value);
+        break;
+      case "content":
+        setContentValue(e.target.value);
+        textAreaAdjust(e.target);
+        break;
+    }
   };
 
   const textAreaAdjust = (element) => {
@@ -25,6 +33,7 @@ export default function JokeForm({joke}: Props): JSX.Element {
 
   const addNewJokeToState = (joke) => {
     console.log(joke);
+    updateJokeList(joke);
     // setJokesList(prev => [joke, ...prev]);
     setContentValue('');
     textAreaAdjust(document.getElementById('content'));
@@ -34,17 +43,18 @@ export default function JokeForm({joke}: Props): JSX.Element {
     e.preventDefault();
     if (contentValue) {
       const translation = {
-        content: contentValue
+        content: contentValue,
+        language: language
       };
       submitTranslation(translation, addNewJokeToState);
     }
   }
 
-  const submitTranslation = (joke, callback) => {
-    const url = '/api/v1/jokes';
+  const submitTranslation = (translation, callback) => {
+    const url = `/api/v1/jokes/${joke.id}/translations`;
     const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
     const csrfToken = csrfMetaTag.content;
-    const body = { joke }; // ES6 destructuring
+    const body = { translation }; // ES6 destructuring
     fetch(url, {
       method: 'POST',
       headers: {
@@ -63,8 +73,9 @@ export default function JokeForm({joke}: Props): JSX.Element {
   if (!isConnected) return null;
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white border border-gray-100 px-4 py-2 shadow-sm rounded-md" >
-      <select name="language" id="language">
+    <form onSubmit={handleSubmit} className="bg-white border border-gray-100 px-4 py-2 shadow-sm rounded-md mt-8 mb-4" >
+      <select name="language" id="language" onChange={handleChange}>
+        <option value="">Choisir la langue</option>
         <option value="Français">Français</option>
         <option value="English">English</option>
         <option value="Español">Español</option>

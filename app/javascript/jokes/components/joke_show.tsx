@@ -10,10 +10,10 @@ import defaultAvatar from 'images/avatar.png';
 interface Props {
   joke: JokeObject;
   setJokeOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setJokesList: React.Dispatch<React.SetStateAction<JokeObject[]>>;
+  updateJokeList: (updatedJoke: JokeObject) => void;
 }
 
-export default function JokeShow({joke, setJokeOpen, setJokesList}: Props): JSX.Element {
+export default function JokeShow({joke, setJokeOpen, updateJokeList}: Props): JSX.Element {
   const closeJoke =() => setJokeOpen(false);
 
   const renderTranslations = () => {
@@ -48,14 +48,14 @@ export default function JokeShow({joke, setJokeOpen, setJokesList}: Props): JSX.
         </div>
 
         <div className="bg-white w-1/2 rounded-full mt-2">
-          <JokeReaction joke={joke} setJokesList={setJokesList} isSmall={true}/>
+          <JokeReaction joke={joke} updateJokeList={updateJokeList} isSmall={true}/>
         </div>
 
       </div>
 
       <div className="w-1/2 bg-gray-100 p-4 flex flex-col">
         <h2 className="text-lg font-bold">Translations</h2>
-        <TranslationForm joke={joke} />
+        <TranslationForm joke={joke} updateJokeList={updateJokeList} />
 
         {renderTranslations()}
 

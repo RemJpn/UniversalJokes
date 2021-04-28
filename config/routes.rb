@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :jokes, only: [ :index, :create ] do
+        resources :translations, only: [ :create ]
         resources :liked_jokes, only: [ :create ]
         resources :saved_jokes, only: [ :create ]
       end
