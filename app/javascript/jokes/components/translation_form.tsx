@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
-import Select from 'react-select';
 
-import LanguageSelect from './language_select';
+import {LanguageSelect} from './language_select';
 import {IsConnectedContext} from '../contexts/IsConnectedContext';
 import {JokeObject} from './joke';
 import tailSpin from 'images/tail-spin.svg';
@@ -16,34 +15,6 @@ interface languageOption {
   icon: string;
   label: string;
 }
-
-const languageOptions: languageOption[] = [
-  { value: 'fr', icon: '🇫🇷', label: 'Français' },
-  { value: 'en', icon: '🇬🇧', label: 'English' },
-  { value: 'es', icon: '🇪🇸', label: 'Español' },
-  { value: 'ja', icon: '🇯🇵', label: '日本語' },
-];
-
-const getLabel = ({ icon, label }: languageOption): JSX.Element => {
-  return (
-    <div style={{ alignItems: 'center', display: 'flex' }}>
-      <span style={{ fontSize: 18, marginRight: '0.5em' }}>{icon}</span>
-      <span style={{ fontSize: 14 }}>{label}</span>
-    </div>
-  );
-
-}
-
-const customStyles = {
-  control: (provided) => ({
-    ...provided,
-    width: 200
-  }),
-  menu: (provided) => ({
-    ...provided,
-    width: 200
-  })
-};
 
 export default function TranslationForm({joke, updateJokeList}: Props): JSX.Element {
   const isConnected = useContext(IsConnectedContext);
@@ -63,11 +34,11 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
 
     if (language) {
       autoBtn.disabled = false;
-      autoBtn.classList.add('bg-indigo-300');
+      autoBtn.classList.add('bg-indigo-300', 'shadow-sm');
       autoBtn.classList.remove('bg-gray-300');
     } else {
       autoBtn.disabled = true;
-      autoBtn.classList.remove('bg-indigo-300');
+      autoBtn.classList.remove('bg-indigo-300', 'shadow-sm');
       autoBtn.classList.add('bg-gray-300');
     }
   }
@@ -75,17 +46,16 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
     const sendBtn = document.getElementById(`send-${joke.id}`) as HTMLInputElement;
 
     if (language && contentValue) {
-      sendBtn.classList.add('bg-indigo-600');
-      sendBtn.classList.remove('bg-gray-600');
+      sendBtn.classList.add('bg-indigo-600', 'shadow-sm');
+      sendBtn.classList.remove('bg-gray-300');
       sendBtn.disabled=false;
     } else {
       sendBtn.disabled = true;
-      sendBtn.classList.remove('bg-indigo-600');
-      sendBtn.classList.add('bg-gray-600');
+      sendBtn.classList.remove('bg-indigo-600', 'shadow-sm');
+      sendBtn.classList.add('bg-gray-300');
     }
   }
 
-  useEffect(() => console.log(language), [language]);
   useEffect(() => toggleAutoBtn(), [language]);
   useEffect(() => toggleSendBtn(), [language, contentValue]);
 
@@ -95,9 +65,7 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
   }
 
   const addNewJokeToState = (joke) => {
-    console.log(joke);
     updateJokeList(joke);
-    // setJokesList(prev => [joke, ...prev]);
     setContentValue('');
     textAreaAdjust(contentInput);
   }
@@ -141,7 +109,7 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
     const url = `https://libretranslate.com/translate`;
     const body = {
       q: joke.content,
-      source: "fr",
+      source: joke.language,
       target: language.value
     };
     fetch(url, {
@@ -156,8 +124,6 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
       autoBtn.classList.remove('hidden');
       loader.classList.add('hidden');
     });
-
-
   }
 
 
@@ -179,7 +145,7 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
       <div className="flex justify-between items-center mt-2">
         <button id={`autoBtn-${joke.id}`} onClick={fetchTrans} className="bg-gray-300 text-white rounded-md px-4 py-2 text-sm">Auto</button>
         <img id={`loader-${joke.id}`} src={tailSpin} alt="loading" className="h-6 hidden"/>
-        <button id={`send-${joke.id}`} type="submit" className="bg-gray-600 text-white rounded-md px-4 py-2 text-sm">Proposer la traduction</button>
+        <button id={`send-${joke.id}`} type="submit" className="bg-gray-300 text-white rounded-md px-4 py-2 text-sm">Proposer la traduction</button>
       </div>
     </form>
   );

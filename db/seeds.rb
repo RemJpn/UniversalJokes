@@ -29,10 +29,10 @@ user3 = User.create!(
 #----------------------------------------------------
 puts "Seeding languages..."
 
-language1 = Language.create!(name: 'Français')
-language2 = Language.create!(name: 'English')
-language3 = Language.create!(name: 'Español')
-language4 = Language.create!(name: '日本語')
+language1 = Language.create!(name: 'fr')
+language2 = Language.create!(name: 'en')
+language3 = Language.create!(name: 'es')
+language4 = Language.create!(name: 'ja')
 
 
 #----------------------------------------------------

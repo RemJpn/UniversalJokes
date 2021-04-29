@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {languageOptions} from './language_select';
 import defaultAvatar from 'images/avatar.png';
 
 
@@ -26,7 +27,11 @@ export function Translation({translation}: Props): JSX.Element {
           <p className="ml-2 text-sm font-bold">{translation.author}</p>
         </div>
         <p className="text-gray-400">
-          {translation.language}
+          {
+            languageOptions
+              .find(option => option.value == translation.language)
+              .icon
+          }
         </p>
       </div>
       <div className="text-sm mt-2">

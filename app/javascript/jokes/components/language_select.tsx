@@ -13,7 +13,7 @@ interface languageOption {
   label: string;
 }
 
-const languageOptions: languageOption[] = [
+export const languageOptions: languageOption[] = [
   { value: 'fr', icon: '🇫🇷', label: 'Français' },
   { value: 'en', icon: '🇬🇧', label: 'English' },
   { value: 'es', icon: '🇪🇸', label: 'Español' },
@@ -41,7 +41,7 @@ const customStyles = {
   })
 };
 
-export default function LanguageSelect({language, setLanguage}: Props): JSX.Element {
+export function LanguageSelect({language, setLanguage}: Props): JSX.Element {
 
   return (
     <Select
@@ -54,3 +54,4 @@ export default function LanguageSelect({language, setLanguage}: Props): JSX.Elem
     />
   );
 }
+
