@@ -14,6 +14,8 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
   const [contentValue, setContentValue] = useState('');
   const [language, setLanguage] = useState('');
 
+  const contentInput = document.getElementById(`content-${joke.id}`);
+
   const handleChange = (e) => {
     switch(e.target.id) {
       case "language":
@@ -36,7 +38,7 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
     updateJokeList(joke);
     // setJokesList(prev => [joke, ...prev]);
     setContentValue('');
-    textAreaAdjust(document.getElementById('content'));
+    textAreaAdjust(contentInput);
   }
 
   const handleSubmit = (e) => {
@@ -69,6 +71,25 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
     .then(callback);
   }
 
+  const fetchTrans = () => {
+    const url = `https://libretranslate.com/translate`;
+    const body = {
+      q: joke.content,
+      source: "fr",
+      target: language
+    };
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    })
+    .then(response => response.json())
+    .then(data => {
+      setContentValue(data.translatedText);
+      textAreaAdjust(contentInput);
+    });
+  }
+
 
   if (!isConnected) return null;
 
@@ -76,20 +97,23 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
     <form onSubmit={handleSubmit} className="bg-white border border-gray-100 px-4 py-2 shadow-sm rounded-md mt-8 mb-4" >
       <select name="language" id="language" onChange={handleChange}>
         <option value="">Choisir la langue</option>
-        <option value="Français">Français</option>
-        <option value="English">English</option>
-        <option value="Español">Español</option>
-        <option value="日本語">日本語</option>
+        <option value="fr">Français</option>
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="ja">日本語</option>
       </select>
       <textarea
         name="content"
-        id="content"
+        id={`content-${joke.id}`}
         cols= {30}
         rows= {1}
         value={contentValue}
         className="form-control"
         onChange={handleChange}/>
-      <button type="submit" className="bg-indigo-600 text-white rounded-md mt-2 px-4 py-2 text-sm">Proposer la traduction</button>
+      <div className="flex justify-between">
+        <button onClick={fetchTrans} className="bg-indigo-300 text-white rounded-md mt-2 px-4 py-2 text-sm">Auto</button>
+        <button type="submit" className="bg-indigo-600 text-white rounded-md mt-2 px-4 py-2 text-sm">Proposer la traduction</button>
+      </div>
     </form>
   );
 }
