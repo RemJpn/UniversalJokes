@@ -1,7 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 import {IsConnectedContext} from '../contexts/IsConnectedContext';
 import {JokeObject} from './joke';
+import tailSpin from 'images/tail-spin.svg';
 
 interface Props {
   joke: JokeObject;
@@ -21,12 +22,43 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
       case "language":
         setLanguage(e.target.value);
         break;
-      case "content":
+      case `content-${joke.id}`:
+        console.log(e.target.value);
         setContentValue(e.target.value);
         textAreaAdjust(e.target);
         break;
     }
   };
+
+  const toggleAutoBtn = () => {
+    const autoBtn = document.getElementById(`autoBtn-${joke.id}`) as HTMLInputElement;
+
+    if (language) {
+      autoBtn.disabled = false;
+      autoBtn.classList.add('bg-indigo-300');
+      autoBtn.classList.remove('bg-gray-300');
+    } else {
+      autoBtn.disabled = true;
+      autoBtn.classList.remove('bg-indigo-300');
+      autoBtn.classList.add('bg-gray-300');
+    }
+  }
+  const toggleSendBtn = () => {
+    const sendBtn = document.getElementById(`send-${joke.id}`) as HTMLInputElement;
+
+    if (language && contentValue) {
+      sendBtn.classList.add('bg-indigo-600');
+      sendBtn.classList.remove('bg-gray-600');
+      sendBtn.disabled=false;
+    } else {
+      sendBtn.disabled = true;
+      sendBtn.classList.remove('bg-indigo-600');
+      sendBtn.classList.add('bg-gray-600');
+    }
+  }
+
+  useEffect(() => toggleAutoBtn(), [language]);
+  useEffect(() => toggleSendBtn(), [language, contentValue]);
 
   const textAreaAdjust = (element) => {
     element.style.height = "1px";
@@ -72,6 +104,11 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
   }
 
   const fetchTrans = () => {
+    const autoBtn = document.getElementById(`autoBtn-${joke.id}`);
+    const loader = document.getElementById(`loader-${joke.id}`);
+    autoBtn.classList.add('hidden');
+    loader.classList.remove('hidden');
+
     const url = `https://libretranslate.com/translate`;
     const body = {
       q: joke.content,
@@ -87,7 +124,11 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
     .then(data => {
       setContentValue(data.translatedText);
       textAreaAdjust(contentInput);
+      autoBtn.classList.remove('hidden');
+      loader.classList.add('hidden');
     });
+
+
   }
 
 
@@ -110,9 +151,10 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
         value={contentValue}
         className="form-control"
         onChange={handleChange}/>
-      <div className="flex justify-between">
-        <button onClick={fetchTrans} className="bg-indigo-300 text-white rounded-md mt-2 px-4 py-2 text-sm">Auto</button>
-        <button type="submit" className="bg-indigo-600 text-white rounded-md mt-2 px-4 py-2 text-sm">Proposer la traduction</button>
+      <div className="flex justify-between items-center">
+        <button id={`autoBtn-${joke.id}`} onClick={fetchTrans} className="bg-gray-300 text-white rounded-md mt-2 px-4 py-2 text-sm">Auto</button>
+        <img id={`loader-${joke.id}`} src={tailSpin} alt="loading" className="h-6 hidden"/>
+        <button id={`send-${joke.id}`} type="submit" className="bg-gray-600 text-white rounded-md mt-2 px-4 py-2 text-sm">Proposer la traduction</button>
       </div>
     </form>
   );
