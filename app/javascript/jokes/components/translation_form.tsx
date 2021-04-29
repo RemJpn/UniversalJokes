@@ -1,5 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
+import Select from 'react-select';
 
+import LanguageSelect from './language_select';
 import {IsConnectedContext} from '../contexts/IsConnectedContext';
 import {JokeObject} from './joke';
 import tailSpin from 'images/tail-spin.svg';
@@ -9,25 +11,51 @@ interface Props {
   updateJokeList: (updatedJoke: JokeObject) => void;
 }
 
+interface languageOption {
+  value: string;
+  icon: string;
+  label: string;
+}
+
+const languageOptions: languageOption[] = [
+  { value: 'fr', icon: '🇫🇷', label: 'Français' },
+  { value: 'en', icon: '🇬🇧', label: 'English' },
+  { value: 'es', icon: '🇪🇸', label: 'Español' },
+  { value: 'ja', icon: '🇯🇵', label: '日本語' },
+];
+
+const getLabel = ({ icon, label }: languageOption): JSX.Element => {
+  return (
+    <div style={{ alignItems: 'center', display: 'flex' }}>
+      <span style={{ fontSize: 18, marginRight: '0.5em' }}>{icon}</span>
+      <span style={{ fontSize: 14 }}>{label}</span>
+    </div>
+  );
+
+}
+
+const customStyles = {
+  control: (provided) => ({
+    ...provided,
+    width: 200
+  }),
+  menu: (provided) => ({
+    ...provided,
+    width: 200
+  })
+};
+
 export default function TranslationForm({joke, updateJokeList}: Props): JSX.Element {
   const isConnected = useContext(IsConnectedContext);
 
   const [contentValue, setContentValue] = useState('');
-  const [language, setLanguage] = useState('');
+  const [language, setLanguage] = useState<languageOption>();
 
   const contentInput = document.getElementById(`content-${joke.id}`);
 
   const handleChange = (e) => {
-    switch(e.target.id) {
-      case "language":
-        setLanguage(e.target.value);
-        break;
-      case `content-${joke.id}`:
-        console.log(e.target.value);
-        setContentValue(e.target.value);
-        textAreaAdjust(e.target);
-        break;
-    }
+    setContentValue(e.target.value);
+    textAreaAdjust(e.target);
   };
 
   const toggleAutoBtn = () => {
@@ -57,6 +85,7 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
     }
   }
 
+  useEffect(() => console.log(language), [language]);
   useEffect(() => toggleAutoBtn(), [language]);
   useEffect(() => toggleSendBtn(), [language, contentValue]);
 
@@ -78,7 +107,7 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
     if (contentValue) {
       const translation = {
         content: contentValue,
-        language: language
+        language: language.value
       };
       submitTranslation(translation, addNewJokeToState);
     }
@@ -113,7 +142,7 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
     const body = {
       q: joke.content,
       source: "fr",
-      target: language
+      target: language.value
     };
     fetch(url, {
       method: 'POST',
@@ -136,13 +165,9 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
 
   return (
     <form onSubmit={handleSubmit} className="bg-white border border-gray-100 px-4 py-3 shadow-sm rounded-md mt-2 mb-2" >
-      <select name="language" id="language" onChange={handleChange}>
-        <option value="">Choisir la langue</option>
-        <option value="fr">Français</option>
-        <option value="en">English</option>
-        <option value="es">Español</option>
-        <option value="ja">日本語</option>
-      </select>
+
+      <LanguageSelect language={language} setLanguage={setLanguage} />
+
       <textarea
         name="content"
         id={`content-${joke.id}`}
