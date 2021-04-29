@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {JokeObject} from './joke';
 import JokeReaction from './joke_reaction';
 import {Translation} from './translation';
 import TranslationForm from './translation_form';
+import {languageOption, LanguageSelect} from './language_select';
 
 import defaultAvatar from 'images/avatar.png';
 
@@ -14,11 +15,24 @@ interface Props {
 }
 
 export default function JokeShow({joke, setJokeOpen, updateJokeList}: Props): JSX.Element {
+  const [languageFilter, setLanguageFilter] = useState<languageOption>();
   const closeJoke =() => setJokeOpen(false);
 
   const renderTranslations = () => {
+    const filteredTrans = languageFilter ?
+      joke.translations.filter(trans => trans.language == languageFilter.value)
+      : joke.translations;
+
+    if (filteredTrans.length === 0){
+      return (
+        <p className="text-center mt-8">
+          Aucune traduction n'as encore été proposée dans cette langue. A vous de jouer!
+        </p>
+       );
+    }
+
     return (
-      joke.translations.map(translation => {
+      filteredTrans.map(translation => {
         return <Translation translation={translation} key={translation.id} />
       })
     )
@@ -57,6 +71,10 @@ export default function JokeShow({joke, setJokeOpen, updateJokeList}: Props): JS
         <h2 className="text-lg font-bold">Translations</h2>
         <TranslationForm joke={joke} updateJokeList={updateJokeList} />
 
+        <div className="flex justify-between items-center">
+          <p>Filtrer:</p>
+          <LanguageSelect language={languageFilter} setLanguage={setLanguageFilter} />
+        </div>
         <div className="">
           {renderTranslations()}
         </div>

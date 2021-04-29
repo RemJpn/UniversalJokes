@@ -7,7 +7,7 @@ interface Props {
   setLanguage: React.Dispatch<React.SetStateAction<languageOption>>;
 }
 
-interface languageOption {
+export interface languageOption {
   value: string;
   icon: string;
   label: string;
