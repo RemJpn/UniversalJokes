@@ -135,7 +135,7 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
   if (!isConnected) return null;
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white border border-gray-100 px-4 py-2 shadow-sm rounded-md mt-8 mb-4" >
+    <form onSubmit={handleSubmit} className="bg-white border border-gray-100 px-4 py-3 shadow-sm rounded-md mt-2 mb-2" >
       <select name="language" id="language" onChange={handleChange}>
         <option value="">Choisir la langue</option>
         <option value="fr">Français</option>
@@ -149,12 +149,12 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
         cols= {30}
         rows= {1}
         value={contentValue}
-        className="form-control"
+        className="form-control resize-none mt-2"
         onChange={handleChange}/>
-      <div className="flex justify-between items-center">
-        <button id={`autoBtn-${joke.id}`} onClick={fetchTrans} className="bg-gray-300 text-white rounded-md mt-2 px-4 py-2 text-sm">Auto</button>
+      <div className="flex justify-between items-center mt-2">
+        <button id={`autoBtn-${joke.id}`} onClick={fetchTrans} className="bg-gray-300 text-white rounded-md px-4 py-2 text-sm">Auto</button>
         <img id={`loader-${joke.id}`} src={tailSpin} alt="loading" className="h-6 hidden"/>
-        <button id={`send-${joke.id}`} type="submit" className="bg-gray-600 text-white rounded-md mt-2 px-4 py-2 text-sm">Proposer la traduction</button>
+        <button id={`send-${joke.id}`} type="submit" className="bg-gray-600 text-white rounded-md px-4 py-2 text-sm">Proposer la traduction</button>
       </div>
     </form>
   );
