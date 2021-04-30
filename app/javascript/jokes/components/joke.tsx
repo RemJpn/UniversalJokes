@@ -51,23 +51,23 @@ export function Joke({joke, setJokesList}: Props): JSX.Element {
   }
 
   return (
-    <div className="joke shadow-sm">
-      <div className="joke-author flex items-center">
+    <div className="whitespace-pre-wrap bg-white px-4 py-3 rounded-md border border-gray-200 shadow-sm mt-2">
+      <div className="flex items-center font-bold">
         <img src={defaultAvatar} alt="default" className="w-10"/>
         <p className="ml-2">{joke.author}</p>
       </div>
-      <div className="joke-content cursor-pointer" onClick={openJoke}>
+      <div className="text-sm cursor-pointer mt-3 ml-2" onClick={openJoke}>
         <p>{joke.content}</p>
       </div>
 
-      <div className="joke-likes">
+      <div className="flex justify-between text-gray-400 mt-3">
         {joke.likes} personnes ont ri à cette blague
         <a href="https://www.facebook.com/sharer/sharer.php?u=example.org" target="_blank">
           Share on Facebook
         </a>
       </div>
       <JokeReaction joke={joke} updateJokeList={updateJokeList} isSmall={false}/>
-      <div className="joke-translations-link cursor-pointer" onClick={openJoke}>
+      <div className="cursor-pointer" onClick={openJoke}>
         Voir les traductions
       </div>
 

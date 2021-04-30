@@ -66,10 +66,10 @@ export default function JokeShow({joke, setJokeOpen, updateJokeList}: Props): JS
             <img src={defaultAvatar} alt="default" className="w-10"/>
             <p className="ml-2 font-bold">{joke.author}</p>
           </div>
-          <div className="text-sm mt-3">
+          <div className="text-sm mt-3 ml-2">
             <p>{joke.content}</p>
           </div>
-          <div className="text-gray-400 mt-4">
+          <div className="text-gray-400 mt-3">
             {joke.likes} personnes ont ri à cette blague
           </div>
         </div>
