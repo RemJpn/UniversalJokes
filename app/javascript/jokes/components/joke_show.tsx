@@ -39,8 +39,8 @@ export default function JokeShow({joke, setJokeOpen, updateJokeList}: Props): JS
   }
 
   return (
-    <div className="w-screen h-screen fixed inset-0 flex bg-red-900 z-50">
-      <div className="w-1/2 flex flex-col items-center p-4">
+    <div className="w-screen overflow-y-auto md:h-screen fixed inset-0 md:flex bg-red-900 z-50">
+      <div className="md:w-1/2 flex flex-col items-center p-4">
         <div className="flex items-center self-start" onClick={closeJoke}>
           <i className="fas fa-arrow-left text-white cursor-pointer" ></i>
           <h1 className="text-3xl text-shadow text-white ml-8 cursor-pointer">
@@ -48,7 +48,8 @@ export default function JokeShow({joke, setJokeOpen, updateJokeList}: Props): JS
               <span style={{fontFamily: 'Orelega One'}}>JOKES</span>
           </h1>
         </div>
-        <div className="bg-white w-3/4 px-4 py-3 rounded-md border border-gray-200 shadow mt-16">
+
+        <div className="bg-white px-4 py-3 rounded-md border border-gray-200 shadow mt-6 md:mt-16">
           <div className="flex items-center">
             <img src={defaultAvatar} alt="default" className="w-10"/>
             <p className="ml-2 font-bold">{joke.author}</p>
@@ -67,7 +68,7 @@ export default function JokeShow({joke, setJokeOpen, updateJokeList}: Props): JS
 
       </div>
 
-      <div className="w-1/2 bg-gray-100 p-4 flex flex-col overflow-y-auto">
+      <div className="md:w-1/2 bg-gray-100 p-4 flex flex-col md:overflow-y-auto">
         <h2 className="text-lg font-bold">Translations</h2>
         <TranslationForm joke={joke} updateJokeList={updateJokeList} />
 
@@ -80,6 +81,7 @@ export default function JokeShow({joke, setJokeOpen, updateJokeList}: Props): JS
         </div>
 
       </div>
+
     </div>
   );
 }

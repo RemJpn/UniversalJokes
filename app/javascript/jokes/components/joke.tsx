@@ -32,7 +32,7 @@ interface Props {
 }
 
 export function Joke({joke, setJokesList}: Props): JSX.Element {
-  const [jokeOpen, setJokeOpen] = useState(true);
+  const [jokeOpen, setJokeOpen] = useState(false);
   const openJoke = () => setJokeOpen(true);
 
   const updateJokeList = (updatedJoke: JokeObject) => {
