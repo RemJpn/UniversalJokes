@@ -31,27 +31,30 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
 
   const toggleAutoBtn = () => {
     const autoBtn = document.getElementById(`autoBtn-${joke.id}`) as HTMLInputElement;
+    const lightActiveClasses = ['bg-indigo-300', 'shadow-sm', 'hover:bg-yellow-500'];
 
     if (language) {
       autoBtn.disabled = false;
-      autoBtn.classList.add('bg-indigo-300', 'shadow-sm');
+      autoBtn.classList.add(...lightActiveClasses);
       autoBtn.classList.remove('bg-gray-300');
     } else {
       autoBtn.disabled = true;
-      autoBtn.classList.remove('bg-indigo-300', 'shadow-sm');
+      autoBtn.classList.remove(...lightActiveClasses);
       autoBtn.classList.add('bg-gray-300');
     }
   }
+
   const toggleSendBtn = () => {
     const sendBtn = document.getElementById(`send-${joke.id}`) as HTMLInputElement;
+    const darkActiveClasses = ['bg-indigo-900', 'shadow-sm', 'hover:bg-yellow-900'];
 
     if (language && contentValue) {
-      sendBtn.classList.add('bg-indigo-600', 'shadow-sm');
+      sendBtn.classList.add(...darkActiveClasses);
       sendBtn.classList.remove('bg-gray-300');
       sendBtn.disabled=false;
     } else {
       sendBtn.disabled = true;
-      sendBtn.classList.remove('bg-indigo-600', 'shadow-sm');
+      sendBtn.classList.remove(...darkActiveClasses);
       sendBtn.classList.add('bg-gray-300');
     }
   }
@@ -143,9 +146,9 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
         className="form-control resize-none mt-2"
         onChange={handleChange}/>
       <div className="flex justify-between items-center mt-2">
-        <button id={`autoBtn-${joke.id}`} onClick={fetchTrans} className="bg-gray-300 text-white rounded-md px-4 py-2 text-sm">Auto</button>
+        <button id={`autoBtn-${joke.id}`} onClick={fetchTrans} className="bg-gray-300 text-white rounded-md px-4 py-2 text-sm transition duration-200">Auto</button>
         <img id={`loader-${joke.id}`} src={tailSpin} alt="loading" className="h-6 hidden"/>
-        <button id={`send-${joke.id}`} type="submit" className="bg-gray-300 text-white rounded-md px-4 py-2 text-sm">Proposer la traduction</button>
+        <button id={`send-${joke.id}`} type="submit" className="bg-gray-300 text-white rounded-md px-4 py-2 text-sm transition duration-200">Proposer la traduction</button>
       </div>
     </form>
   );
