@@ -1,7 +1,6 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {LanguageSelect} from './language_select';
-import {IsConnectedContext} from '../contexts/IsConnectedContext';
 import {JokeObject} from './joke';
 import tailSpin from 'images/tail-spin.svg';
 
@@ -17,8 +16,6 @@ interface languageOption {
 }
 
 export default function TranslationForm({joke, updateJokeList}: Props): JSX.Element {
-  const isConnected = useContext(IsConnectedContext);
-
   const [contentValue, setContentValue] = useState('');
   const [language, setLanguage] = useState<languageOption>();
 
@@ -128,9 +125,6 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
       loader.classList.add('hidden');
     });
   }
-
-
-  if (!isConnected) return null;
 
   return (
     <form onSubmit={handleSubmit} className="bg-white border border-gray-100 px-4 py-3 shadow-sm rounded-md mt-2 mb-2" >

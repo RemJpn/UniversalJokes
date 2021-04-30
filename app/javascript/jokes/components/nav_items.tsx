@@ -29,7 +29,7 @@ export default function NavItems({setCurrentPage}: Props) : JSX.Element {
         <i className="fas fa-heart text-xl text-yellow-100 hover:text-yellow-900 transition duration-200 text-shadow"></i>
       </li>
       <li className="">
-        <a href="#">
+        <a href="/users/sign_out" rel="nofollow" data-method="delete">
           <img className="h-10 rounded-full" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
         </a>
       </li>

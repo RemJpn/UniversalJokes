@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useContext} from 'react';
 
 import {JokeObject} from './joke';
 import JokeReaction from './joke_reaction';
 import {Translation} from './translation';
 import TranslationForm from './translation_form';
 import {languageOption, LanguageSelect} from './language_select';
+import {IsConnectedContext} from '../contexts/IsConnectedContext';
 
 import defaultAvatar from 'images/avatar.png';
 
@@ -15,10 +16,17 @@ interface Props {
 }
 
 export default function JokeShow({joke, setJokeOpen, updateJokeList}: Props): JSX.Element {
+  const isConnected = useContext(IsConnectedContext);
   const [languageFilter, setLanguageFilter] = useState<languageOption>();
   const closeJoke =() => setJokeOpen(false);
 
-  const renderTranslations = () => {
+  const renderTranslationForm = (): JSX.Element => {
+    if (isConnected) {
+      return <TranslationForm joke={joke} updateJokeList={updateJokeList} />
+    }
+  }
+
+  const renderTranslations = (): JSX.Element => {
     const filteredTrans = languageFilter ?
       joke.translations.filter(trans => trans.language == languageFilter.value)
       : joke.translations;
@@ -32,9 +40,13 @@ export default function JokeShow({joke, setJokeOpen, updateJokeList}: Props): JS
     }
 
     return (
-      filteredTrans.map(translation => {
-        return <Translation translation={translation} key={translation.id} />
-      })
+      <div>
+        {
+          filteredTrans.map(translation => {
+          return <Translation translation={translation} key={translation.id} />
+          })
+        }
+      </div>
     )
   }
 
@@ -70,7 +82,7 @@ export default function JokeShow({joke, setJokeOpen, updateJokeList}: Props): JS
 
       <div className="md:w-1/2 bg-gray-100 p-4 flex flex-col md:overflow-y-auto">
         <h2 className="text-lg font-bold">Translations</h2>
-        <TranslationForm joke={joke} updateJokeList={updateJokeList} />
+        {renderTranslationForm()}
 
         <div className="flex justify-between items-center">
           <p>Filtrer:</p>
