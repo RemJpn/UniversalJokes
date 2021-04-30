@@ -15,6 +15,7 @@
     "paths": {
         "*": [ "app/javascript/custom_types/*"],
     },
+    "types": ["node"]
   },
   "exclude": [
     "**/*.spec.ts",

@@ -3,11 +3,16 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-/* eslint @typescript-eslint/no-var-requires: "off" */
-require("@rails/ujs").start();
-require("turbolinks").start()
-require("@rails/activestorage").start()
+// require("@rails/ujs").start()
+// require("turbolinks").start()
+// require("@rails/activestorage").start()
 require("channels")
+import * as ujs from '@rails/ujs';
+ujs.start()
+import * as turbolinks from 'turbolinks';
+turbolinks.start()
+import * as activestorage from '@rails/activestorage';
+activestorage.start()
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
