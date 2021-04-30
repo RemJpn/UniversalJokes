@@ -60,11 +60,8 @@ export function Joke({joke, setJokesList}: Props): JSX.Element {
         <p>{joke.content}</p>
       </div>
 
-      <div className="flex justify-between text-gray-400 mt-3">
+      <div className="text-gray-400 mt-3">
         {joke.likes} personnes ont ri à cette blague
-        <a href="https://www.facebook.com/sharer/sharer.php?u=example.org" target="_blank">
-          Share on Facebook
-        </a>
       </div>
       <JokeReaction joke={joke} updateJokeList={updateJokeList} isSmall={false}/>
       <div className="cursor-pointer" onClick={openJoke}>

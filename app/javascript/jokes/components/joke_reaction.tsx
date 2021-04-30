@@ -95,38 +95,73 @@ export default function JokeReaction({joke, updateJokeList, isSmall}: Props): JS
     joke.saved_id ? deleteSaved() : createSaved();
   }
 
+  const renderLike = () => {
+    if (!isConnected) return null;
 
-  if (!isConnected) return null;
-
-  if (isSmall) {
-    return (
-      <div className="joke-reaction">
+    if (isSmall) {
+      return (
         <div onClick={toggleLike} className={joke.liked_id ? '' : 'isInactive'} >
           <span className={joke.liked_id ? '' : 'slanted'}>{emojify('🤣')}</span>
         </div>
+      );
+    } else {
+      return (
+        <div onClick={toggleLike} className={`group transition duration-200 ease-out ${joke.liked_id ? '' : 'isInactive'}`} >
+          <span className={joke.liked_id ? '' : 'slanted'}>{emojify('🤣')}</span>
+          <p className=" group-hover:text-yellow-700 hidden sm:block">J'ai ri</p>
+        </div>
+      );
+    }
+  }
+
+  const renderSave = () => {
+    if (!isConnected) return null;
+
+    if (isSmall) {
+      return (
         <div onClick={toggleSave} className={joke.saved_id ? '' : 'isInactive'} >
           {emojify('💾')}
         </div>
+      );
+    } else {
+      return (
+        <div onClick={toggleSave} className={`group transition duration-200 ease-out ${joke.saved_id ? '' : 'isInactive'}`} >
+          {emojify('💾')}
+          <p className=" group-hover:text-yellow-700 hidden sm:block">{joke.saved_id ? 'Enregistrée' : 'Enregistrer'}</p>
+        </div>
+      );
+    }
+  }
+
+  const renderShare = () => {
+    if (isSmall) {
+      return (
         <a href="https://www.facebook.com/sharer/sharer.php?u=example.org"
            target="_blank"
-           className="h-8 w-8 text-center text-gray-600 hover:text-yellow-700 transition duration-200">
+           className="h-8 w-8 text-center text-gray-600 hover:text-yellow-700 transition duration-200 ease-out">
           <i className="fas fa-share-alt text-2xl"></i>
         </a>
-      </div>
-
-    );
+      );
+    } else {
+      return (
+        <a href="https://www.facebook.com/sharer/sharer.php?u=example.org"
+           target="_blank"
+           className="hover:no-underline"
+           >
+          <div className="group flex h-8 transition duration-200 ease-out hover:text-yellow-700">
+            <i className="fas fa-share-alt text-2xl text-gray-600 group-hover:text-yellow-700"></i>
+            <p className="ml-2 opacity-50 hidden sm:block">Partager</p>
+          </div>
+        </a>
+      );
+    }
   }
 
   return (
     <div className="joke-reaction">
-      <div onClick={toggleLike} className={joke.liked_id ? '' : 'isInactive'} >
-        <span className={joke.liked_id ? '' : 'slanted'}>{emojify('🤣')}</span>
-        <p>J'ai ri</p>
-      </div>
-      <div onClick={toggleSave} className={joke.saved_id ? '' : 'isInactive'} >
-        {emojify('💾')}
-        <p>{joke.saved_id ? 'Enregistrée' : 'Enregistrer'}</p>
-      </div>
+      {renderLike()}
+      {renderSave()}
+      {renderShare()}
     </div>
   );
 }
