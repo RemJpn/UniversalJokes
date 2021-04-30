@@ -13,9 +13,8 @@
     // following for png.d.ts
     "baseUrl": "./",
     "paths": {
-        "*": [ "app/javascript/custom_types/*"],
-    },
-    "types": ["node"]
+        "*": [ "app/javascript/custom_types/*"]
+    }
   },
   "exclude": [
     "**/*.spec.ts",
