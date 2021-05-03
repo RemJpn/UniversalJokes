@@ -10,6 +10,7 @@ class Api::V1::UsersController < ApplicationController
   def render_jsonapi_user
     {
       id: current_user.id,
+      nickname: current_user.nickname,
       email: current_user.email,
       nb_liked: current_user.liked_jokes.size
     }

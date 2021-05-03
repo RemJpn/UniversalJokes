@@ -2,7 +2,7 @@ module Response
   def prepare_api_v1_joke(joke)
     {
       id: joke.id,
-      author: joke.user.email,
+      author: joke.user.nickname || 'Anonymous',
       language: joke.language.name,
       category: joke.category.name,
       content: joke.content,
@@ -17,7 +17,7 @@ module Response
   def prepare_api_v1_translation(translation)
     {
       id: translation.id,
-      author: translation.user.email,
+      author: translation.user.nickname || 'Anonymous',
       language: translation.language.name,
       content: translation.content,
       created_at: translation.created_at,

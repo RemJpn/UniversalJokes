@@ -14,16 +14,19 @@ puts "Seeding users..."
 user1 = User.create!(
   email: "user1@test.com",
   password: "123456",
+  nickname: "Michel"
   )
 
 user2 = User.create!(
   email: "user2@test.com",
   password: "123456",
+  nickname: "Yoda"
   )
 
 user3 = User.create!(
   email: "user3@test.com",
-  password: "123456"
+  password: "123456",
+  nickname: "Brian"
   )
 
 #----------------------------------------------------
