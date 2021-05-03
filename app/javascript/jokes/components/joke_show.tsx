@@ -80,7 +80,7 @@ export default function JokeShow({joke, setJokeOpen, updateJokeList}: Props): JS
 
       </div>
 
-      <div className="md:w-1/2 h-full bg-gray-100 p-4 flex flex-col md:overflow-y-auto">
+      <div className="md:w-1/2 bg-gray-100 p-4 flex flex-col md:overflow-y-auto">
         <h2 className="text-lg font-bold">Translations</h2>
         {renderTranslationForm()}
 
