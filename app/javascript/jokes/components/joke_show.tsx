@@ -52,7 +52,7 @@ export default function JokeShow({joke, setJokeOpen, updateJokeList}: Props): JS
 
   return (
     <div className="w-screen overflow-y-auto md:h-screen fixed inset-0 md:flex bg-red-900 z-50">
-      <div className="md:w-1/2 flex flex-col items-center p-4">
+      <div className="md:w-1/2 flex flex-col items-center px-4 py-4 sm:px-12 md:px-4 w-full">
         <div className="flex items-center self-start" onClick={closeJoke}>
           <i className="fas fa-arrow-left text-white cursor-pointer" ></i>
           <h1 className="text-3xl text-shadow text-white ml-8 cursor-pointer">
@@ -74,7 +74,7 @@ export default function JokeShow({joke, setJokeOpen, updateJokeList}: Props): JS
           </div>
         </div>
 
-        <div className="bg-white w-1/2 rounded-full mt-2">
+        <div className="bg-white w-60 rounded-full mt-2">
           <JokeReaction joke={joke} updateJokeList={updateJokeList} isSmall={true}/>
         </div>
 

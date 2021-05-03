@@ -1,12 +1,4 @@
 .joke-reaction {
-  display: flex;
-  justify-content: space-evenly;
-  cursor: pointer;
-  margin: 10px 0;
-
-  p {
-    margin-left: 5px;
-  }
 
   & > div {
     opacity: 1;

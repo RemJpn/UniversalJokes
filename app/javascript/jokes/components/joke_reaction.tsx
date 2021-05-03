@@ -100,13 +100,13 @@ export default function JokeReaction({joke, updateJokeList, isSmall}: Props): JS
 
     if (isSmall) {
       return (
-        <div onClick={toggleLike} className={joke.liked_id ? '' : 'isInactive'} >
+        <div onClick={toggleLike} className={`cursor-pointer ${joke.liked_id ? '' : 'isInactive'}`} >
           <span className={joke.liked_id ? '' : 'slanted'}>{emojify('🤣')}</span>
         </div>
       );
     } else {
       return (
-        <div onClick={toggleLike} className={`group transition duration-200 ease-out ${joke.liked_id ? '' : 'isInactive'}`} >
+        <div onClick={toggleLike} className={`group transition duration-200 ease-out cursor-pointer ${joke.liked_id ? '' : 'isInactive'}`} >
           <span className={joke.liked_id ? '' : 'slanted'}>{emojify('🤣')}</span>
           <p className=" group-hover:text-yellow-700 hidden sm:block">J'ai ri</p>
         </div>
@@ -119,13 +119,13 @@ export default function JokeReaction({joke, updateJokeList, isSmall}: Props): JS
 
     if (isSmall) {
       return (
-        <div onClick={toggleSave} className={joke.saved_id ? '' : 'isInactive'} >
+        <div onClick={toggleSave} className={`cursor-pointer ${joke.saved_id ? '' : 'isInactive'}`} >
           {emojify('💾')}
         </div>
       );
     } else {
       return (
-        <div onClick={toggleSave} className={`group transition duration-200 ease-out ${joke.saved_id ? '' : 'isInactive'}`} >
+        <div onClick={toggleSave} className={`group transition duration-200 ease-out cursor-pointer ${joke.saved_id ? '' : 'isInactive'}`} >
           {emojify('💾')}
           <p className=" group-hover:text-yellow-700 hidden sm:block">{joke.saved_id ? 'Enregistrée' : 'Enregistrer'}</p>
         </div>
@@ -158,7 +158,7 @@ export default function JokeReaction({joke, updateJokeList, isSmall}: Props): JS
   }
 
   return (
-    <div className="joke-reaction">
+    <div className="joke-reaction flex justify-evenly my-2">
       {renderLike()}
       {renderSave()}
       {renderShare()}

@@ -142,7 +142,7 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
       <div className="flex justify-between items-center mt-2">
         <button id={`autoBtn-${joke.id}`} onClick={fetchTrans} className="bg-gray-300 text-white rounded-md px-4 py-2 text-sm transition duration-200">Auto</button>
         <img id={`loader-${joke.id}`} src={tailSpin} alt="loading" className="h-6 hidden"/>
-        <button id={`send-${joke.id}`} type="submit" className="bg-gray-300 text-white rounded-md px-4 py-2 text-sm transition duration-200">Proposer la traduction</button>
+        <button id={`send-${joke.id}`} type="submit" className="bg-gray-300 text-white rounded-md px-4 py-2 text-sm transition duration-200">Envoyer</button>
       </div>
     </form>
   );
