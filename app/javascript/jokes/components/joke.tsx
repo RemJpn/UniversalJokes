@@ -65,7 +65,7 @@ export function Joke({joke, setJokesList}: Props): JSX.Element {
       </div>
       <JokeReaction joke={joke} updateJokeList={updateJokeList} isSmall={false}/>
       <div className="cursor-pointer" onClick={openJoke}>
-        Voir les traductions
+        Voir les traductions ({joke.translations.length})
       </div>
 
       {renderJokeShow()}
