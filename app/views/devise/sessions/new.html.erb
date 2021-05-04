@@ -1,20 +1,49 @@
-<h2>Log in</h2>
+<div class="w-screen h-screen bg-center bg-cover" style="background-image: url('<%= image_path "circles.jpg" %>')">
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+  <div class="absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center"
+          style="width: 280px; height: fit-content">
+
+    <div class="rounded-xl backdrop-filter backdrop-blur
+                border-2 border-gray-600  mb-4"
+          style="width: 280px; height: fit-content">
+
+      <h1 class="text-3xl text-shadow text-white py-0 cursor-pointer bg-yellow-600 w-full flex justify-center items-center h-16 rounded-t-xl">
+          <span style="font-family: 'Dancing Script'">Universal</span>
+          <span style="font-family: 'Orelega One'">JOKES</span>
+      </h1>
+
+
+      <div class="flex flex-col justify-evenly items-center p-4">
+        <h2 class="text-white text-lg">Log in</h2>
+        <!-- <form action=""> -->
+        <%= simple_form_for(resource, html:{ class: "w-full" }, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <%= f.input :email,
+                        required: false,
+                        autofocus: true,
+                        input_html: { autocomplete: "email" },
+                        label_html: { class: "text-white"} %>
+            <%= f.input :password,
+                        required: false,
+                        input_html: { autocomplete: "current-password" },
+                        label_html: { class: "text-white"} %>
+            <%= f.input :remember_me,
+                        label_html: { class: "text-white"},
+                        as: :boolean if devise_mapping.rememberable? %>
+
+            <%= f.button :submit, "Log in", class: "text-white bg-yellow-600 rounded" %>
+        <% end %>
+        <!-- </form> -->
+
+
+      </div>
+    </div>
+
+    <%= render "devise/shared/links" %>
+
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
 
-<%= render "devise/shared/links" %>
+
+
+</div>
+
