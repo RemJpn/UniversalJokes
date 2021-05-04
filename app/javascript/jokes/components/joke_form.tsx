@@ -63,7 +63,7 @@ export default function JokeForm({setJokesList}: Props): JSX.Element {
   if (!isConnected) return null;
 
   return (
-    <form onSubmit={handleSubmit} className="channel-editor joke_form shadow-sm flex flex-col" >
+    <form onSubmit={handleSubmit} className="p-5 my-4 bg-white border border-gray-300 rounded shadow-sm flex flex-col" >
       <textarea
         name="content"
         id="content"
@@ -71,7 +71,7 @@ export default function JokeForm({setJokesList}: Props): JSX.Element {
         rows= {1}
         value={contentValue}
         placeholder="Une petite blague à nous raconter?"
-        className= "w-full h-10 px-2 py-2 shadow-sm border border-gray-200 rounded focus:ring focus:ring-yellow-400 focus:ring-opacity-50 focus:border-yellow-500"
+        className= "resize-none w-full h-10 px-2 py-2 shadow-sm border border-gray-200 rounded focus:ring focus:ring-yellow-400 focus:ring-opacity-50 focus:border-yellow-500"
         onChange={handleChange}/>
       <button type="submit" className="self-center mt-3 px-3 py-2 bg-blue-600 text-white rounded hover:bg-yellow-600 transition duration-200 ease-in-out">Soumettre</button>
     </form>
