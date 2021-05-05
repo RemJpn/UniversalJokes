@@ -11,10 +11,13 @@ class Api::V1::JokesController < ApplicationController
   end
 
   def create
-    new_joke = Joke.new(message_params)
+    new_joke = Joke.new(
+      content: message_params[:content],
+      language: Language.find_by(name: message_params[:language])
+    )
     new_joke.user = current_user
     # Default language and category for now
-    new_joke.language = Language.where(name: 'Français').first
+    # new_joke.language = Language.where(name: 'fr').first
     new_joke.category = Category.where(name: 'Courte').first
     if new_joke.save!
       render json: prepare_api_v1_joke(new_joke)
@@ -24,6 +27,6 @@ class Api::V1::JokesController < ApplicationController
   private
 
   def message_params
-    params.require(:joke).permit(:content)
+    params.require(:joke).permit(:content, :language)
   end
 end
