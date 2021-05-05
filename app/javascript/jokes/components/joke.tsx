@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import JokeReaction from './joke_reaction';
 import JokeShow from './joke_show';
@@ -49,6 +49,14 @@ export function Joke({joke, setJokesList}: Props): JSX.Element {
 
     return <JokeShow joke={joke} setJokeOpen={setJokeOpen} updateJokeList={updateJokeList}/>;
   }
+
+  useEffect(()=>{
+    if (jokeOpen){
+      document.body.classList.add("overflow-y-hidden");
+    } else {
+      document.body.classList.remove("overflow-y-hidden");
+    }
+  },[jokeOpen]);
 
   return (
     <div className="whitespace-pre-wrap bg-white px-4 py-3 rounded-md border border-gray-200 shadow-sm mt-2">
