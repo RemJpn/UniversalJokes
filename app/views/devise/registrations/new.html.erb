@@ -1,25 +1,60 @@
-<h2>Sign up</h2>
+<div class="w-screen h-screen bg-center bg-cover" style="background-image: url('<%= image_path "circles.jpg" %>')">
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+  <div class="absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          style="width: 280px; height: fit-content">
 
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
+    <div class="rounded-xl backdrop-filter backdrop-blur
+                border border-white border-opacity-20  mb-4"
+          style="width: 280px; height: fit-content">
+
+      <a href="/">
+        <h1 class="text-3xl text-shadow text-white py-0 cursor-pointer bg-yellow-600 w-full flex justify-center items-center h-16 rounded-t-xl">
+            <span style="font-family: 'Dancing Script'">Universal</span>
+            <span style="font-family: 'Orelega One'">JOKES</span>
+        </h1>
+
+      </a>
+
+
+      <div class="flex flex-col justify-evenly items-center p-4 pb-8">
+        <h2 class="text-white text-lg">Sign up</h2>
+
+        <!-- <form action=""> -->
+        <%= simple_form_for(resource, html:{ class: "w-full grid grid-cols-1 gap-2" }, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= f.error_notification %>
+
+            <%= f.input :email,
+                        required: true,
+                        autofocus: true,
+                        input_html: { autocomplete: "email", class: "w-full h-12 px-2 py-1 shadow-sm border border-gray-100 rounded focus:ring focus:ring-yellow-400 focus:ring-opacity-50 focus:border-yellow-500" },
+                        label_html: { class: "text-white mb-2"},
+                        wrapper_html: {class: "flex flex-col mb-4"}%>
+            <%= f.input :password,
+                        required: true,
+                        hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                        hint_html: {class: "text-white"},
+                        input_html: { autocomplete: "new-password", class: "w-full h-12 px-2 py-1 shadow-sm border border-gray-100 rounded focus:ring focus:ring-yellow-400 focus:ring-opacity-50 focus:border-yellow-500" },
+                        label_html: { class: "text-white mb-2"},
+                        wrapper_html: {class: "flex flex-col mb-4"} %>
+            <%= f.input :password_confirmation,
+                        required: true,
+                        input_html: { autocomplete: "new-password", class: "w-full h-12 px-2 py-1 shadow-sm border border-gray-100 rounded focus:ring focus:ring-yellow-400 focus:ring-opacity-50 focus:border-yellow-500" },
+                        label_html: { class: "text-white mb-2"},
+                        wrapper_html: {class: "flex flex-col mb-4"} %>
+            <%= f.button :submit, "Enregistrer", class: "mt-4 px-3 py-2 text-white bg-yellow-600 rounded" %>
+        <% end %>
+        <!-- </form> -->
+
+
+      </div>
+    </div>
+
+    <%= render "devise/shared/links" %>
+
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
 
-<%= render "devise/shared/links" %>
+
+
+</div>
+

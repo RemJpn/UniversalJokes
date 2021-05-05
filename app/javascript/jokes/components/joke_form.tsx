@@ -63,7 +63,7 @@ export default function JokeForm({setJokesList}: Props): JSX.Element {
   if (!isConnected) return null;
 
   return (
-    <form onSubmit={handleSubmit} className="p-5 my-4 bg-white border border-gray-300 rounded shadow-sm flex flex-col" >
+    <form onSubmit={handleSubmit} className="p-5 mb-4 bg-white border border-gray-300 rounded shadow-sm flex flex-col" >
       <textarea
         name="content"
         id="content"

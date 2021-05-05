@@ -19,7 +19,7 @@ export default function Feed({jokesList, setJokesList}: Props): JSX.Element {
   }
 
   return (
-    <main className='feed mt-20'>
+    <main className='feed mt-16 p-4'>
       <JokeForm setJokesList={setJokesList} />
       {renderJokesList()}
     </main>
