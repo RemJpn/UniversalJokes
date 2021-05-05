@@ -80,7 +80,7 @@ export default function JokeShow({jokeFromJokeList, setJokeOpen, updateJokeList,
           </h1>
         </div>
 
-        <div className="bg-white px-4 py-3 rounded-md border border-gray-200 shadow mt-6 md:mt-16">
+        <div className="whitespace-pre-wrap w-full bg-white px-4 py-3 rounded-md border border-gray-200 shadow mt-6 md:mt-16">
           <div className="flex items-center">
             <img src={defaultAvatar} alt="default" className="w-10"/>
             <p className="ml-2 font-bold">{joke.author}</p>
