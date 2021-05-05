@@ -100,11 +100,12 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
     .then(callback);
   }
 
-  const fetchTrans = () => {
+  const fetchTrans = (e) => {
+    e.preventDefault(); //prevent doing 'submit' after clicking
     const autoBtn = document.getElementById(`autoBtn-${joke.id}`);
     const loader = document.getElementById(`loader-${joke.id}`);
-    autoBtn.classList.add('hidden');
     loader.classList.remove('hidden');
+    autoBtn.classList.add('hidden');
 
     const url = `https://libretranslate.com/translate`;
     const body = {

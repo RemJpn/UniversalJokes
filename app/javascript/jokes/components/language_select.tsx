@@ -33,7 +33,8 @@ const customStyles = {
   control: (provided) => ({
     ...provided,
     width: 200,
-    fontSize: 14
+    fontSize: 14,
+    borderColor: "rgb(229, 231, 235)"
   }),
   menu: (provided) => ({
     ...provided,

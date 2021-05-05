@@ -51,8 +51,8 @@ export default function JokeShow({joke, setJokeOpen, updateJokeList}: Props): JS
   }
 
   return (
-    <div className="w-screen overflow-y-auto md:h-screen fixed inset-0 md:flex bg-red-900 z-50">
-      <div className="md:w-1/2 flex flex-col items-center px-4 py-4 sm:px-12 md:px-4 w-full">
+    <div className="w-screen bg-gray-100 overflow-y-auto md:h-screen fixed inset-0 md:flex z-50">
+      <div className="md:w-1/2 bg-red-900 flex flex-col items-center px-4 py-4 sm:px-12 md:px-4 w-full">
         <div className="flex items-center self-start" onClick={closeJoke}>
           <i className="fas fa-arrow-left text-white cursor-pointer" ></i>
           <h1 className="text-3xl text-shadow text-white ml-8 cursor-pointer">
@@ -80,7 +80,7 @@ export default function JokeShow({joke, setJokeOpen, updateJokeList}: Props): JS
 
       </div>
 
-      <div className="md:w-1/2 bg-gray-100 p-4 flex flex-col md:overflow-y-auto">
+      <div className="md:w-1/2 p-4 flex flex-col md:overflow-y-auto">
         <h2 className="text-lg font-bold">Translations</h2>
         {renderTranslationForm()}
 
