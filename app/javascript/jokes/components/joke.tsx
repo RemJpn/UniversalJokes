@@ -47,7 +47,7 @@ export function Joke({joke, setJokesList}: Props): JSX.Element {
   const renderJokeShow = () => {
     if (!jokeOpen) return null;
 
-    return <JokeShow joke={joke} setJokeOpen={setJokeOpen} updateJokeList={updateJokeList}/>;
+    return <JokeShow jokeFromJokeList={joke} setJokeOpen={setJokeOpen} updateJokeList={updateJokeList}/>;
   }
 
   useEffect(()=>{

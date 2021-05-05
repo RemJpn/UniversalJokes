@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 
 import {JokeObject} from './joke';
 import JokeReaction from './joke_reaction';
@@ -15,10 +15,27 @@ interface Props {
   updateJokeList: (updatedJoke: JokeObject) => void;
 }
 
-export default function JokeShow({joke, setJokeOpen, updateJokeList}: Props): JSX.Element {
+export default function JokeShow({jokeFromJokeList, setJokeOpen, updateJokeList, ...props}): JSX.Element {
   const isConnected = useContext(IsConnectedContext);
+  const [joke, setJoke] = useState<JokeObject>(jokeFromJokeList)
   const [languageFilter, setLanguageFilter] = useState<languageOption>();
   const closeJoke =() => setJokeOpen(false);
+
+  useEffect(() => {
+    // if no joke given as props, do a API call
+    if (!joke) {
+      getJoke();
+    }
+  }, []);
+
+  const getJoke = () => {
+    const jokeId = props.match.params.id;
+    const url = `/api/v1/jokes/${jokeId}`;
+    fetch(url, { credentials: "same-origin" })
+      .then(r => r.json())
+      .then(data => setJoke(data));
+  };
+
 
   const renderTranslationForm = (): JSX.Element => {
     if (isConnected) {
@@ -49,6 +66,8 @@ export default function JokeShow({joke, setJokeOpen, updateJokeList}: Props): JS
       </div>
     )
   }
+
+  if (!joke) return <p>Loading...</p>;
 
   return (
     <div className="w-screen bg-gray-100 overflow-y-auto md:h-screen fixed inset-0 md:flex z-50">

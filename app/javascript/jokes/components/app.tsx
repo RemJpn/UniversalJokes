@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Route, Redirect, Switch }from 'react-router-dom';
 
 import Feed from './feed';
 import NavBar from './navbar';
+import JokeShow from './joke_show';
+
 import {IsConnectedContext} from '../contexts/IsConnectedContext';
 
 
@@ -49,7 +52,21 @@ const App: React.FC = () => {
   return (
     <IsConnectedContext.Provider value={currentUser} >
       <NavBar setCurrentPage={setCurrentPage} />
-      <Feed jokesList={jokesList} setJokesList={setJokesList} />
+
+      <Switch>
+        <Route
+          path="/" exact
+          render={(props) => (
+            <Feed {...props} jokesList={jokesList} setJokesList={setJokesList} />
+          )}
+        />
+        <Route
+          path="/jokes/:id"
+          render={(props) => (
+            <JokeShow {...props} />
+          )}
+        />
+      </Switch>
     </IsConnectedContext.Provider >
   ) ;
 };
