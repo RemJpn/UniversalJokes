@@ -6,7 +6,7 @@ import tailSpin from 'images/tail-spin.svg';
 
 interface Props {
   joke: JokeObject;
-  updateJokeList: (updatedJoke: JokeObject) => void;
+  setJoke: React.Dispatch<React.SetStateAction<JokeObject>>;
 }
 
 interface languageOption {
@@ -15,7 +15,7 @@ interface languageOption {
   label: string;
 }
 
-export default function TranslationForm({joke, updateJokeList}: Props): JSX.Element {
+export default function TranslationForm({joke, setJoke}: Props): JSX.Element {
   const [contentValue, setContentValue] = useState('');
   const [language, setLanguage] = useState<languageOption>();
 
@@ -65,7 +65,7 @@ export default function TranslationForm({joke, updateJokeList}: Props): JSX.Elem
   }
 
   const addNewJokeToState = (joke) => {
-    updateJokeList(joke);
+    setJoke(joke);
     setContentValue('');
     textAreaAdjust(contentInput);
   }

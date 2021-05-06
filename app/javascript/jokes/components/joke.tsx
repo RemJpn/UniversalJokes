@@ -32,10 +32,15 @@ interface Props {
 }
 
 export function Joke({joke, setJokesList}: Props): JSX.Element {
+  const [thisJoke, setJoke] = useState(joke);
   const [jokeOpen, setJokeOpen] = useState(false);
-  const openJoke = () => setJokeOpen(true);
+  const openJoke = () => {
+    setJokeOpen(true);
+    window.history.pushState({}, "UniversalJokes", `/jokes/${thisJoke.id}`);
+  }
 
   const updateJokeList = (updatedJoke: JokeObject) => {
+    console.log('updating jokeList')
     setJokesList(prev => {
       const jokeIndex = prev.findIndex(prevjoke => prevjoke.id == updatedJoke.id);
       const newList = [...prev];
@@ -47,7 +52,7 @@ export function Joke({joke, setJokesList}: Props): JSX.Element {
   const renderJokeShow = () => {
     if (!jokeOpen) return null;
 
-    return <JokeShow jokeFromJokeList={joke} setJokeOpen={setJokeOpen} updateJokeList={updateJokeList}/>;
+    return <JokeShow joke={thisJoke} setJoke={setJoke} setJokeOpen={setJokeOpen} />;
   }
 
   useEffect(()=>{
@@ -62,18 +67,18 @@ export function Joke({joke, setJokesList}: Props): JSX.Element {
     <div className="whitespace-pre-wrap bg-white px-4 py-3 rounded-md border border-gray-200 shadow-sm mt-2">
       <div className="flex items-center font-bold">
         <img src={defaultAvatar} alt="default" className="w-10"/>
-        <p className="ml-2">{joke.author}</p>
+        <p className="ml-2">{thisJoke.author}</p>
       </div>
       <div className="text-sm cursor-pointer mt-3 ml-2" onClick={openJoke}>
-        <p>{joke.content}</p>
+        <p>{thisJoke.content}</p>
       </div>
 
       <div className="text-gray-400 mt-3">
-        {joke.likes} personnes ont ri à cette blague
+        {thisJoke.likes} personnes ont ri à cette blague
       </div>
-      <JokeReaction joke={joke} updateJokeList={updateJokeList} isSmall={false}/>
+      <JokeReaction joke={thisJoke} setJoke={setJoke} isSmall={false}/>
       <div className="cursor-pointer" onClick={openJoke}>
-        Voir les traductions ({joke.translations.length})
+        Voir les traductions ({thisJoke.translations.length})
       </div>
 
       {renderJokeShow()}

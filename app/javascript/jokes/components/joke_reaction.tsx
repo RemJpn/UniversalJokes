@@ -6,11 +6,11 @@ import {JokeObject} from './joke';
 
 interface Props {
   joke: JokeObject;
+  setJoke?: (joke: JokeObject) => void;
   isSmall: boolean;
-  updateJokeList: (updatedJoke: JokeObject) => void;
 }
 
-export default function JokeReaction({joke, updateJokeList, isSmall}: Props): JSX.Element {
+export default function JokeReaction({joke, setJoke, isSmall}: Props): JSX.Element {
   const isConnected = useContext(IsConnectedContext);
 
   const createLike = () => {
@@ -27,7 +27,7 @@ export default function JokeReaction({joke, updateJokeList, isSmall}: Props): JS
       credentials: 'same-origin'
     })
     .then(response => response.json())
-    .then(updateJokeList);
+    .then(setJoke);
   }
 
   const deleteLike = () => {
@@ -44,7 +44,7 @@ export default function JokeReaction({joke, updateJokeList, isSmall}: Props): JS
       credentials: 'same-origin'
     })
     .then(response => response.json())
-    .then(updateJokeList);
+    .then(setJoke);
   }
 
   const toggleLike = () => {
@@ -69,7 +69,7 @@ export default function JokeReaction({joke, updateJokeList, isSmall}: Props): JS
       credentials: 'same-origin'
     })
     .then(response => response.json())
-    .then(updateJokeList);
+    .then(setJoke);
   }
 
   const deleteSaved = () => {
@@ -87,7 +87,7 @@ export default function JokeReaction({joke, updateJokeList, isSmall}: Props): JS
       credentials: 'same-origin'
     })
     .then(response => response.json())
-    .then(updateJokeList);
+    .then(setJoke);
   }
 
   const toggleSave = () => {
