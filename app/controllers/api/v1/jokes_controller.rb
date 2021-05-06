@@ -2,7 +2,7 @@
 # require 'prepare_for_api'
 
 class Api::V1::JokesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
     jokes = Joke.all.sort_by(&:created_at).reverse

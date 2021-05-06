@@ -3,7 +3,7 @@ import { Route, Redirect, Switch }from 'react-router-dom';
 
 import Feed from './feed';
 import NavBar from './navbar';
-import JokeShow from './joke_show';
+import JokeShowUrl from './joke_show_url';
 
 import {IsConnectedContext} from '../contexts/IsConnectedContext';
 
@@ -63,7 +63,7 @@ const App: React.FC = () => {
         <Route
           path="/jokes/:id"
           render={(props) => (
-            <JokeShow {...props} />
+            <JokeShowUrl {...props} />
           )}
         />
       </Switch>

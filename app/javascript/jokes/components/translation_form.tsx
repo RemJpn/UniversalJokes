@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import {LanguageSelect} from './language_select';
 import {JokeObject} from './joke';
 import tailSpin from 'images/tail-spin.svg';
+import {IsConnectedContext} from '../contexts/IsConnectedContext';
 
 interface Props {
   joke: JokeObject;
@@ -16,6 +17,7 @@ interface languageOption {
 }
 
 export default function TranslationForm({joke, setJoke}: Props): JSX.Element {
+  const isConnected = useContext(IsConnectedContext);
   const [contentValue, setContentValue] = useState('');
   const [language, setLanguage] = useState<languageOption>();
 
@@ -27,32 +29,36 @@ export default function TranslationForm({joke, setJoke}: Props): JSX.Element {
   };
 
   const toggleAutoBtn = () => {
-    const autoBtn = document.getElementById(`autoBtn-${joke.id}`) as HTMLInputElement;
-    const lightActiveClasses = ['bg-indigo-300', 'shadow-sm', 'hover:bg-yellow-500'];
+    if (isConnected){
+      const autoBtn = document.getElementById(`autoBtn-${joke.id}`) as HTMLInputElement;
+      const lightActiveClasses = ['bg-indigo-300', 'shadow-sm', 'hover:bg-yellow-500'];
 
-    if (language) {
-      autoBtn.disabled = false;
-      autoBtn.classList.add(...lightActiveClasses);
-      autoBtn.classList.remove('bg-gray-300');
-    } else {
-      autoBtn.disabled = true;
-      autoBtn.classList.remove(...lightActiveClasses);
-      autoBtn.classList.add('bg-gray-300');
+      if (language) {
+        autoBtn.disabled = false;
+        autoBtn.classList.add(...lightActiveClasses);
+        autoBtn.classList.remove('bg-gray-300');
+      } else {
+        autoBtn.disabled = true;
+        autoBtn.classList.remove(...lightActiveClasses);
+        autoBtn.classList.add('bg-gray-300');
+      }
     }
   }
 
   const toggleSendBtn = () => {
-    const sendBtn = document.getElementById(`send-${joke.id}`) as HTMLInputElement;
-    const darkActiveClasses = ['bg-indigo-900', 'shadow-sm', 'hover:bg-yellow-900'];
+    if (isConnected){
+      const sendBtn = document.getElementById(`send-${joke.id}`) as HTMLInputElement;
+      const darkActiveClasses = ['bg-indigo-900', 'shadow-sm', 'hover:bg-yellow-900'];
 
-    if (language && contentValue) {
-      sendBtn.classList.add(...darkActiveClasses);
-      sendBtn.classList.remove('bg-gray-300');
-      sendBtn.disabled=false;
-    } else {
-      sendBtn.disabled = true;
-      sendBtn.classList.remove(...darkActiveClasses);
-      sendBtn.classList.add('bg-gray-300');
+      if (language && contentValue) {
+        sendBtn.classList.add(...darkActiveClasses);
+        sendBtn.classList.remove('bg-gray-300');
+        sendBtn.disabled=false;
+      } else {
+        sendBtn.disabled = true;
+        sendBtn.classList.remove(...darkActiveClasses);
+        sendBtn.classList.add('bg-gray-300');
+      }
     }
   }
 
@@ -126,6 +132,8 @@ export default function TranslationForm({joke, setJoke}: Props): JSX.Element {
       loader.classList.add('hidden');
     });
   }
+
+  if (!isConnected) return null;
 
   return (
     <form onSubmit={handleSubmit} className="bg-white border border-gray-300 px-4 py-3 shadow-sm rounded-md mt-2 mb-2" >
