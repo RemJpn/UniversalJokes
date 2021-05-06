@@ -12,6 +12,7 @@ interface Props {
 
 export default function JokeReaction({joke, setJoke, isSmall}: Props): JSX.Element {
   const isConnected = useContext(IsConnectedContext);
+  const jokeUrl = `${window.location.hostname}/jokes/${joke.id}`
 
   const createLike = () => {
     const url = `/api/v1/jokes/${joke.id}/liked_jokes`;
@@ -95,66 +96,59 @@ export default function JokeReaction({joke, setJoke, isSmall}: Props): JSX.Eleme
     joke.saved_id ? deleteSaved() : createSaved();
   }
 
+  //Buttons Conditional formatting
+  const likeIconClass = `
+    cursor-pointer
+    ${joke.liked_id ? '' : 'isInactive'}
+    ${isSmall ? '' : 'group transition duration-200 ease-out'}
+  `;
+  const saveIconClass = `
+    cursor-pointer
+    ${joke.saved_id ? '' : 'isInactive'}
+    ${isSmall ? '' : 'group transition duration-200 ease-out'}
+  `;
+  const textClass = `
+    ${isSmall ? 'hidden' : 'group-hover:text-yellow-700 hidden sm:block' }
+  `;
+  const shareTextClass = `
+    ${isSmall ? 'hidden' : 'ml-2 opacity-50 hidden sm:block' }
+  `;
+
+
   const renderLike = () => {
     if (!isConnected) return null;
 
-    if (isSmall) {
-      return (
-        <div onClick={toggleLike} className={`cursor-pointer ${joke.liked_id ? '' : 'isInactive'}`} >
-          <span className={joke.liked_id ? '' : 'slanted'}>{emojify('🤣')}</span>
-        </div>
-      );
-    } else {
-      return (
-        <div onClick={toggleLike} className={`group transition duration-200 ease-out cursor-pointer ${joke.liked_id ? '' : 'isInactive'}`} >
-          <span className={joke.liked_id ? '' : 'slanted'}>{emojify('🤣')}</span>
-          <p className=" group-hover:text-yellow-700 hidden sm:block">J'ai ri</p>
-        </div>
-      );
-    }
+    return (
+      <div onClick={toggleLike} className={likeIconClass} >
+        <span className={joke.liked_id ? '' : 'slanted'}>{emojify('🤣')}</span>
+        <p className={textClass}>J'ai ri</p>
+      </div>
+    );
   }
 
   const renderSave = () => {
     if (!isConnected) return null;
 
-    if (isSmall) {
-      return (
-        <div onClick={toggleSave} className={`cursor-pointer ${joke.saved_id ? '' : 'isInactive'}`} >
-          {emojify('💾')}
-        </div>
-      );
-    } else {
-      return (
-        <div onClick={toggleSave} className={`group transition duration-200 ease-out cursor-pointer ${joke.saved_id ? '' : 'isInactive'}`} >
-          {emojify('💾')}
-          <p className=" group-hover:text-yellow-700 hidden sm:block">{joke.saved_id ? 'Enregistrée' : 'Enregistrer'}</p>
-        </div>
-      );
-    }
+    return (
+      <div onClick={toggleSave} className={saveIconClass} >
+        {emojify('💾')}
+        <p className={textClass}>{joke.saved_id ? 'Enregistrée' : 'Enregistrer'}</p>
+      </div>
+    );
   }
 
   const renderShare = () => {
-    if (isSmall) {
-      return (
-        <a href="https://www.facebook.com/sharer/sharer.php?u=example.org"
-           target="_blank"
-           className="h-8 w-8 text-center text-gray-600 hover:text-yellow-700 transition duration-200 ease-out">
-          <i className="fas fa-share-alt text-2xl"></i>
-        </a>
-      );
-    } else {
-      return (
-        <a href="https://www.facebook.com/sharer/sharer.php?u=example.org"
-           target="_blank"
-           className="hover:no-underline"
-           >
-          <div className="group flex h-8 transition duration-200 ease-out hover:text-yellow-700">
-            <i className="fas fa-share-alt text-2xl text-gray-600 group-hover:text-yellow-700"></i>
-            <p className="ml-2 opacity-50 hidden sm:block">Partager</p>
-          </div>
-        </a>
-      );
-    }
+    return (
+      <a href={`https://www.facebook.com/sharer/sharer.php?u=${jokeUrl}`}
+         target="_blank"
+         className="hover:no-underline"
+         >
+        <div className="group flex h-8 transition duration-200 ease-out hover:text-yellow-700">
+          <i className="fas fa-share-alt text-2xl text-gray-600 group-hover:text-yellow-700"></i>
+          <p className={shareTextClass}>Partager</p>
+        </div>
+      </a>
+    )
   }
 
   return (

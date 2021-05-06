@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import JokeReaction from './joke_reaction';
 import JokeShow from './joke_show';
 import defaultAvatar from 'images/avatar.png';
+import {TranslationObject} from './translation';
 
 export interface JokeObject {
   id: number;
@@ -15,15 +16,6 @@ export interface JokeObject {
   saved_id: number | null;
   created_at: string;
   translations: TranslationObject[];
-}
-
-interface TranslationObject {
-  id: number;
-  content: string;
-  author: string;
-  language: string;
-  created_at: string;
-  joke_id: number;
 }
 
 interface Props{
