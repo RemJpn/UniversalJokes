@@ -26,27 +26,18 @@ interface TranslationObject {
   joke_id: number;
 }
 
-interface Props {
+interface Props{
   joke: JokeObject;
-  setJokesList: React.Dispatch<React.SetStateAction<JokeObject[]>>;
 }
 
-export function Joke({joke, setJokesList}: Props): JSX.Element {
+
+export function Joke({joke}: Props): JSX.Element {
   const [thisJoke, setJoke] = useState(joke);
   const [jokeOpen, setJokeOpen] = useState(false);
+
   const openJoke = () => {
     setJokeOpen(true);
     window.history.pushState({}, "UniversalJokes", `/jokes/${thisJoke.id}`);
-  }
-
-  const updateJokeList = (updatedJoke: JokeObject) => {
-    console.log('updating jokeList')
-    setJokesList(prev => {
-      const jokeIndex = prev.findIndex(prevjoke => prevjoke.id == updatedJoke.id);
-      const newList = [...prev];
-      newList[jokeIndex] = updatedJoke;
-      return newList;
-    });
   }
 
   const renderJokeShow = () => {

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useLocation} from 'react-router-dom';
+
 
 import {Joke, JokeObject} from './joke';
 import JokeForm from './joke_form';
@@ -10,10 +12,33 @@ interface Props {
 }
 
 export default function Feed({jokesList, setJokesList}: Props): JSX.Element {
+  const location = useLocation();
+
+  // const jokesIndex = () => {
+  //   const url = '/api/v1/jokes';
+  //   fetch(url, { credentials: "same-origin" })
+  //     .then(r => r.json())
+  //     .then(data => setJokesList(data));
+  // };
+
+  // const savedJokesIndex = () => {
+  //   const url = '/api/v1/saved_jokes';
+  //   fetch(url, { credentials: "same-origin" })
+  //     .then(r => r.json())
+  //     .then(data => setJokesList(data));
+  // };
+
+  // useEffect( () => {
+
+  // });
+
+
+
+
   const renderJokesList = () => {
     return jokesList.map ( joke => {
       return (
-        <Joke joke={joke} key={joke.id} setJokesList={setJokesList} />
+        <Joke joke={joke} key={joke.id} />
       );
     });
   }

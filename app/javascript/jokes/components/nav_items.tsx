@@ -1,13 +1,10 @@
 import React, {useContext} from 'react';
+import {Link} from 'react-router-dom';
 
-import {Joke, JokeObject} from './joke';
 import {IsConnectedContext} from '../contexts/IsConnectedContext';
 
-interface Props {
-  setCurrentPage: React.Dispatch<React.SetStateAction<string>>;
-}
 
-export default function NavItems({setCurrentPage}: Props) : JSX.Element {
+export default function NavItems() : JSX.Element {
   const isConnected = useContext(IsConnectedContext);
 
   if (!isConnected){
@@ -22,11 +19,15 @@ export default function NavItems({setCurrentPage}: Props) : JSX.Element {
 
   return (
     <ul className="flex list-none items-center">
-      <li className="mr-4 cursor-pointer" onClick={() => setCurrentPage('jokesIndex')}>
+      <li className="mr-4 cursor-pointer" >
+        <Link to="/" >
          <i className="fas fa-home text-xl text-yellow-100 hover:text-yellow-900 transition duration-200 text-shadow"></i>
+        </Link>
       </li>
-      <li className="mr-4 cursor-pointer" onClick={() => setCurrentPage('savedJokesIndex')}>
-        <i className="fas fa-heart text-xl text-yellow-100 hover:text-yellow-900 transition duration-200 text-shadow"></i>
+      <li className="mr-4 cursor-pointer" >
+        <Link to="/saved">
+          <i className="fas fa-heart text-xl text-yellow-100 hover:text-yellow-900 transition duration-200 text-shadow"></i>
+        </Link>
       </li>
       <li className="">
         <a href="/users/sign_out" rel="nofollow" data-method="delete">
