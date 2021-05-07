@@ -12,7 +12,8 @@ interface Props {
 
 export default function JokeReaction({joke, setJoke, isSmall}: Props): JSX.Element {
   const isConnected = useContext(IsConnectedContext);
-  const jokeUrl = `${window.location.hostname}/jokes/${joke.id}`
+  // const jokeUrl = `${window.location.hostname}/jokes/${joke.id}`;
+  const jokeUrl = `http://universaljokes.herokuapp.com/jokes/${joke.id}`;
 
   const createLike = () => {
     const url = `/api/v1/jokes/${joke.id}/liked_jokes`;
