@@ -13,9 +13,10 @@ export default function JokeShowUrl(props): JSX.Element {
     fetch(url, { credentials: "same-origin" })
       .then(r => r.json())
       .then(data => {
-        console.log('before: ', thisJoke);
         setThisJoke(data)
-        console.log('after: ', thisJoke);
+      })
+      .catch(() => {
+        window.location.href = "/"
       });
   };
 
