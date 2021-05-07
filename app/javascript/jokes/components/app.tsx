@@ -4,6 +4,7 @@ import { Route, Switch, useLocation }from 'react-router-dom';
 import Feed from './feed';
 import NavBar from './navbar';
 import JokeShowUrl from './joke_show_url';
+import Profile from './profile';
 
 import {IsConnectedContext} from '../contexts/IsConnectedContext';
 
@@ -58,16 +59,17 @@ const App: React.FC = () => {
       <Switch>
         <Route
           path="/" exact
-          render={(props) => (
-            <Feed {...props} jokesList={jokesList} setJokesList={setJokesList} />
+          render={() => (
+            <Feed jokesList={jokesList} setJokesList={setJokesList} />
           )}
         />
         <Route
           path="/saved"
-          render={(props) => (
-            <Feed {...props} jokesList={jokesList} setJokesList={setJokesList} />
+          render={() => (
+            <Feed jokesList={jokesList} setJokesList={setJokesList} />
           )}
         />
+        <Route path="/profile" component={Profile} />
         <Route
           path="/jokes/:id"
           render={(props) => (

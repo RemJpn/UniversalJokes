@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
   get "saved", to: 'pages#home'
+  get "profile", to: 'pages#home'
   get "jokes/:id", to: 'pages#home'
 
   namespace :api, defaults: { format: :json } do
