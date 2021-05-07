@@ -1,0 +1,5 @@
+meta_product_name: "Universal Jokes"
+meta_title: "UniversalJokes - Blagues dans toutes les langues"
+meta_description: "Partagez/traduisez les blagues les plus drôles"
+meta_image: "opengraph_logo.png" # should exist in `app/assets/images/`
+twitter_account: "@universal_jokes"   # required for Twitter Cards
