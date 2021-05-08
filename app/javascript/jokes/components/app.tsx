@@ -6,21 +6,21 @@ import NavBar from './navbar';
 import JokeShowUrl from './joke_show_url';
 import Profile from './profile';
 
-import {IsConnectedContext} from '../contexts/IsConnectedContext';
+import {CurrentUserContext, defaultUser} from '../contexts/CurrentUserContext';
 
 
 const App: React.FC = () => {
   const [jokesList, setJokesList] = useState([]);
-  const [currentUser, setCurrentUser] = useState(false);
+  const [currentUser, setCurrentUser] = useState(defaultUser);
   const location = useLocation();
 
-  const userLoggedIn =() => {
+  const getCurrentUser =() => {
     const url = '/api/v1/logged_in';
     fetch(url, { credentials: "same-origin" })
       .then(r => r.json())
-      .then(data => setCurrentUser(data.email != null));
+      .then(data => setCurrentUser(data));
   }
-  useEffect(() => userLoggedIn(), []);
+  useEffect(() => getCurrentUser(), []);
 
   const jokesIndex = () => {
     const url = '/api/v1/jokes';
@@ -39,11 +39,9 @@ const App: React.FC = () => {
   useEffect(()=>{
     switch (location.pathname) {
       case "/":
-        console.log('index')
         jokesIndex()
         break;
       case "/saved":
-        console.log('saved')
         savedJokesIndex();
         break;
     }
@@ -53,7 +51,7 @@ const App: React.FC = () => {
   if (!jokesList) return <p>Loading...</p>;
 
   return (
-    <IsConnectedContext.Provider value={currentUser} >
+    <CurrentUserContext.Provider value={currentUser} >
       <NavBar />
 
       <Switch>
@@ -77,7 +75,7 @@ const App: React.FC = () => {
           )}
         />
       </Switch>
-    </IsConnectedContext.Provider >
+    </CurrentUserContext.Provider >
   ) ;
 };
 

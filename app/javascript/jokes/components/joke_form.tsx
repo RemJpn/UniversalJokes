@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 
-import {IsConnectedContext} from '../contexts/IsConnectedContext';
+import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import {JokeObject} from './joke';
 import {LanguageSelect, languageOption} from './language_select';
 
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function JokeForm({setJokesList}: Props): JSX.Element {
-  const isConnected = useContext(IsConnectedContext);
+  const currentUser = useContext(CurrentUserContext);
 
   const [contentValue, setContentValue] = useState('');
   const [language, setLanguage] = useState<languageOption>();
@@ -22,7 +22,6 @@ export default function JokeForm({setJokesList}: Props): JSX.Element {
   };
 
   const addNewJokeToState = (joke) => {
-    console.log(joke);
     setJokesList(prev => [joke, ...prev]);
     setContentValue('');
     textAreaAdjust(document.getElementById('content'));
@@ -63,7 +62,7 @@ export default function JokeForm({setJokesList}: Props): JSX.Element {
     element.style.height = (0 + element.scrollHeight)+"px";
   }
 
-  if (!isConnected) return null;
+  if (!currentUser.authenticated) return null;
 
   return (
     <form onSubmit={handleSubmit} className="p-5 mb-4 bg-white border border-gray-300 rounded shadow-sm flex flex-col" >

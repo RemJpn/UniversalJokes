@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {emojify} from 'react-emojione';
 
-import {IsConnectedContext} from '../contexts/IsConnectedContext';
+import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import {JokeObject} from './joke';
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function JokeReaction({joke, setJoke, isSmall}: Props): JSX.Element {
-  const isConnected = useContext(IsConnectedContext);
+  const currentUser = useContext(CurrentUserContext);
   // const jokeUrl = `${window.location.hostname}/jokes/${joke.id}`;
   const jokeUrl = `http://universaljokes.herokuapp.com/jokes/${joke.id}`;
 
@@ -117,7 +117,7 @@ export default function JokeReaction({joke, setJoke, isSmall}: Props): JSX.Eleme
 
 
   const renderLike = () => {
-    if (!isConnected) return null;
+    if (!currentUser.authenticated) return null;
 
     return (
       <div onClick={toggleLike} className={likeIconClass} >
@@ -128,7 +128,7 @@ export default function JokeReaction({joke, setJoke, isSmall}: Props): JSX.Eleme
   }
 
   const renderSave = () => {
-    if (!isConnected) return null;
+    if (!currentUser.authenticated) return null;
 
     return (
       <div onClick={toggleSave} className={saveIconClass} >

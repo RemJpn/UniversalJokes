@@ -1,11 +1,11 @@
 import React, {useState, useContext, useRef} from 'react';
 
-import {IsConnectedContext} from '../contexts/IsConnectedContext';
+import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 
 
 export default function Profile(): JSX.Element {
-  const isConnected = useContext(IsConnectedContext);
+  const currentUser = useContext(CurrentUserContext);
   const nickname = useRef(null);
   const nicknameInput = useRef(null);
   const nicknameText = useRef(null);
@@ -24,6 +24,11 @@ export default function Profile(): JSX.Element {
 
   }
 
+  if (!currentUser.authenticated){
+    window.location.href = "/";
+    return null;
+  }
+
   return (
     <main className='feed mt-16 p-4'>
 
@@ -31,7 +36,7 @@ export default function Profile(): JSX.Element {
         <img className="h-40 rounded-full border-4 border-yellow-600" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
 
         <div className={`group flex h-10 mt-4 items-center relative`} ref={nickname} onClick={enableEdit} >
-          <p className="text-2xl group-hover:text-gray-600">{isConnected ? "René" : "Jean-Paul"}</p>
+          <p className="text-2xl group-hover:text-gray-600">{currentUser.nickname}</p>
           <i className="ml-2 fas fa-pen opacity-0 group-hover:opacity-100 absolute -right-8"></i>
 
         </div>

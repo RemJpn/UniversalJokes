@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import {LanguageSelect} from './language_select';
 import {JokeObject} from './joke';
 import tailSpin from 'images/tail-spin.svg';
-import {IsConnectedContext} from '../contexts/IsConnectedContext';
+import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 interface Props {
   joke: JokeObject;
@@ -17,7 +17,7 @@ interface languageOption {
 }
 
 export default function TranslationForm({joke, setJoke}: Props): JSX.Element {
-  const isConnected = useContext(IsConnectedContext);
+  const currentUser = useContext(CurrentUserContext);
   const [contentValue, setContentValue] = useState('');
   const [language, setLanguage] = useState<languageOption>();
 
@@ -29,7 +29,7 @@ export default function TranslationForm({joke, setJoke}: Props): JSX.Element {
   };
 
   const toggleAutoBtn = () => {
-    if (isConnected){
+    if (currentUser.authenticated){
       const autoBtn = document.getElementById(`autoBtn-${joke.id}`) as HTMLInputElement;
       const lightActiveClasses = ['bg-indigo-300', 'shadow-sm', 'hover:bg-yellow-500'];
 
@@ -46,7 +46,7 @@ export default function TranslationForm({joke, setJoke}: Props): JSX.Element {
   }
 
   const toggleSendBtn = () => {
-    if (isConnected){
+    if (currentUser.authenticated){
       const sendBtn = document.getElementById(`send-${joke.id}`) as HTMLInputElement;
       const darkActiveClasses = ['bg-indigo-900', 'shadow-sm', 'hover:bg-yellow-900'];
 
@@ -133,7 +133,7 @@ export default function TranslationForm({joke, setJoke}: Props): JSX.Element {
     });
   }
 
-  if (!isConnected) return null;
+  if (!currentUser.authenticated) return null;
 
   return (
     <form onSubmit={handleSubmit} className="bg-white border border-gray-300 px-4 py-3 shadow-sm rounded-md mt-2 mb-2" >

@@ -1,13 +1,13 @@
 import React, {useContext} from 'react';
 import {Link} from 'react-router-dom';
 
-import {IsConnectedContext} from '../contexts/IsConnectedContext';
+import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 
 export default function NavItems() : JSX.Element {
-  const isConnected = useContext(IsConnectedContext);
+  const currentUser = useContext(CurrentUserContext);
 
-  if (!isConnected){
+  if (!currentUser.authenticated){
     return (
       <ul>
         <li>

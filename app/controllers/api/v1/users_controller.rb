@@ -2,13 +2,14 @@ class Api::V1::UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:logged_in]
 
   def logged_in
-    render json: user_signed_in? ? render_jsonapi_user : {}
+    render json: user_signed_in? ? render_jsonapi_user : { authenticated: false }
   end
 
   private
 
   def render_jsonapi_user
     {
+      authenticated: true,
       id: current_user.id,
       nickname: current_user.nickname,
       email: current_user.email,
