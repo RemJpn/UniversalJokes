@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, useLocation }from 'react-router-dom';
 
+import {PrivateRoute} from './private_route';
 import Feed from './feed';
 import NavBar from './navbar';
 import JokeShowUrl from './joke_show_url';
@@ -55,19 +56,15 @@ const App: React.FC = () => {
       <NavBar />
 
       <Switch>
-        <Route
-          path="/" exact
-          render={() => (
-            <Feed jokesList={jokesList} setJokesList={setJokesList} />
-          )}
-        />
-        <Route
-          path="/saved"
-          render={() => (
-            <Feed jokesList={jokesList} setJokesList={setJokesList} />
-          )}
-        />
-        <Route path="/profile" component={Profile} />
+        <Route path="/" exact>
+          <Feed jokesList={jokesList} setJokesList={setJokesList} />
+        </Route>
+        <Route path="/saved">
+          <Feed jokesList={jokesList} setJokesList={setJokesList} />
+        </Route>
+        <PrivateRoute path="/profile">
+          <Profile/>
+        </PrivateRoute>
         <Route
           path="/jokes/:id"
           render={(props) => (

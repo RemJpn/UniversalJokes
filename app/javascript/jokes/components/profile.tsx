@@ -24,11 +24,6 @@ export default function Profile(): JSX.Element {
 
   }
 
-  if (!currentUser.authenticated){
-    window.location.href = "/";
-    return null;
-  }
-
   return (
     <main className='feed mt-16 p-4'>
 
