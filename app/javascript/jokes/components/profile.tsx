@@ -22,7 +22,26 @@ export default function Profile(): JSX.Element {
     e.preventDefault();
     nickname.current.classList.remove('hidden');
     nicknameInput.current.classList.add('hidden');
+    updateUser({"nickname": nicknameValue}, console.log)
+  }
 
+  const updateUser = (user, callback) => {
+    const url = `/api/v1/users/${currentUser.id}`;
+    const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
+    const csrfToken = csrfMetaTag.content;
+    const body = { user };
+    fetch(url, {
+      method: 'PATCH',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': csrfToken
+      },
+      credentials: 'same-origin',
+      body: JSON.stringify(body)
+    })
+    .then(response => response.json())
+    .then(callback);
   }
 
   return (
@@ -42,6 +61,7 @@ export default function Profile(): JSX.Element {
             ref={nicknameText}
             type="text"
             value={nicknameValue}
+            onChange={(e) => setNicknameValue(e.target.value)}
             className="h-10 px-2 py-2 shadow-sm border border-gray-200 rounded focus:ring focus:ring-yellow-400 focus:ring-opacity-50 focus:border-yellow-500" />
         </form>
       </div>
