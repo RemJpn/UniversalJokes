@@ -3,20 +3,20 @@ import {Route, Redirect} from 'react-router-dom';
 
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
-export function PrivateRoute({ children, ...rest }) {
+export function PrivateRoute({ component: Component, setCurrentUser,...rest }) {
   const currentUser = useContext(CurrentUserContext);
 
   return (
     <Route
       {...rest}
-      render={({ location }) =>
+      render={(props) =>
         currentUser.authenticated ? (
-          children
+          <Component setCurrentUser={setCurrentUser}/>
         ) : (
           <Redirect
             to={{
               pathname: "/",
-              state: { from: location }
+              state: { from: props.location }
             }}
           />
         )

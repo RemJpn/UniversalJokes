@@ -15,6 +15,8 @@ const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState(defaultUser);
   const location = useLocation();
 
+  const profileProps={setCurrentUser: setCurrentUser}
+
   const getCurrentUser =() => {
     const url = '/api/v1/logged_in';
     fetch(url, { credentials: "same-origin" })
@@ -62,9 +64,7 @@ const App: React.FC = () => {
         <Route path="/saved">
           <Feed jokesList={jokesList} setJokesList={setJokesList} />
         </Route>
-        <PrivateRoute path="/profile">
-          <Profile/>
-        </PrivateRoute>
+        <PrivateRoute path="/profile" {...profileProps} component={Profile}/>
         <Route
           path="/jokes/:id"
           render={(props) => (

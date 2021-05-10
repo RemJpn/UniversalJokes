@@ -4,13 +4,14 @@ import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 
 
-export default function Profile(): JSX.Element {
+export default function Profile({setCurrentUser}): JSX.Element {
   const currentUser = useContext(CurrentUserContext);
   const [nicknameValue, setNicknameValue] = useState(currentUser.nickname);
 
   const nickname = useRef(null);
   const nicknameInput = useRef(null);
   const nicknameText = useRef(null);
+
 
   const enableEdit = () => {
     nickname.current.classList.add('hidden');
@@ -22,7 +23,7 @@ export default function Profile(): JSX.Element {
     e.preventDefault();
     nickname.current.classList.remove('hidden');
     nicknameInput.current.classList.add('hidden');
-    updateUser({"nickname": nicknameValue}, console.log)
+    updateUser({"nickname": nicknameValue}, setCurrentUser)
   }
 
   const updateUser = (user, callback) => {
