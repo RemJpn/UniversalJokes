@@ -8,4 +8,6 @@ class User < ApplicationRecord
   has_many :liked_jokes
   has_many :saved_jokes
   has_many :translations
+
+  has_one_attached :avatar
 end

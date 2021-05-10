@@ -4,6 +4,7 @@ import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import {updateUser, User} from '../api/UserAPI';
 import {LanguageSelect} from './language_select';
 
+
 interface Props {
   setCurrentUser: React.Dispatch<React.SetStateAction<User>>
 }
@@ -37,7 +38,7 @@ export default function Profile({setCurrentUser}: Props): JSX.Element {
     <main className='feed mt-16 p-4'>
 
       <div className="flex flex-col items-center bg-white px-4 py-4 rounded-md border border-gray-200 shadow-sm">
-        <img className="h-36 rounded-full border-4 border-yellow-600" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
+        <img className="h-36 rounded-full border-4 border-yellow-600" src={currentUser.avatar} />
 
         <div className={`group flex h-10 mt-4 items-center relative`} ref={nickname} onClick={enableEdit} >
           <p className="text-2xl group-hover:text-gray-600">{currentUser.nickname}</p>

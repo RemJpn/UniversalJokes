@@ -16,6 +16,8 @@ user1 = User.create!(
   password: "123456",
   nickname: "Michel"
   )
+user1.avatar.attach(io: File.open('app/assets/images/yoda.png'), filename: 'yoda.png', content_type: 'image/png')
+
 
 user2 = User.create!(
   email: "user2@test.com",

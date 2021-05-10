@@ -4,6 +4,7 @@ interface User {
   nickname: string;
   email: string;
   nb_liked: number;
+  avatar: string;
 }
 
 

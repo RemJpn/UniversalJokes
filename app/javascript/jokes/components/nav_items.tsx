@@ -32,7 +32,7 @@ export default function NavItems() : JSX.Element {
       <li className="">
 
         <Link to="profile">
-          <img className="h-10 rounded-full" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
+          <img className="h-10 rounded-full" src={currentUser.avatar} />
         </Link>
 
       </li>
