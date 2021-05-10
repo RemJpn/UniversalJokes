@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import {LanguageSelect} from './language_select';
 import {JokeObject} from '../api/JokeAPI';
+import {fetchLiberTrans, submitTranslation} from '../api/TranslationAPI';
 import tailSpin from 'images/tail-spin.svg';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
@@ -44,6 +45,7 @@ export default function TranslationForm({joke, setJoke}: Props): JSX.Element {
       }
     }
   }
+  useEffect(() => toggleAutoBtn(), [language]);
 
   const toggleSendBtn = () => {
     if (currentUser.authenticated){
@@ -61,8 +63,6 @@ export default function TranslationForm({joke, setJoke}: Props): JSX.Element {
       }
     }
   }
-
-  useEffect(() => toggleAutoBtn(), [language]);
   useEffect(() => toggleSendBtn(), [language, contentValue]);
 
   const textAreaAdjust = (element) => {
@@ -83,54 +83,27 @@ export default function TranslationForm({joke, setJoke}: Props): JSX.Element {
         content: contentValue,
         language: language.value
       };
-      submitTranslation(translation, addNewJokeToState);
+      submitTranslation(joke.id, translation, addNewJokeToState);
     }
   }
 
-  const submitTranslation = (translation, callback) => {
-    const url = `/api/v1/jokes/${joke.id}/translations`;
-    const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
-    const csrfToken = csrfMetaTag.content;
-    const body = { translation }; // ES6 destructuring
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': csrfToken
-      },
-      credentials: 'same-origin',
-      body: JSON.stringify(body)
-    })
-    .then(response => response.json())
-    .then(callback);
-  }
-
-  const fetchTrans = (e) => {
+  //get automatic translation
+  const autoTrans = (e) => {
     e.preventDefault(); //prevent doing 'submit' after clicking
     const autoBtn = document.getElementById(`autoBtn-${joke.id}`);
     const loader = document.getElementById(`loader-${joke.id}`);
     loader.classList.remove('hidden');
     autoBtn.classList.add('hidden');
 
-    const url = `https://libretranslate.com/translate`;
-    const body = {
-      q: joke.content,
-      source: joke.language,
-      target: language.value
-    };
-    fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    })
-    .then(response => response.json())
-    .then(data => {
+    const handleAutoTrans = (data) => {
+      console.log(data);
       setContentValue(data.translatedText);
       textAreaAdjust(contentInput);
       autoBtn.classList.remove('hidden');
       loader.classList.add('hidden');
-    });
+    }
+
+    fetchLiberTrans(joke, language.value, handleAutoTrans);
   }
 
   if (!currentUser.authenticated) return null;
@@ -149,7 +122,7 @@ export default function TranslationForm({joke, setJoke}: Props): JSX.Element {
         className="w-full h-10 px-2 py-2 shadow-sm border border-gray-200 rounded focus:ring focus:ring-yellow-400 focus:ring-opacity-50 focus:border-yellow-500 resize-none mt-2"
         onChange={handleChange}/>
       <div className="flex justify-between items-center mt-2">
-        <button id={`autoBtn-${joke.id}`} onClick={fetchTrans} className="bg-gray-300 text-white rounded-md px-4 py-2 text-sm transition duration-200">Auto</button>
+        <button id={`autoBtn-${joke.id}`} onClick={autoTrans} className="bg-gray-300 text-white rounded-md px-4 py-2 text-sm transition duration-200">Auto</button>
         <img id={`loader-${joke.id}`} src={tailSpin} alt="loading" className="h-6 hidden"/>
         <button id={`send-${joke.id}`} type="submit" className="bg-gray-300 text-white rounded-md px-4 py-2 text-sm transition duration-200">Envoyer</button>
       </div>

@@ -1,4 +1,4 @@
-import {TranslationObject} from '../components/translation';
+import {TranslationObject} from '../api/TranslationAPI';
 
 
 interface DraftJoke {
@@ -18,6 +18,13 @@ interface JokeObject {
   created_at: string;
   translations: TranslationObject[];
 }
+
+const jokesIndex = (setJokesList: (jokeList: JokeObject[]) => void): void => {
+  const url = '/api/v1/jokes';
+  fetch(url, { credentials: "same-origin" })
+    .then(r => r.json())
+    .then(setJokesList);
+};
 
 const getJoke = (jokeId: number, callback: (joke: JokeObject) => void):void => {
   const url = `/api/v1/jokes/${jokeId}`;
@@ -48,4 +55,4 @@ const submitJoke = (joke: DraftJoke, callback: (joke: JokeObject) => void): void
   .then(callback);
 }
 
-export {JokeObject, getJoke,submitJoke}
+export {JokeObject, jokesIndex, getJoke,submitJoke}

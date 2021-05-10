@@ -1,17 +1,10 @@
 import React from 'react';
 
+import {TranslationObject} from '../api/TranslationAPI';
+
 import {languageOptions} from './language_select';
 import defaultAvatar from 'images/avatar.png';
 
-
-export interface TranslationObject {
-  id: number;
-  content: string;
-  author: string;
-  language: string;
-  created_at: string;
-  joke_id: number;
-}
 
 interface Props {
   translation: TranslationObject

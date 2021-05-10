@@ -8,6 +8,9 @@ import JokeShowUrl from './joke_show_url';
 import Profile from './profile';
 
 import {CurrentUserContext, defaultUser} from '../contexts/CurrentUserContext';
+import {getCurrentUser} from '../api/UserAPI';
+import {jokesIndex} from '../api/JokeAPI';
+import {savedJokesIndex} from '../api/SavedAPI';
 
 
 const App: React.FC = () => {
@@ -15,37 +18,15 @@ const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState(defaultUser);
   const location = useLocation();
 
-  const profileProps={setCurrentUser: setCurrentUser}
-
-  const getCurrentUser =() => {
-    const url = '/api/v1/logged_in';
-    fetch(url, { credentials: "same-origin" })
-      .then(r => r.json())
-      .then(data => setCurrentUser(data));
-  }
-  useEffect(() => getCurrentUser(), []);
-
-  const jokesIndex = () => {
-    const url = '/api/v1/jokes';
-    fetch(url, { credentials: "same-origin" })
-      .then(r => r.json())
-      .then(data => setJokesList(data));
-  };
-
-  const savedJokesIndex = () => {
-    const url = '/api/v1/saved_jokes';
-    fetch(url, { credentials: "same-origin" })
-      .then(r => r.json())
-      .then(data => setJokesList(data));
-  };
+  useEffect(() => getCurrentUser(setCurrentUser), []);
 
   useEffect(()=>{
     switch (location.pathname) {
       case "/":
-        jokesIndex()
+        jokesIndex(setJokesList);
         break;
       case "/saved":
-        savedJokesIndex();
+        savedJokesIndex(setJokesList);
         break;
     }
   }, [location])
@@ -64,7 +45,7 @@ const App: React.FC = () => {
         <Route path="/saved">
           <Feed jokesList={jokesList} setJokesList={setJokesList} />
         </Route>
-        <PrivateRoute path="/profile" {...profileProps} component={Profile}/>
+        <PrivateRoute path="/profile" setCurrentUser={setCurrentUser} component={Profile}/>
         <Route
           path="/jokes/:id"
           render={(props) => (

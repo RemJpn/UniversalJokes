@@ -3,6 +3,9 @@ import {emojify} from 'react-emojione';
 
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import {JokeObject} from '../api/JokeAPI';
+import {createLike, deleteLike} from '../api/LikedAPI';
+import {createSaved, deleteSaved} from '../api/SavedAPI';
+
 
 interface Props {
   joke: JokeObject;
@@ -12,89 +15,17 @@ interface Props {
 
 export default function JokeReaction({joke, setJoke, isSmall}: Props): JSX.Element {
   const currentUser = useContext(CurrentUserContext);
-  // const jokeUrl = `${window.location.hostname}/jokes/${joke.id}`;
   const jokeUrl = `http://universaljokes.herokuapp.com/jokes/${joke.id}`;
-
-  const createLike = () => {
-    const url = `/api/v1/jokes/${joke.id}/liked_jokes`;
-   const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
-   const csrfToken = csrfMetaTag.content;
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': csrfToken
-      },
-      credentials: 'same-origin'
-    })
-    .then(response => response.json())
-    .then(setJoke);
-  }
-
-  const deleteLike = () => {
-   const url = `/api/v1/liked_jokes/${joke.liked_id}`;
-   const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
-   const csrfToken = csrfMetaTag.content;
-    fetch(url, {
-      method: 'DELETE',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': csrfToken
-      },
-      credentials: 'same-origin'
-    })
-    .then(response => response.json())
-    .then(setJoke);
-  }
 
   const toggleLike = () => {
     console.log(`liking...${joke.id}`);
     console.log(joke)
-    joke.liked_id ? deleteLike() : createLike();
-  }
-
-
-  const createSaved = () => {
-    console.log('saving...');
-    const url = `/api/v1/jokes/${joke.id}/saved_jokes`;
-    const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
-    const csrfToken = csrfMetaTag.content;
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': csrfToken
-      },
-      credentials: 'same-origin'
-    })
-    .then(response => response.json())
-    .then(setJoke);
-  }
-
-  const deleteSaved = () => {
-    console.log('unsaving...');
-    const url = `/api/v1/saved_jokes/${joke.saved_id}`;
-    const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
-    const csrfToken = csrfMetaTag.content;
-    fetch(url, {
-      method: 'DELETE',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': csrfToken
-      },
-      credentials: 'same-origin'
-    })
-    .then(response => response.json())
-    .then(setJoke);
+    joke.liked_id ? deleteLike(joke.liked_id, setJoke) : createLike(joke.id, setJoke);
   }
 
   const toggleSave = () => {
     console.log('save id =', joke.saved_id);
-    joke.saved_id ? deleteSaved() : createSaved();
+    joke.saved_id ? deleteSaved(joke.saved_id, setJoke) : createSaved(joke.id, setJoke);
   }
 
   //Buttons Conditional formatting

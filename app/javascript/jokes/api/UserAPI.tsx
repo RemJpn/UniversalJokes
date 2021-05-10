@@ -6,6 +6,14 @@ interface User {
   nb_liked: number;
 }
 
+
+const getCurrentUser =(setCurrentUser: (user: User) => void): void => {
+  const url = '/api/v1/logged_in';
+  fetch(url, { credentials: "same-origin" })
+    .then(r => r.json())
+    .then(setCurrentUser);
+}
+
 const updateUser = (user: User, callback: React.Dispatch<React.SetStateAction<User>>): void => {
   const url = `/api/v1/users/${user.id}`;
   const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
@@ -25,4 +33,4 @@ const updateUser = (user: User, callback: React.Dispatch<React.SetStateAction<Us
   .then(callback);
 }
 
-export {User, updateUser}
+export {User, getCurrentUser, updateUser}
