@@ -3,25 +3,12 @@ import React, {useState, useEffect} from 'react';
 import JokeReaction from './joke_reaction';
 import JokeShow from './joke_show';
 import defaultAvatar from 'images/avatar.png';
-import {TranslationObject} from './translation';
+import {JokeObject} from '../api/JokeAPI';
 
-export interface JokeObject {
-  id: number;
-  author: string;
-  language: string;
-  category: string;
-  content: string;
-  likes: number;
-  liked_id: number | null;
-  saved_id: number | null;
-  created_at: string;
-  translations: TranslationObject[];
-}
 
 interface Props{
   joke: JokeObject;
 }
-
 
 export function Joke({joke}: Props): JSX.Element {
   const [thisJoke, setJoke] = useState(joke);

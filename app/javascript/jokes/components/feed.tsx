@@ -1,8 +1,9 @@
 import React from 'react';
 
 
-import {Joke, JokeObject} from './joke';
+import {Joke} from './joke';
 import JokeForm from './joke_form';
+import {JokeObject} from '../api/JokeAPI';
 
 
 interface Props {

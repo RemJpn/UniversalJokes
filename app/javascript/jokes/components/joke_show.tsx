@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 
 
-import {JokeObject} from './joke';
+import {JokeObject} from '../api/JokeAPI';
 import JokeReaction from './joke_reaction';
 import {Translation} from './translation';
 import TranslationForm from './translation_form';

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 
 import {LanguageSelect} from './language_select';
-import {JokeObject} from './joke';
+import {JokeObject} from '../api/JokeAPI';
 import tailSpin from 'images/tail-spin.svg';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 

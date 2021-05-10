@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {emojify} from 'react-emojione';
 
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
-import {JokeObject} from './joke';
+import {JokeObject} from '../api/JokeAPI';
 
 interface Props {
   joke: JokeObject;

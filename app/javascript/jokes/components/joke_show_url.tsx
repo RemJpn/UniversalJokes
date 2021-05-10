@@ -1,26 +1,14 @@
 import React, {useState, useEffect} from 'react';
 
-import {JokeObject} from './joke';
+import {JokeObject, getJoke} from '../api/JokeAPI';
 import JokeShow from './joke_show';
 
 
-export default function JokeShowUrl(props): JSX.Element {
+export default function JokeShowUrl({match}): JSX.Element {
   const [thisJoke, setThisJoke] = useState<JokeObject>();
+  const jokeId = match.params.id;
 
-  const getJoke = () => {
-    const jokeId = props.match.params.id;
-    const url = `/api/v1/jokes/${jokeId}`;
-    fetch(url, { credentials: "same-origin" })
-      .then(r => r.json())
-      .then(data => {
-        setThisJoke(data)
-      })
-      .catch(() => {
-        window.location.href = "/"
-      });
-  };
-
-  useEffect(() => getJoke(), []);
+  useEffect(() => getJoke(jokeId, setThisJoke), []);
 
 
   if (!thisJoke) return <p className="mt-20">Loading</p>

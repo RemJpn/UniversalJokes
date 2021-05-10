@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
-import {JokeObject} from './joke';
+import {JokeObject, submitJoke} from '../api/JokeAPI';
 import {LanguageSelect, languageOption} from './language_select';
 
 
@@ -36,25 +36,6 @@ export default function JokeForm({setJokesList}: Props): JSX.Element {
       };
       submitJoke(joke, addNewJokeToState);
     }
-  }
-
-  const submitJoke = (joke, callback) => {
-    const url = '/api/v1/jokes';
-    const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
-    const csrfToken = csrfMetaTag.content;
-    const body = { joke }; // ES6 destructuring
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': csrfToken
-      },
-      credentials: 'same-origin',
-      body: JSON.stringify(body)
-    })
-    .then(response => response.json())
-    .then(callback);
   }
 
   const textAreaAdjust = (element) => {
