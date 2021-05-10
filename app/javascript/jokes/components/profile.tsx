@@ -51,6 +51,11 @@ export default function Profile({setCurrentUser}: Props): JSX.Element {
             onChange={(e) => setNicknameValue(e.target.value)}
             className="h-10 px-2 py-2 shadow-sm border border-gray-200 rounded focus:ring focus:ring-yellow-400 focus:ring-opacity-50 focus:border-yellow-500" />
         </form>
+
+        <a href="/users/sign_out" rel="nofollow" data-method="delete">
+          se déconnecter
+        </a>
+
       </div>
 
     </main>

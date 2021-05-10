@@ -1,9 +1,10 @@
 import React, {useContext} from 'react';
 import {Route, Redirect} from 'react-router-dom';
 
+import NotConnected from './not_connected';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
-export function PrivateRoute({ component: Component, setCurrentUser,...rest }) {
+export function PrivateRoute({ component: Component, setCurrentUser,...rest }): JSX.Element {
   const currentUser = useContext(CurrentUserContext);
 
   return (
@@ -13,12 +14,13 @@ export function PrivateRoute({ component: Component, setCurrentUser,...rest }) {
         currentUser.authenticated ? (
           <Component setCurrentUser={setCurrentUser}/>
         ) : (
-          <Redirect
-            to={{
-              pathname: "/",
-              state: { from: props.location }
-            }}
-          />
+          <NotConnected />
+          // <Redirect
+          //   to={{
+          //     pathname: "/",
+          //     state: { from: props.location }
+          //   }}
+          // />
         )
       }
     />

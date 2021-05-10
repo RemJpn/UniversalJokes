@@ -30,9 +30,7 @@ export default function NavItems() : JSX.Element {
         </Link>
       </li>
       <li className="">
-{/*        <a href="/users/sign_out" rel="nofollow" data-method="delete">
-          <img className="h-10 rounded-full" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
-        </a>*/}
+
         <Link to="profile">
           <img className="h-10 rounded-full" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
         </Link>
