@@ -1,17 +1,19 @@
 import React, {useState, useContext, useRef} from 'react';
 
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
+import {updateUser, User} from '../api/UserAPI';
 
+interface Props {
+  setCurrentUser: React.Dispatch<React.SetStateAction<User>>
+}
 
-
-export default function Profile({setCurrentUser}): JSX.Element {
+export default function Profile({setCurrentUser}: Props): JSX.Element {
   const currentUser = useContext(CurrentUserContext);
   const [nicknameValue, setNicknameValue] = useState(currentUser.nickname);
 
   const nickname = useRef(null);
   const nicknameInput = useRef(null);
   const nicknameText = useRef(null);
-
 
   const enableEdit = () => {
     nickname.current.classList.add('hidden');
@@ -23,26 +25,10 @@ export default function Profile({setCurrentUser}): JSX.Element {
     e.preventDefault();
     nickname.current.classList.remove('hidden');
     nicknameInput.current.classList.add('hidden');
-    updateUser({"nickname": nicknameValue}, setCurrentUser)
-  }
-
-  const updateUser = (user, callback) => {
-    const url = `/api/v1/users/${currentUser.id}`;
-    const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
-    const csrfToken = csrfMetaTag.content;
-    const body = { user };
-    fetch(url, {
-      method: 'PATCH',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': csrfToken
-      },
-      credentials: 'same-origin',
-      body: JSON.stringify(body)
-    })
-    .then(response => response.json())
-    .then(callback);
+    updateUser({
+      ...currentUser,
+      "nickname": nicknameValue
+    }, setCurrentUser)
   }
 
   return (
