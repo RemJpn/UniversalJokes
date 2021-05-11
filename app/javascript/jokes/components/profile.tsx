@@ -43,6 +43,7 @@ export default function Profile({setCurrentUser}: Props): JSX.Element {
         <img className="h-36 w-36 rounded-full border-4 border-yellow-600 cursor-pointer object-cover"
              src={currentUser.avatar}
              onClick={()=>setModalOpen(true)} />
+        <AvatarModal setCurrentUser={setCurrentUser} modalOpen={modalOpen} setModalOpen={setModalOpen}/>
 
         <div className={`group flex h-10 mt-4 items-center relative`} ref={nickname} onClick={enableEdit} >
           <p className="text-2xl group-hover:text-gray-600">{currentUser.nickname}</p>
@@ -78,7 +79,6 @@ export default function Profile({setCurrentUser}: Props): JSX.Element {
 
       </div>
 
-      <AvatarModal setCurrentUser={setCurrentUser} modalOpen={modalOpen} setModalOpen={setModalOpen}/>
 
     </main>
   );

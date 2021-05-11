@@ -22,11 +22,10 @@ export function AvatarModal({setCurrentUser, modalOpen, setModalOpen}: Props): J
 
   const handleSubmit = e => {
     e.preventDefault();
-    const selectedFile = e.target.files[0];
+    const selectedFile = e.target[0].files[0];
 
     if (selectedFile.size < 1000000){
       const formData = new FormData(e.target);
-      console.log(formData);
       updateAvatar(formData, (data) => {
         setCurrentUser(data);
         setModalOpen(false);
