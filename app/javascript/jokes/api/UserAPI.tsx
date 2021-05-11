@@ -1,3 +1,12 @@
+interface UpdatedUser {
+  authenticated?: boolean;
+  id: number;
+  nickname?: string;
+  email?: string;
+  nb_liked?: number;
+  avatar?: string;
+}
+
 interface User {
   authenticated: boolean;
   id: number;
@@ -15,7 +24,7 @@ const getCurrentUser =(setCurrentUser: (user: User) => void): void => {
     .then(setCurrentUser);
 }
 
-const updateUser = (user: User, callback: React.Dispatch<React.SetStateAction<User>>): void => {
+const updateUser = (user: UpdatedUser, callback: React.Dispatch<React.SetStateAction<User>>): void => {
   const url = `/api/v1/users/${user.id}`;
   const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
   const csrfToken = csrfMetaTag.content;

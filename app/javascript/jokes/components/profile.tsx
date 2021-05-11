@@ -29,10 +29,11 @@ export default function Profile({setCurrentUser}: Props): JSX.Element {
     nickname.current.classList.remove('hidden');
     nicknameInput.current.classList.add('hidden');
     updateUser({
-      ...currentUser,
+      "id": currentUser.id,
       "nickname": nicknameValue
     }, setCurrentUser)
   }
+      // ...currentUser,
 
   return (
     <main className='feed mt-16 p-4'>

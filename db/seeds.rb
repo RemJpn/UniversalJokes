@@ -16,7 +16,7 @@ user1 = User.create!(
   password: "123456",
   nickname: "Michel"
   )
-user1.avatar.attach(io: File.open('app/assets/images/yoda.png'), filename: 'yoda.png', content_type: 'image/png')
+user1.avatar.attach(io: File.open('app/assets/images/michel.jpeg'), filename: 'michel.jpeg', content_type: 'image/jpeg')
 
 
 user2 = User.create!(
@@ -24,12 +24,14 @@ user2 = User.create!(
   password: "123456",
   nickname: "Yoda"
   )
+user2.avatar.attach(io: File.open('app/assets/images/yoda.png'), filename: 'yoda.png', content_type: 'image/png')
 
 user3 = User.create!(
   email: "user3@test.com",
   password: "123456",
   nickname: "Brian"
   )
+user3.avatar.attach(io: File.open('app/assets/images/brian.jpeg'), filename: 'brian.jpeg', content_type: 'image/jpeg')
 
 #----------------------------------------------------
 puts "Seeding languages..."

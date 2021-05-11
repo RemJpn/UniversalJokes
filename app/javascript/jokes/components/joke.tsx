@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 
 import JokeReaction from './joke_reaction';
 import JokeShow from './joke_show';
-import defaultAvatar from 'images/avatar.png';
 import {JokeObject} from '../api/JokeAPI';
 
 
