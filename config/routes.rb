@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       resources :liked_jokes, only: [ :destroy ]
       resources :saved_jokes, only: [ :index, :destroy ]
       get :logged_in, to: "users#logged_in"
+      patch :avatar, to: "users#update_avatar"
       resources :users, only: [:index, :update]
 
     end

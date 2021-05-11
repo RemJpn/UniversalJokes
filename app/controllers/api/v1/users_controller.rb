@@ -11,6 +11,11 @@ class Api::V1::UsersController < ApplicationController
     render json: render_jsonapi_user
   end
 
+  def update_avatar
+    current_user.update(params.permit(:avatar))
+    render json: render_jsonapi_user
+  end
+
   private
 
   def render_jsonapi_user

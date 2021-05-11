@@ -4,7 +4,7 @@ interface UpdatedUser {
   nickname?: string;
   email?: string;
   nb_liked?: number;
-  avatar?: string;
+  avatar?: FormData;
 }
 
 interface User {
@@ -43,4 +43,22 @@ const updateUser = (user: UpdatedUser, callback: React.Dispatch<React.SetStateAc
   .then(callback);
 }
 
-export {User, getCurrentUser, updateUser}
+const updateAvatar = (formData: FormData, callback): void => {
+  const url = `/api/v1/avatar`;
+  const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
+  const csrfToken = csrfMetaTag.content;
+  fetch(url, {
+    method: 'PATCH',
+    headers: {
+      Accept: 'application/json',
+      'X-CSRF-Token': csrfToken
+    },
+    credentials: 'same-origin',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(callback);
+}
+
+
+export {User, getCurrentUser, updateUser, updateAvatar}
