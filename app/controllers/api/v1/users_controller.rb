@@ -13,14 +13,6 @@ class Api::V1::UsersController < ApplicationController
 
   private
 
-  def user_avatar
-    if current_user.avatar.attached?
-      view_context.cl_image_path(current_user.avatar.key)
-    else
-      view_context.image_path("avatar.png")
-    end
-  end
-
   def render_jsonapi_user
     {
       authenticated: true,
@@ -28,7 +20,7 @@ class Api::V1::UsersController < ApplicationController
       nickname: current_user.nickname,
       email: current_user.email,
       nb_liked: current_user.liked_jokes.size,
-      avatar: user_avatar
+      avatar: user_avatar(current_user)
     }
   end
 

@@ -9,6 +9,7 @@ interface DraftJoke {
 interface JokeObject {
   id: number;
   author: string;
+  avatar: string;
   language: string;
   category: string;
   content: string;

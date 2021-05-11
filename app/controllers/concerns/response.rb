@@ -3,6 +3,7 @@ module Response
     {
       id: joke.id,
       author: joke.user.nickname || 'Anonymous',
+      avatar: user_avatar(joke.user),
       language: joke.language.name,
       category: joke.category.name,
       content: joke.content,
@@ -23,5 +24,13 @@ module Response
       created_at: translation.created_at,
       joke_id: translation.joke.id
     }
+  end
+
+  def user_avatar(user)
+    if user.avatar.attached?
+      view_context.cl_image_path(user.avatar.key)
+    else
+      view_context.image_path("avatar.png")
+    end
   end
 end
