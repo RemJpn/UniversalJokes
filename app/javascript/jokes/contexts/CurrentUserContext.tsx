@@ -6,7 +6,8 @@ export const defaultUser = {
   nickname: 'not connected',
   email: 'not connected',
   nb_liked: 0,
-  avatar: ''
+  avatar: '',
+  language: 'fr'
 }
 
 export const CurrentUserContext = React.createContext(defaultUser);

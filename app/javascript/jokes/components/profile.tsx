@@ -1,7 +1,7 @@
-import React, {useState, useContext, useRef} from 'react';
+import React, {useState, useContext, useRef, useEffect} from 'react';
 
 import {AvatarModal} from './avatar_modal';
-import {LanguageSelect} from './language_select';
+import {LanguageSelect, languageOptions} from './language_select';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import {updateUser, User} from '../api/UserAPI';
 
@@ -11,14 +11,16 @@ interface Props {
 }
 
 export default function Profile({setCurrentUser}: Props): JSX.Element {
+
   const currentUser = useContext(CurrentUserContext);
   const [nicknameValue, setNicknameValue] = useState(currentUser.nickname);
-  // const [language, setLanguage] = useState(currentUser.language);
+  const [language, setLanguage] = useState(languageOptions.find(option => option.value == currentUser.language));
   const [modalOpen, setModalOpen] = useState(false);
 
   const nickname = useRef(null);
   const nicknameInput = useRef(null);
   const nicknameText = useRef(null);
+
 
   const enableEdit = () => {
     nickname.current.classList.add('hidden');
@@ -35,6 +37,16 @@ export default function Profile({setCurrentUser}: Props): JSX.Element {
       "nickname": nicknameValue
     }, setCurrentUser)
   }
+
+  const handleLanguageChange = () => {
+   if(language){
+     updateUser({
+       "id": currentUser.id,
+       "language": language.value
+     }, setCurrentUser)
+   }
+  }
+  useEffect(handleLanguageChange, [language]);
 
   return (
     <main className='feed mt-16 p-4'>
@@ -60,10 +72,12 @@ export default function Profile({setCurrentUser}: Props): JSX.Element {
             className="h-10 px-2 py-2 shadow-sm border border-gray-200 rounded focus:ring focus:ring-yellow-400 focus:ring-opacity-50 focus:border-yellow-500" />
         </form>
 
-{/*        <p>Langue appli:</p>
-        <LanguageSelect language={} setLanguage={} />*/}
+        <div className="mt-4 flex flex-col sm:flex-row sm:items-center">
+          <p className="mb-2 sm:mb-0 sm:mr-2">Langue appli:</p>
+          <LanguageSelect language={language} setLanguage={setLanguage} />
+        </div>
 
-        <div className="text-center">
+        <div className="mt-4 text-center">
           <p className="text-4xl">{currentUser.nb_liked}</p>
           <p className="uppercase">Likes</p>
         </div>

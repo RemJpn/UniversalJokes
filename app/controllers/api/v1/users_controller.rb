@@ -25,11 +25,12 @@ class Api::V1::UsersController < ApplicationController
       nickname: current_user.nickname,
       email: current_user.email,
       nb_liked: current_user.liked_jokes.size,
-      avatar: user_avatar(current_user)
+      avatar: user_avatar(current_user),
+      language: current_user.language || "en"
     }
   end
 
   def user_params
-    params.require(:user).permit(:nickname, :avatar)
+    params.require(:user).permit(:nickname, :avatar, :language)
   end
 end

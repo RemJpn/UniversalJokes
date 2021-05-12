@@ -5,6 +5,7 @@ interface UpdatedUser {
   email?: string;
   nb_liked?: number;
   avatar?: FormData;
+  language?: string;
 }
 
 interface User {
@@ -14,6 +15,7 @@ interface User {
   email: string;
   nb_liked: number;
   avatar: string;
+  language: string;
 }
 
 
