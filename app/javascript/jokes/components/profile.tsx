@@ -34,10 +34,13 @@ export default function Profile({setCurrentUser}: Props): JSX.Element {
     e.preventDefault();
     nickname.current.classList.remove('hidden');
     nicknameInput.current.classList.add('hidden');
-    updateUser({
-      "id": currentUser.id,
-      "nickname": nicknameValue
-    }, setCurrentUser)
+
+    if(nicknameValue.length > 2){
+      updateUser({
+        "id": currentUser.id,
+        "nickname": nicknameValue
+      }, setCurrentUser)
+    }
   }
 
   const handleLanguageChange = () => {

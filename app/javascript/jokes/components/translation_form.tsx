@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import {FormattedMessage} from 'react-intl';
 
 import {LanguageSelect} from './language_select';
 import {JokeObject} from '../api/JokeAPI';
@@ -122,9 +123,13 @@ export default function TranslationForm({joke, setJoke}: Props): JSX.Element {
         className="w-full h-10 px-2 py-2 shadow-sm border border-gray-200 rounded focus:ring focus:ring-yellow-400 focus:ring-opacity-50 focus:border-yellow-500 resize-none mt-2"
         onChange={handleChange}/>
       <div className="flex justify-between items-center mt-2">
-        <button id={`autoBtn-${joke.id}`} onClick={autoTrans} className="bg-gray-300 text-white rounded-md px-4 py-2 text-sm transition duration-200">Auto</button>
+        <button id={`autoBtn-${joke.id}`} onClick={autoTrans} className="bg-gray-300 text-white rounded-md px-4 py-2 text-sm transition duration-200">
+          <FormattedMessage id="translation_form.auto"/>
+        </button>
         <img id={`loader-${joke.id}`} src={tailSpin} alt="loading" className="h-6 hidden"/>
-        <button id={`send-${joke.id}`} type="submit" className="bg-gray-300 text-white rounded-md px-4 py-2 text-sm transition duration-200">Envoyer</button>
+        <button id={`send-${joke.id}`} type="submit" className="bg-gray-300 text-white rounded-md px-4 py-2 text-sm transition duration-200">
+          <FormattedMessage id="translation_form.send"/>
+        </button>
       </div>
     </form>
   );

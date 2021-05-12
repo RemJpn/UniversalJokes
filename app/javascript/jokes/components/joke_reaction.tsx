@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
 import {emojify} from 'react-emojione';
+import {FormattedMessage} from 'react-intl';
 
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import {JokeObject} from '../api/JokeAPI';
@@ -53,7 +54,9 @@ export default function JokeReaction({joke, setJoke, isSmall}: Props): JSX.Eleme
     return (
       <div onClick={toggleLike} className={likeIconClass} >
         <span className={joke.liked_id ? '' : 'slanted'}>{emojify('🤣')}</span>
-        <p className={textClass}>J'ai ri</p>
+        <p className={textClass}>
+          <FormattedMessage id="joke_reaction.like"/>
+        </p>
       </div>
     );
   }
@@ -64,7 +67,12 @@ export default function JokeReaction({joke, setJoke, isSmall}: Props): JSX.Eleme
     return (
       <div onClick={toggleSave} className={saveIconClass} >
         {emojify('💾')}
-        <p className={textClass}>{joke.saved_id ? 'Enregistrée' : 'Enregistrer'}</p>
+        <p className={textClass}>
+          {joke.saved_id ?
+            <FormattedMessage id="joke_reaction.saved"/>
+            : <FormattedMessage id="joke_reaction.save"/>
+          }
+        </p>
       </div>
     );
   }
@@ -77,7 +85,9 @@ export default function JokeReaction({joke, setJoke, isSmall}: Props): JSX.Eleme
          >
         <div className="group flex h-8 transition duration-200 ease-out hover:text-yellow-700">
           <i className="fas fa-share-alt text-2xl text-gray-600 group-hover:text-yellow-700"></i>
-          <p className={shareTextClass}>Partager</p>
+          <p className={shareTextClass}>
+            <FormattedMessage id="joke_reaction.share"/>
+          </p>
         </div>
       </a>
     )

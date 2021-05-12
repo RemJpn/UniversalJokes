@@ -21,7 +21,7 @@ class Api::V1::UsersController < ApplicationController
     {
       authenticated: true,
       id: current_user.id,
-      nickname: current_user.nickname,
+      nickname: current_user.nickname || 'Anonymous',
       email: current_user.email,
       nb_jokes: current_user.jokes.size,
       nb_translations: current_user.translations.size,

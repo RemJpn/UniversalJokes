@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
-
+import {FormattedMessage} from 'react-intl';
 
 import {JokeObject} from '../api/JokeAPI';
 import JokeReaction from './joke_reaction';
@@ -99,7 +99,9 @@ export default function JokeShow({joke, setJoke, setJokeOpen = null, isFromUrl=f
       </div>
 
       <div className="md:w-1/2 p-4 flex flex-col md:overflow-y-auto">
-        <h2 className="text-lg font-bold">Translations</h2>
+        <h2 className="text-lg font-bold">
+          <FormattedMessage id="joke_show.translations" />
+        </h2>
         <TranslationForm joke={joke} setJoke={setJoke} />
 
         <div className="flex justify-between items-center">

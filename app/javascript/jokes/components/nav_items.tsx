@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
 import {Link} from 'react-router-dom';
+import {FormattedMessage} from 'react-intl';
 
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
@@ -11,7 +12,9 @@ export default function NavItems() : JSX.Element {
     return (
       <ul>
         <li>
-          <a className="text-yellow-100 hover:text-yellow-900 hover:no-underline transition duration-300" href="/users/sign_in">Login</a>
+          <a className="text-yellow-100 hover:text-yellow-900 hover:no-underline transition duration-300" href="/users/sign_in">
+            <FormattedMessage id="nav_items.login"/>
+          </a>
         </li>
       </ul>
     );

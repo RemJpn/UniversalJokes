@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {FormattedMessage} from 'react-intl';
 
 import JokeReaction from './joke_reaction';
 import JokeShow from './joke_show';
@@ -43,11 +44,11 @@ export function Joke({joke}: Props): JSX.Element {
       </div>
 
       <div className="text-gray-400 mt-3">
-        {thisJoke.likes} personnes ont ri à cette blague
+        <FormattedMessage id="joke.likes" values={{nb_likes: thisJoke.likes}}/>
       </div>
       <JokeReaction joke={thisJoke} setJoke={setJoke} isSmall={false}/>
       <div className="cursor-pointer" onClick={openJoke}>
-        Voir les traductions ({thisJoke.translations.length})
+        <FormattedMessage id="joke.see_translations" values={{nb_translations: thisJoke.translations.length}}/>
       </div>
 
       {renderJokeShow()}
