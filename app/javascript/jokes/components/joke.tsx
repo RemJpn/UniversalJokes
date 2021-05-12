@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {FormattedMessage} from 'react-intl';
 
+import AuthorBanner from './author_banner';
 import JokeReaction from './joke_reaction';
 import JokeShow from './joke_show';
 import {JokeObject} from '../api/JokeAPI';
-import {languageOptions} from './language_select';
 
 
 interface Props{
@@ -36,19 +36,7 @@ export function Joke({joke}: Props): JSX.Element {
 
   return (
     <div className="whitespace-pre-wrap bg-white px-4 py-3 rounded-md border border-gray-200 shadow-sm mt-2">
-      <div className="flex justify-between items-center mr-2">
-        <div className="flex items-center font-bold">
-          <img src={thisJoke.avatar} alt="default" className="w-10 h-10 object-cover rounded-full"/>
-          <p className="ml-2">{thisJoke.author}</p>
-        </div>
-        <div>
-          {
-            languageOptions
-              .find(option => option.value == joke.language)
-              .icon
-          }
-        </div>
-      </div>
+      <AuthorBanner element={thisJoke}/>
 
       <div className="text-sm cursor-pointer mt-3 ml-2" onClick={openJoke}>
         <p>{thisJoke.content}</p>
@@ -57,7 +45,9 @@ export function Joke({joke}: Props): JSX.Element {
       <div className="text-gray-400 mt-3">
         <FormattedMessage id="joke.likes" values={{nb_likes: thisJoke.likes}}/>
       </div>
+
       <JokeReaction joke={thisJoke} setJoke={setJoke} isSmall={false}/>
+
       <div className="cursor-pointer" onClick={openJoke}>
         <FormattedMessage id="joke.see_translations" values={{nb_translations: thisJoke.translations.length}}/>
       </div>

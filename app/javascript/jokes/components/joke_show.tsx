@@ -2,13 +2,13 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
 
-import {JokeObject} from '../api/JokeAPI';
+import AuthorBanner from './author_banner';
 import JokeReaction from './joke_reaction';
-import {Translation} from './translation';
 import TranslationForm from './translation_form';
+import {Translation} from './translation';
+import {JokeObject} from '../api/JokeAPI';
 import {languageOption, LanguageSelect} from './language_select';
 
-import defaultAvatar from 'images/avatar.png';
 
 interface Props {
   joke: JokeObject;
@@ -17,7 +17,7 @@ interface Props {
   isFromUrl?: boolean;
 }
 
-export default function JokeShow({joke, setJoke, setJokeOpen = null, isFromUrl=false, ...props}): JSX.Element {
+export default function JokeShow({joke, setJoke, setJokeOpen = null, isFromUrl=false, ...props}: Props): JSX.Element {
   const [languageFilter, setLanguageFilter] = useState<languageOption>();
   const closeJoke =() => {
     setJokeOpen(false);
@@ -80,13 +80,12 @@ export default function JokeShow({joke, setJoke, setJokeOpen = null, isFromUrl=f
         {renderHomeLink()}
 
         <div className="whitespace-pre-wrap w-full bg-white px-4 py-3 rounded-md border border-gray-200 shadow mt-6 md:mt-16">
-          <div className="flex items-center">
-            <img src={defaultAvatar} alt="default" className="w-10"/>
-            <p className="ml-2 font-bold">{joke.author}</p>
-          </div>
+          <AuthorBanner element={joke} />
+
           <div className="text-sm mt-3 ml-2">
             <p>{joke.content}</p>
           </div>
+
           <div className="text-gray-400 mt-3">
             {joke.likes} personnes ont ri à cette blague
           </div>

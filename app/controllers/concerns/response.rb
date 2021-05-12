@@ -19,6 +19,7 @@ module Response
     {
       id: translation.id,
       author: translation.user.nickname || 'Anonymous',
+      avatar: user_avatar(translation.user),
       language: translation.language.name,
       content: translation.content,
       created_at: translation.created_at,
