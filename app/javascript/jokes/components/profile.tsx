@@ -1,4 +1,6 @@
 import React, {useState, useContext, useRef, useEffect} from 'react';
+import {FormattedMessage} from 'react-intl';
+
 
 import {AvatarModal} from './avatar_modal';
 import {LanguageSelect, languageOptions} from './language_select';
@@ -73,27 +75,39 @@ export default function Profile({setCurrentUser}: Props): JSX.Element {
         </form>
 
         <div className="mt-4 flex flex-col sm:flex-row sm:items-center">
-          <p className="mb-2 sm:mb-0 sm:mr-2">Langue appli:</p>
+          <p className="mb-2 sm:mb-0 sm:mr-2">
+            <FormattedMessage id="profile.app_language"/>
+          </p>
           <LanguageSelect language={language} setLanguage={setLanguage} />
         </div>
 
-        <h3 className="mt-10 text-lg font-bold">STATS</h3>
+        <h3 className="mt-10 text-lg font-bold">
+          <FormattedMessage id="profile.stats"/>
+        </h3>
         <div className="flex flex-wrap justify-center">
           <div className="mt-4 text-center w-40">
             <p className="text-4xl">{currentUser.nb_jokes}</p>
-            <p className="uppercase">Blagues</p>
+            <p className="uppercase">
+              <FormattedMessage id="profile.jokes"/>
+            </p>
           </div>
           <div className="mt-4 text-center w-40">
             <p className="text-4xl">{currentUser.nb_translations}</p>
-            <p className="uppercase">Traductions</p>
+            <p className="uppercase">
+              <FormattedMessage id="profile.translations"/>
+            </p>
           </div>
           <div className="mt-4 text-center w-40">
             <p className="text-4xl">{currentUser.nb_liked}</p>
-            <p className="uppercase">Rires</p>
+            <p className="uppercase">
+              <FormattedMessage id="profile.likes"/>
+            </p>
           </div>
           <div className="mt-4 text-center w-40">
             <p className="text-4xl">{currentUser.nb_saved}</p>
-            <p className="uppercase">Enregistrées</p>
+            <p className="uppercase">
+              <FormattedMessage id="profile.saved"/>
+            </p>
           </div>
 
         </div>
@@ -104,7 +118,7 @@ export default function Profile({setCurrentUser}: Props): JSX.Element {
            rel="nofollow"
            data-method="delete"
            className="text-sm mt-16">
-          se déconnecter
+          <FormattedMessage id="profile.logout"/>
         </a>
 
       </div>

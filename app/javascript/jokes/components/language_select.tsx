@@ -1,6 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
-
+import {FormattedMessage} from 'react-intl';
 
 interface Props {
   language: languageOption;
@@ -45,14 +45,19 @@ const customStyles = {
 export function LanguageSelect({language, setLanguage}: Props): JSX.Element {
 
   return (
-    <Select
-      formatOptionLabel={getLabel}
-      value ={language}
-      onChange={setLanguage}
-      options={languageOptions}
-      styles={customStyles}
-      placeholder="Choisir la langue..."
-    />
+    <FormattedMessage id="language_select.choose">
+      {(msg)=>(
+        <Select
+          formatOptionLabel={getLabel}
+          value ={language}
+          onChange={setLanguage}
+          options={languageOptions}
+          styles={customStyles}
+          placeholder={msg}
+        />
+      )}
+
+    </FormattedMessage>
   );
 }
 
