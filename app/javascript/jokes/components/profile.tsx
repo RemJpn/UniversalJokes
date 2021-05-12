@@ -58,7 +58,7 @@ export default function Profile({setCurrentUser}: Props): JSX.Element {
         <AvatarModal setCurrentUser={setCurrentUser} modalOpen={modalOpen} setModalOpen={setModalOpen}/>
 
         <div className={`group flex h-10 mt-4 items-center relative`} ref={nickname} onClick={enableEdit} >
-          <p className="text-2xl group-hover:text-gray-600">{currentUser.nickname}</p>
+          <p className="text-2xl font-bold group-hover:text-gray-600">{currentUser.nickname}</p>
           <i className="ml-2 fas fa-pen opacity-0 group-hover:opacity-100 absolute -right-8"></i>
 
         </div>
@@ -77,9 +77,25 @@ export default function Profile({setCurrentUser}: Props): JSX.Element {
           <LanguageSelect language={language} setLanguage={setLanguage} />
         </div>
 
-        <div className="mt-4 text-center">
-          <p className="text-4xl">{currentUser.nb_liked}</p>
-          <p className="uppercase">Likes</p>
+        <h3 className="mt-10 text-lg font-bold">STATS</h3>
+        <div className="flex flex-wrap justify-center">
+          <div className="mt-4 text-center w-40">
+            <p className="text-4xl">{currentUser.nb_jokes}</p>
+            <p className="uppercase">Blagues</p>
+          </div>
+          <div className="mt-4 text-center w-40">
+            <p className="text-4xl">{currentUser.nb_translations}</p>
+            <p className="uppercase">Traductions</p>
+          </div>
+          <div className="mt-4 text-center w-40">
+            <p className="text-4xl">{currentUser.nb_liked}</p>
+            <p className="uppercase">Rires</p>
+          </div>
+          <div className="mt-4 text-center w-40">
+            <p className="text-4xl">{currentUser.nb_saved}</p>
+            <p className="uppercase">Enregistrées</p>
+          </div>
+
         </div>
 
 
@@ -87,7 +103,7 @@ export default function Profile({setCurrentUser}: Props): JSX.Element {
         <a href="/users/sign_out"
            rel="nofollow"
            data-method="delete"
-           className="text-sm mt-8">
+           className="text-sm mt-16">
           se déconnecter
         </a>
 

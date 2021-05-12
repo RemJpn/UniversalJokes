@@ -1,9 +1,6 @@
 interface UpdatedUser {
-  authenticated?: boolean;
   id: number;
   nickname?: string;
-  email?: string;
-  nb_liked?: number;
   avatar?: FormData;
   language?: string;
 }
@@ -13,7 +10,10 @@ interface User {
   id: number;
   nickname: string;
   email: string;
+  nb_jokes: number;
+  nb_translations: number;
   nb_liked: number;
+  nb_saved: number;
   avatar: string;
   language: string;
 }
