@@ -120,7 +120,7 @@ export default function Profile({setCurrentUser}: Props): JSX.Element {
         <a href="/users/sign_out"
            rel="nofollow"
            data-method="delete"
-           className="text-sm mt-16">
+           className="text-sm mt-16 text-gray-700 hover:text-gray-900">
           <FormattedMessage id="profile.logout"/>
         </a>
 

@@ -33,7 +33,7 @@ export default function TranslationForm({joke, setJoke}: Props): JSX.Element {
   const toggleAutoBtn = () => {
     if (currentUser.authenticated){
       const autoBtn = document.getElementById(`autoBtn-${joke.id}`) as HTMLInputElement;
-      const lightActiveClasses = ['bg-indigo-300', 'shadow-sm', 'hover:bg-yellow-500'];
+      const lightActiveClasses = ['bg-indigo-300', 'shadow-sm', 'hover:bg-indigo-500'];
 
       if (language) {
         autoBtn.disabled = false;
@@ -51,7 +51,7 @@ export default function TranslationForm({joke, setJoke}: Props): JSX.Element {
   const toggleSendBtn = () => {
     if (currentUser.authenticated){
       const sendBtn = document.getElementById(`send-${joke.id}`) as HTMLInputElement;
-      const darkActiveClasses = ['bg-indigo-900', 'shadow-sm', 'hover:bg-yellow-900'];
+      const darkActiveClasses = ['bg-indigo-700', 'shadow-sm', 'hover:bg-indigo-900'];
 
       if (language && contentValue) {
         sendBtn.classList.add(...darkActiveClasses);

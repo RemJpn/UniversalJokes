@@ -16,7 +16,8 @@ const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState(defaultUser);
   useEffect(() => getCurrentUser(setCurrentUser), []);
 
-  const [language, setLanguage] = useState('en');
+  const browserLanguage = navigator.language;
+  const [language, setLanguage] = useState(browserLanguage);
   useEffect(() => {
     if(currentUser.authenticated){
       setLanguage(currentUser.language)

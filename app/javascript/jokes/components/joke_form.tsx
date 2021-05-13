@@ -62,7 +62,7 @@ export default function JokeForm({setJokesList}: Props): JSX.Element {
       </FormattedMessage>
       <div className="flex flex-col sm:flex-row mt-3 items-center sm:justify-between">
         <LanguageSelect language={language} setLanguage={setLanguage}/>
-        <button type="submit" className="mt-3 sm:mt-0 px-3 py-2 bg-blue-600 text-white rounded hover:bg-yellow-600 transition duration-200 ease-in-out">
+        <button type="submit" className="mt-3 sm:mt-0 px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-800 transition duration-200 ease-in-out">
           <FormattedMessage id="joke_form.submit" />
         </button>
       </div>

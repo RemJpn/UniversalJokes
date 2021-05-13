@@ -38,17 +38,17 @@ export function Joke({joke}: Props): JSX.Element {
     <div className="whitespace-pre-wrap bg-white px-4 py-3 rounded-md border border-gray-200 shadow-sm mt-2">
       <AuthorBanner element={thisJoke}/>
 
-      <div className="text-sm cursor-pointer mt-3 ml-2" onClick={openJoke}>
+      <div className="cursor-pointer mt-3 ml-2" onClick={openJoke}>
         <p>{thisJoke.content}</p>
       </div>
 
-      <div className="text-gray-400 mt-3">
+      <div className="text-sm text-gray-400 mt-3">
         <FormattedMessage id="joke.likes" values={{nb_likes: thisJoke.likes}}/>
       </div>
 
       <JokeReaction joke={thisJoke} setJoke={setJoke} isSmall={false}/>
 
-      <div className="cursor-pointer" onClick={openJoke}>
+      <div className="text-sm text-blue-900 cursor-pointer hover:underline" onClick={openJoke}>
         <FormattedMessage id="joke.see_translations" values={{nb_translations: thisJoke.translations.length}}/>
       </div>
 
