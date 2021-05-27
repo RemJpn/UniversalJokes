@@ -29,6 +29,18 @@ class Api::V1::JokesController < ApplicationController
     end
   end
 
+  def search
+    if params[:query].blank?
+      redirect_to api_v1_jokes_path and return
+    end
+
+    selected_jokes = Joke.search_by_author_and_content(params['query'])
+                         .sort_by(&:created_at)
+                         .reverse
+    api_jokes = selected_jokes.map { |joke| prepare_api_v1_joke(joke) } # defined in concerns/response.rb
+    render json: api_jokes
+  end
+
   private
 
   def new_joke_params

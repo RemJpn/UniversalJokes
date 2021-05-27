@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
+      get "jokes/search/:query", to: "jokes#search"
       resources :jokes, only: [ :index, :create, :show ] do
         resources :translations, only: [ :create ]
         resources :liked_jokes, only: [ :create ]
