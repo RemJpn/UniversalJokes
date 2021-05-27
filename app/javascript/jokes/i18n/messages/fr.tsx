@@ -6,7 +6,7 @@ export default {
     "avatar_module.select" : "Sélectionner une image",
     "avatar_module.save" : "Enregistrer",
 
-    "joke.likes": "{nb_likes} personnes ont ri",
+    "joke.likes": "{nb_likes, plural, =0 {personne n'a encore ri, soyez le premier} one {une personne a ri} other {# personnes ont ri}}",
     "joke.see_translations": "Voir les traductions ({nb_translations})",
 
     "joke_reaction.like": "J'ai ri",
