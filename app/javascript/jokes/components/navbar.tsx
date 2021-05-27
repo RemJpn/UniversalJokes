@@ -5,7 +5,12 @@ import NavItems from './nav_items';
 import SearchBar from './search_bar';
 
 
-export default function NavBar() : JSX.Element {
+interface Props {
+  search: string,
+  setSearch: React.Dispatch<React.SetStateAction<string>>
+}
+
+export default function NavBar({search, setSearch}: Props) : JSX.Element {
   return (
     <nav className="flex justify-between items-center fixed inset-0 z-10 w-screen shadow-sm h-16 px-4 py-2 bg-yellow-600">
       <div className="relative">
@@ -17,7 +22,7 @@ export default function NavBar() : JSX.Element {
           </h1>
         </Link>
 
-        <SearchBar/>
+        <SearchBar search={search} setSearch={setSearch}/>
 
       </div>
 

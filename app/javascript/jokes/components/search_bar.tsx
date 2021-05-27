@@ -1,8 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect} from 'react';
 
+interface Props {
+  search: string,
+  setSearch: React.Dispatch<React.SetStateAction<string>>
+}
 
-export default function SearchBar() : JSX.Element {
-  const [search, setSearch] = useState('');
+export default function SearchBar({search, setSearch}: Props) : JSX.Element {
   const handleChange = (e) => setSearch(e.target.value);
 
 

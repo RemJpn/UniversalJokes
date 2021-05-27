@@ -24,15 +24,16 @@ const App: React.FC = () => {
     }
   }, [currentUser])
 
+  const [search, setSearch] = useState('');
 
   return (
     <CurrentUserContext.Provider value={currentUser} >
       <I18nProvider locale={language}>
-        <NavBar />
+        <NavBar search={search} setSearch={setSearch}/>
 
         <Switch>
           <Route path={["/", "/saved"]} exact>
-            <Feed />
+            <Feed search={search}/>
           </Route>
           <PrivateRoute path="/profile" setCurrentUser={setCurrentUser} component={Profile}/>
           <Route

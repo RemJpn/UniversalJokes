@@ -20,11 +20,23 @@ interface JokeObject {
   translations: TranslationObject[];
 }
 
-const jokesIndex = (setJokesList: (jokeList: JokeObject[]) => void): void => {
-  const url = '/api/v1/jokes';
-  fetch(url, { credentials: "same-origin" })
+const jokesIndex = (
+                    search: string,
+                    setJokesList: (jokeList: JokeObject[]) => void,
+                    controllerRef: React.MutableRefObject<AbortController>
+                    ): void => {
+  let url = '/api/v1/jokes'
+  if (search) {
+    url = `/api/v1/jokes/search/${search}`;
+  }
+
+  fetch(url, { signal: controllerRef.current?.signal, credentials: "same-origin" })
     .then(r => r.json())
-    .then(setJokesList);
+    .then(data=>{
+      setJokesList(data);
+      controllerRef.current = null;
+    })
+    .catch(err => {});
 };
 
 const getJoke = (jokeId: number, callback: (joke: JokeObject) => void):void => {

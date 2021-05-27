@@ -13,7 +13,8 @@ class Joke < ApplicationRecord
   pg_search_scope :search_by_author_and_content,
                   against: [:content],
                   associated_against: {
-                    user: [:nickname]
+                    user: [:nickname],
+                    translations: [:content]
                   },
                   using: {
                     tsearch: { prefix: true }

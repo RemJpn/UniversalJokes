@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {useLocation} from 'react-router-dom';
 
 
@@ -7,25 +7,42 @@ import JokeForm from './joke_form';
 import {JokeObject, jokesIndex} from '../api/JokeAPI';
 import {savedJokesIndex} from '../api/SavedAPI';
 
+interface Props {
+  search: string,
+}
 
-export default function Feed(): JSX.Element {
+export default function Feed({search}: Props): JSX.Element {
   const [jokesList, setJokesList] = useState<JokeObject[]>([]);
   const location = useLocation();
+  const controllerRef = useRef<AbortController | null>();
 
   useEffect(()=>{
-    switch (location.pathname) {
-      case "/":
-        jokesIndex(setJokesList);
-        break;
-      case "/saved":
-        savedJokesIndex(setJokesList);
-        break;
+    if (controllerRef.current){
+      controllerRef.current.abort();
     }
-  }, [location])
+    const controller = new AbortController();
+    controllerRef.current = controller;
+
+    try {
+      switch (location.pathname) {
+        case "/":
+          jokesIndex(search, setJokesList, controllerRef);
+          break;
+        case "/saved":
+          savedJokesIndex(setJokesList);
+          break;
+      }
+
+    } catch (e) {
+      console.log(e);
+    }
+  }, [location, search])
 
 
   const renderJokesList = () => {
     if (!jokesList) return <p className="mt-16">Loading...</p>;
+
+    if (jokesList.length == 0) return <p className="mt-16">Aucune blague ou utilisateur ne correspond (pour l'instant) à cette recherche</p>;
 
     return jokesList.map ( joke => {
       return (
