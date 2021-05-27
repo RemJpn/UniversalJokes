@@ -1,4 +1,6 @@
 import React, { useEffect} from 'react';
+import {useLocation} from 'react-router-dom';
+
 
 interface Props {
   search: string,
@@ -7,7 +9,7 @@ interface Props {
 
 export default function SearchBar({search, setSearch}: Props) : JSX.Element {
   const handleChange = (e) => setSearch(e.target.value);
-
+  const location = useLocation();
 
   const getSearchResults = () => {
     if (!search) return;
@@ -17,6 +19,8 @@ export default function SearchBar({search, setSearch}: Props) : JSX.Element {
       .then(console.log);
   }
   useEffect(getSearchResults, [search]);
+
+  if (location.pathname === "/profile") return null;
 
   return (
     <form className="absolute top-0 -right-16 sm:-right-52 flex items-center h-10 bg-gray-100 rounded-full px-3 group">
