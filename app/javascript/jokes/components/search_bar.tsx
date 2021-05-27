@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React from 'react';
 import {useLocation} from 'react-router-dom';
 
 
@@ -10,15 +10,6 @@ interface Props {
 export default function SearchBar({search, setSearch}: Props) : JSX.Element {
   const handleChange = (e) => setSearch(e.target.value);
   const location = useLocation();
-
-  const getSearchResults = () => {
-    if (!search) return;
-    const url = `/api/v1/jokes/search/${search}`;
-    fetch(url, { credentials: "same-origin" })
-      .then(r => r.json())
-      .then(console.log);
-  }
-  useEffect(getSearchResults, [search]);
 
   if (location.pathname === "/profile") return null;
 

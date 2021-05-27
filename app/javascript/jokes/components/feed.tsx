@@ -42,7 +42,7 @@ export default function Feed({search}: Props): JSX.Element {
   const renderJokesList = () => {
     if (!jokesList) return <p className="mt-16">Loading...</p>;
 
-    if (jokesList.length == 0) return <p className="mt-16">Aucune blague ou utilisateur ne correspond (pour l'instant) à cette recherche</p>;
+    if (search && jokesList.length == 0) return <p className="mt-16">Aucune blague ou utilisateur ne correspond (pour l'instant) à cette recherche</p>;
 
     return jokesList.map ( joke => {
       return (
