@@ -34,6 +34,7 @@ export default {
     "profile.translations": "Translations",
     "profile.likes": "Laughs",
     "profile.saved": "Saved",
+    "profile.contactus": "Contact us",
     "profile.logout": "Log out",
 
     "translation_form.auto": "Auto",

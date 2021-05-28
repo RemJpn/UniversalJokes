@@ -14,7 +14,7 @@ export default function SearchBar({search, setSearch}: Props) : JSX.Element {
   if (location.pathname === "/profile") return null;
 
   return (
-    <form className="absolute top-0 -right-16 sm:-right-52 flex items-center h-10 bg-gray-100 rounded-full px-3 group">
+    <form className="absolute top-0 -right-16 sm:-right-64 flex items-center h-10 bg-gray-100 rounded-full px-3 group">
       <label className="flex items-center">
         <i className="fas fa-search text-gray-500"></i>
         <input type="text"

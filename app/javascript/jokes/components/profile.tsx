@@ -116,13 +116,20 @@ export default function Profile({setCurrentUser}: Props): JSX.Element {
         </div>
 
 
+        <div className="flex w-full justify-evenly mt-16">
+          <a href="mailto:schwartz.remi@gmail.com"
+             className="text-sm text-gray-700 hover:text-gray-900">
+            <FormattedMessage id="profile.contactus"/>
+          </a>
 
-        <a href="/users/sign_out"
-           rel="nofollow"
-           data-method="delete"
-           className="text-sm mt-16 text-gray-700 hover:text-gray-900">
-          <FormattedMessage id="profile.logout"/>
-        </a>
+          <a href="/users/sign_out"
+             rel="nofollow"
+             data-method="delete"
+             className="text-sm text-gray-700 hover:text-gray-900">
+            <FormattedMessage id="profile.logout"/>
+          </a>
+
+        </div>
 
       </div>
 

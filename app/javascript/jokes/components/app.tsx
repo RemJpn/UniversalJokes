@@ -16,7 +16,15 @@ const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState(defaultUser);
   useEffect(() => getCurrentUser(setCurrentUser), []);
 
-  const browserLanguage = navigator.language;
+  const getLang = () => {
+    if (navigator.languages != undefined)
+      return navigator.languages[0].split(/[-_]/)[0]; //remove region
+    return navigator.language.split(/[-_]/)[0];
+  }
+
+
+  const browserLanguage = getLang();
+  console.log(browserLanguage);
   const [language, setLanguage] = useState(browserLanguage);
   useEffect(() => {
     if(currentUser.authenticated){
@@ -43,6 +51,7 @@ const App: React.FC = () => {
             )}
           />
         </Switch>
+        <p>{browserLanguage}</p>
       </I18nProvider>
     </CurrentUserContext.Provider >
   ) ;
