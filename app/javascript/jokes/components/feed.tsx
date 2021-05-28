@@ -7,6 +7,8 @@ import JokeForm from './joke_form';
 import {JokeObject, jokesIndex} from '../api/JokeAPI';
 import {savedJokesIndex} from '../api/SavedAPI';
 
+import {JokesListContext} from '../contexts/JokesListContext';
+
 interface Props {
   search: string,
 }
@@ -22,7 +24,6 @@ export default function Feed({search}: Props): JSX.Element {
     }
     const controller = new AbortController();
     controllerRef.current = controller;
-
     try {
       switch (location.pathname) {
         case "/":
@@ -32,7 +33,6 @@ export default function Feed({search}: Props): JSX.Element {
           savedJokesIndex(setJokesList);
           break;
       }
-
     } catch (e) {
       console.log(e);
     }
@@ -53,9 +53,11 @@ export default function Feed({search}: Props): JSX.Element {
 
 
   return (
-    <main className='feed mt-16 p-4'>
-      <JokeForm setJokesList={setJokesList} />
-      {renderJokesList()}
-    </main>
+    <JokesListContext.Provider value={{jokesList: jokesList, setJokesList: setJokesList}} >
+      <main className='feed mt-16 p-4'>
+        <JokeForm  />
+        {renderJokesList()}
+      </main>
+    </JokesListContext.Provider>
   );
 }

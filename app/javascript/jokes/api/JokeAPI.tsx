@@ -9,6 +9,7 @@ interface DraftJoke {
 interface JokeObject {
   id: number;
   author: string;
+  author_id: number;
   avatar: string;
   language: string;
   category: string;
@@ -68,4 +69,25 @@ const submitJoke = (joke: DraftJoke, callback: (joke: JokeObject) => void): void
   .then(callback);
 }
 
-export {JokeObject, jokesIndex, getJoke,submitJoke}
+const deleteJoke = (jokeId: number, callback: (data: any) => void):void => {
+  const url = `/api/v1/jokes/${jokeId}`;
+  const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
+  const csrfToken = csrfMetaTag.content;
+  fetch(url, {
+    method: 'DELETE',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-CSRF-Token': csrfToken
+    },
+    credentials: "same-origin"
+    })
+    .then(r => r.json())
+    .then(callback)
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+
+export {JokeObject, jokesIndex, getJoke, submitJoke, deleteJoke}

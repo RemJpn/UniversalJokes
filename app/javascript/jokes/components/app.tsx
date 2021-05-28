@@ -24,7 +24,6 @@ const App: React.FC = () => {
 
 
   const browserLanguage = getLang();
-  console.log(browserLanguage);
   const [language, setLanguage] = useState(browserLanguage);
   useEffect(() => {
     if(currentUser.authenticated){
@@ -51,7 +50,6 @@ const App: React.FC = () => {
             )}
           />
         </Switch>
-        <p>{browserLanguage}</p>
       </I18nProvider>
     </CurrentUserContext.Provider >
   ) ;

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import DeleteIcon from './delete_icon';
+
 import {languageOptions} from './language_select';
 import {JokeObject} from '../api/JokeAPI';
 import {TranslationObject} from '../api/TranslationAPI';
@@ -23,6 +25,7 @@ const AuthorBanner = ({element}: Props): JSX.Element => {
         <p className={`ml-2 ${isJoke ? '' : 'text-sm'}`}>{element.author}</p>
       </div>
       <div>
+        <DeleteIcon element={element}/>
         {
           languageOptions
             .find(option => option.value == element.language)

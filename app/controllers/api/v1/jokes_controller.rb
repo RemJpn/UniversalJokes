@@ -10,6 +10,18 @@ class Api::V1::JokesController < ApplicationController
     render json: api_jokes
   end
 
+  def search
+    if params[:query].blank?
+      redirect_to api_v1_jokes_path and return
+    end
+
+    selected_jokes = Joke.search_by_author_and_content(params['query'])
+                         .sort_by(&:created_at)
+                         .reverse
+    api_jokes = selected_jokes.map { |joke| prepare_api_v1_joke(joke) } # defined in concerns/response.rb
+    render json: api_jokes
+  end
+
   def show
     joke = Joke.find(params[:id])
     render json: prepare_api_v1_joke(joke)
@@ -29,16 +41,10 @@ class Api::V1::JokesController < ApplicationController
     end
   end
 
-  def search
-    if params[:query].blank?
-      redirect_to api_v1_jokes_path and return
-    end
+  def destroy
+    joke = Joke.find(params[:id])
 
-    selected_jokes = Joke.search_by_author_and_content(params['query'])
-                         .sort_by(&:created_at)
-                         .reverse
-    api_jokes = selected_jokes.map { |joke| prepare_api_v1_joke(joke) } # defined in concerns/response.rb
-    render json: api_jokes
+    render json: { deleted_joke_id: params[:id] }
   end
 
   private

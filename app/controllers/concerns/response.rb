@@ -3,6 +3,7 @@ module Response
     {
       id: joke.id,
       author: joke.user.nickname || 'Anonymous',
+      author_id: joke.user.id || null,
       avatar: user_avatar(joke.user),
       language: joke.language.name,
       category: joke.category.name,
@@ -19,6 +20,7 @@ module Response
     {
       id: translation.id,
       author: translation.user.nickname || 'Anonymous',
+      author_id: translation.user.id || null,
       avatar: user_avatar(translation.user),
       language: translation.language.name,
       content: translation.content,

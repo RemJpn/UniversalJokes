@@ -2,15 +2,17 @@ import React, { useState, useContext } from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
+import {JokesListContext} from '../contexts/JokesListContext';
 import {JokeObject, submitJoke} from '../api/JokeAPI';
 import {LanguageSelect, languageOption} from './language_select';
 
-interface Props {
-  setJokesList: React.Dispatch<React.SetStateAction<JokeObject[]>>;
-}
+// interface Props {
+//   setJokesList: React.Dispatch<React.SetStateAction<JokeObject[]>>;
+// }
 
-export default function JokeForm({setJokesList}: Props): JSX.Element {
+export default function JokeForm(): JSX.Element {
   const currentUser = useContext(CurrentUserContext);
+  const {setJokesList} = useContext(JokesListContext);
 
   const [contentValue, setContentValue] = useState('');
   const [language, setLanguage] = useState<languageOption>();

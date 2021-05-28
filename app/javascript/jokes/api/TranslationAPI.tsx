@@ -9,6 +9,7 @@ interface TranslationObject {
   id: number;
   content: string;
   author: string;
+  author_id: number;
   avatar: string;
   language: string;
   created_at: string;
