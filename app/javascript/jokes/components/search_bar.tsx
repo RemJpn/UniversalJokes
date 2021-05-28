@@ -20,7 +20,7 @@ export default function SearchBar({search, setSearch}: Props) : JSX.Element {
         <input type="text"
                value={search}
                onChange={handleChange}
-               className="w-0 p-0 sm:w-40 sm:px-2
+               className="w-0 p-0 sm:w-40 sm:px-2 outline-none
                           transition-width duration-200 ease-in-out
                           group-hover:w-40 group-hover:px-2 focus:w-40 focus:px-2
                           bg-transparent text-gray-800 border-0 focus:ring-0"
