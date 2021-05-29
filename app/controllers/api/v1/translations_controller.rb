@@ -12,6 +12,13 @@ class Api::V1::TranslationsController < ApplicationController
     render json: prepare_api_v1_joke(joke)
   end
 
+  def destroy
+    translation = Translation.find(params[:id])
+    joke = translation.joke
+    translation.destroy
+    render json: prepare_api_v1_joke(joke)
+  end
+
   private
 
   def translation_params

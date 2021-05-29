@@ -43,6 +43,10 @@ class Api::V1::JokesController < ApplicationController
 
   def destroy
     joke = Joke.find(params[:id])
+    joke.translations.destroy_all
+    joke.liked_jokes.destroy_all
+    joke.saved_jokes.destroy_all
+    joke.destroy
 
     render json: { deleted_joke_id: params[:id] }
   end

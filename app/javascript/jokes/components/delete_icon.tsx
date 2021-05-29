@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
 
-import {JokeObject} from '../api/JokeAPI';
-import {TranslationObject} from '../api/TranslationAPI';
-import {deleteJoke} from '../api/JokeAPI';
+import {JokeObject, deleteJoke} from '../api/JokeAPI';
+import {TranslationObject, deleteTranslation} from '../api/TranslationAPI';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import {JokesListContext} from '../contexts/JokesListContext';
+import {JokeContext} from '../contexts/JokeContext';
 
 
 interface Props {
@@ -14,22 +14,27 @@ interface Props {
 const DeleteIcon = ({element}: Props): JSX.Element => {
   const currentUser = useContext(CurrentUserContext);
   const {jokesList, setJokesList} = useContext(JokesListContext);
+  const {setJoke} = useContext(JokeContext);
 
   const isJoke = element["joke_id"] == undefined; //Check if element is a Joke or a translation
 
-  const removeJokeFromState = (deletedJokeId) => {
-    setJokesList(jokesList.filter(joke => joke.id != deletedJokeId))
+  const removeJokeFromState = (data) => {
+    setJokesList(jokesList.filter(joke => joke.id != data.deleted_joke_id))
   }
 
   const handleClick = () => {
     if (isJoke){
-      deleteJoke(element.id, (data) => {
-        console.log(data)
-        removeJokeFromState(data.deleted_joke_id)
-      });
+      deleteJoke(element.id, removeJokeFromState);
+    } else {
+      //if translation
+      deleteTranslation(element.id, setJoke);
     }
   }
 
+  // do not display on joke if user arrived directly on JokeShowUrl
+  if (isJoke && jokesList.length == 0) return null;
+
+  // do not display if user does not own
   if (!currentUser.authenticated || currentUser.id!=element.author_id) return null;
 
   return (

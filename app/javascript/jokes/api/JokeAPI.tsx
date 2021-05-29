@@ -69,7 +69,7 @@ const submitJoke = (joke: DraftJoke, callback: (joke: JokeObject) => void): void
   .then(callback);
 }
 
-const deleteJoke = (jokeId: number, callback: (data: any) => void):void => {
+const deleteJoke = (jokeId: number, callback: (data) => void):void => {
   const url = `/api/v1/jokes/${jokeId}`;
   const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
   const csrfToken = csrfMetaTag.content;

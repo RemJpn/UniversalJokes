@@ -61,4 +61,24 @@ const submitTranslation = (
   .then(callback);
 }
 
-export {TranslationObject, fetchLiberTrans, submitTranslation}
+const deleteTranslation = (transId: number, callback: (data) => void):void => {
+  const url = `/api/v1/translations/${transId}`;
+  const csrfMetaTag: HTMLMetaElement = document.querySelector('meta[name="csrf-token"]');
+  const csrfToken = csrfMetaTag.content;
+  fetch(url, {
+    method: 'DELETE',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-CSRF-Token': csrfToken
+    },
+    credentials: "same-origin"
+    })
+    .then(r => r.json())
+    .then(callback)
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export {TranslationObject, fetchLiberTrans, submitTranslation, deleteTranslation}
