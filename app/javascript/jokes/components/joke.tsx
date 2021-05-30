@@ -24,7 +24,7 @@ export function Joke({joke}: Props): JSX.Element {
   const renderJokeShow = () => {
     if (!jokeOpen) return null;
 
-    return <JokeShow joke={thisJoke} setJoke={setJoke} setJokeOpen={setJokeOpen} />;
+    return <JokeShow setJokeOpen={setJokeOpen} />;
   }
 
   useEffect(()=>{
@@ -48,7 +48,7 @@ export function Joke({joke}: Props): JSX.Element {
           <FormattedMessage id="joke.likes" values={{nb_likes: thisJoke.likes}}/>
         </div>
 
-        <JokeReaction joke={thisJoke} setJoke={setJoke} isSmall={false}/>
+        <JokeReaction isSmall={false}/>
 
         <div className="text-sm text-blue-900 cursor-pointer hover:underline" onClick={openJoke}>
           <FormattedMessage id="joke.see_translations" values={{nb_translations: thisJoke.translations.length}}/>

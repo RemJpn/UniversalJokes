@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {Link} from 'react-router-dom';
 import {FormattedMessage} from 'react-intl';
 
@@ -6,18 +6,17 @@ import AuthorBanner from './author_banner';
 import JokeReaction from './joke_reaction';
 import TranslationForm from './translation_form';
 import {Translation} from './translation';
-import {JokeObject} from '../api/JokeAPI';
 import {languageOption, LanguageSelect} from './language_select';
+import {JokeContext} from '../contexts/JokeContext';
 
 
 interface Props {
-  joke: JokeObject;
-  setJoke: React.Dispatch<React.SetStateAction<JokeObject>>;
   setJokeOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   isFromUrl?: boolean;
 }
 
-export default function JokeShow({joke, setJoke, setJokeOpen = null, isFromUrl=false, ...props}: Props): JSX.Element {
+export default function JokeShow({setJokeOpen = null, isFromUrl=false, ...props}: Props): JSX.Element {
+  const {joke, setJoke} = useContext(JokeContext);
   const [languageFilter, setLanguageFilter] = useState<languageOption>();
   const closeJoke =() => {
     setJokeOpen(false);
@@ -92,7 +91,7 @@ export default function JokeShow({joke, setJoke, setJokeOpen = null, isFromUrl=f
         </div>
 
         <div className="bg-white w-60 rounded-full mt-2">
-          <JokeReaction joke={joke} setJoke={setJoke} isSmall={true}/>
+          <JokeReaction isSmall={true}/>
         </div>
 
       </div>
@@ -101,7 +100,7 @@ export default function JokeShow({joke, setJoke, setJokeOpen = null, isFromUrl=f
         <h2 className="text-lg font-bold">
           <FormattedMessage id="joke_show.translations" />
         </h2>
-        <TranslationForm joke={joke} setJoke={setJoke} />
+        <TranslationForm/>
 
         <div className="flex justify-between items-center">
           <p>Filtrer:</p>

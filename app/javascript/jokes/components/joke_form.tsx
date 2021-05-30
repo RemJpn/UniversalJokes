@@ -3,12 +3,9 @@ import {FormattedMessage} from 'react-intl';
 
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import {JokesListContext} from '../contexts/JokesListContext';
-import {JokeObject, submitJoke} from '../api/JokeAPI';
+import {submitJoke} from '../api/JokeAPI';
 import {LanguageSelect, languageOption} from './language_select';
 
-// interface Props {
-//   setJokesList: React.Dispatch<React.SetStateAction<JokeObject[]>>;
-// }
 
 export default function JokeForm(): JSX.Element {
   const currentUser = useContext(CurrentUserContext);

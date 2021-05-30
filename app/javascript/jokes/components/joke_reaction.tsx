@@ -3,19 +3,18 @@ import {emojify} from 'react-emojione';
 import {FormattedMessage} from 'react-intl';
 
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
-import {JokeObject} from '../api/JokeAPI';
+import {JokeContext} from '../contexts/JokeContext';
 import {createLike, deleteLike} from '../api/LikedAPI';
 import {createSaved, deleteSaved} from '../api/SavedAPI';
 
 
 interface Props {
-  joke: JokeObject;
-  setJoke?: (joke: JokeObject) => void;
   isSmall: boolean;
 }
 
-export default function JokeReaction({joke, setJoke, isSmall}: Props): JSX.Element {
+export default function JokeReaction({isSmall}: Props): JSX.Element {
   const currentUser = useContext(CurrentUserContext);
+  const {joke, setJoke} = useContext(JokeContext);
   const jokeUrl = `http://universaljokes.herokuapp.com/jokes/${joke.id}`;
 
   const toggleLike = () => {

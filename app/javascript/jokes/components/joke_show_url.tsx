@@ -16,7 +16,7 @@ export default function JokeShowUrl({match}): JSX.Element {
 
   return (
     <JokeContext.Provider value={{joke: thisJoke, setJoke: setThisJoke}} >
-      <JokeShow joke={thisJoke} setJoke={setThisJoke} isFromUrl={true} />
+      <JokeShow isFromUrl={true} />
     </JokeContext.Provider>
   )
 }

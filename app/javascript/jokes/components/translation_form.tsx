@@ -2,15 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import {FormattedMessage} from 'react-intl';
 
 import {LanguageSelect} from './language_select';
-import {JokeObject} from '../api/JokeAPI';
 import {fetchLiberTrans, submitTranslation} from '../api/TranslationAPI';
 import tailSpin from 'images/tail-spin.svg';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
+import {JokeContext} from '../contexts/JokeContext';
 
-interface Props {
-  joke: JokeObject;
-  setJoke: React.Dispatch<React.SetStateAction<JokeObject>>;
-}
 
 interface languageOption {
   value: string;
@@ -18,8 +14,10 @@ interface languageOption {
   label: string;
 }
 
-export default function TranslationForm({joke, setJoke}: Props): JSX.Element {
+export default function TranslationForm(): JSX.Element {
   const currentUser = useContext(CurrentUserContext);
+  const {joke, setJoke} = useContext(JokeContext);
+
   const [contentValue, setContentValue] = useState('');
   const [language, setLanguage] = useState<languageOption>();
 

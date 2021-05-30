@@ -12,7 +12,8 @@ module Response
       liked_id: current_user&.liked_jokes&.find { |like| like.joke == joke }&.id,
       saved_id: current_user&.saved_jokes&.find { |saved| saved.joke == joke }&.id,
       created_at: joke.created_at,
-      translations: joke.translations.map { |translation| prepare_api_v1_translation(translation) }
+      translations: joke.translations.sort_by(&:created_at).reverse
+                        .map { |translation| prepare_api_v1_translation(translation) }
     }
   end
 
