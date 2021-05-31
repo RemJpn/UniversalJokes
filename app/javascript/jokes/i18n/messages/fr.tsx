@@ -6,6 +6,8 @@ export default {
     "avatar_module.select" : "Sélectionner une image",
     "avatar_module.save" : "Enregistrer",
 
+    "feed.no_joke": "Aucune blague ou utilisateur ne correspond (pour l'instant) à cette recherche",
+
     "joke.likes": "{nb_likes, plural, =0 {personne n'a encore ri, soyez le premier} one {une personne a ri} other {# personnes ont ri}}",
     "joke.see_translations": "Voir les traductions ({nb_translations})",
 
@@ -18,6 +20,8 @@ export default {
     "joke_form.submit": "Soumettre",
 
     "joke_show.translations": "Traductions",
+    "joke_show.no_translations": "Aucune traduction n'as encore été proposée dans cette langue. A vous de jouer!",
+    "joke_show.filter": "Filtrer:",
 
     "language_select.choose": "Choisir la langue...",
 

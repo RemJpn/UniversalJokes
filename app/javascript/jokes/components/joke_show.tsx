@@ -31,6 +31,7 @@ export default function JokeShow({setJokeOpen = null, isFromUrl=false, ...props}
     if (filteredTrans.length === 0){
       return (
         <p className="text-center mt-8">
+          <FormattedMessage id="joke_show.no_translations" />
           Aucune traduction n'as encore été proposée dans cette langue. A vous de jouer!
         </p>
        );
@@ -86,7 +87,7 @@ export default function JokeShow({setJokeOpen = null, isFromUrl=false, ...props}
           </div>
 
           <div className="text-gray-400 mt-3">
-            {joke.likes} personnes ont ri à cette blague
+            <FormattedMessage id="joke.likes" values={{nb_likes: joke.likes}}/>
           </div>
         </div>
 
@@ -103,7 +104,9 @@ export default function JokeShow({setJokeOpen = null, isFromUrl=false, ...props}
         <TranslationForm/>
 
         <div className="flex justify-between items-center">
-          <p>Filtrer:</p>
+          <p>
+            <FormattedMessage id="joke_show.filter" />
+          </p>
           <LanguageSelect language={languageFilter} setLanguage={setLanguageFilter} />
         </div>
         <div className="">

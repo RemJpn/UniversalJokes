@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {useLocation} from 'react-router-dom';
-
+import {FormattedMessage} from 'react-intl';
 
 import {Joke} from './joke';
 import JokeForm from './joke_form';
@@ -42,7 +42,13 @@ export default function Feed({search}: Props): JSX.Element {
   const renderJokesList = () => {
     if (!jokesList) return <p className="mt-16">Loading...</p>;
 
-    if (search && jokesList.length == 0) return <p className="mt-16">Aucune blague ou utilisateur ne correspond (pour l'instant) à cette recherche</p>;
+    if (search && jokesList.length == 0) {
+      return (
+        <p className="mt-16">
+          <FormattedMessage id="feed.no_joke" />
+        </p>
+       );
+    }
 
     return jokesList.map ( joke => {
       return (
