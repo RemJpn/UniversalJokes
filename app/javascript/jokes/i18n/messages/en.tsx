@@ -41,6 +41,8 @@ export default {
     "profile.contactus": "Contact us",
     "profile.logout": "Log out",
 
+    "search_bar.search": "Search",
+
     "translation_form.auto": "Auto",
     "translation_form.send": "Send",
   }

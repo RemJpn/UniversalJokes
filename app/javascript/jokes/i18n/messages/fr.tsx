@@ -41,6 +41,8 @@ export default {
     "profile.contactus": "Nous contacter",
     "profile.logout": "Se déconnecter",
 
+    "search_bar.search": "Rechercher",
+
     "translation_form.auto": "Auto",
     "translation_form.send": "Envoyer",
   }
